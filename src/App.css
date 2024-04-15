@@ -1,5 +1,21 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+:root {
+  --primary-color:#F8d15C;
+  --secondary-color: #CA5366;
+  --section-color: #FEFCF9;
+  --detail-color: #F4DBDF;
+  --error-color: #8f3b48;
+  --font-color: #352f36;
+  --element-color: #F5F5F5;
+  --primary-nav-color: #F2E3C7;
+  --darkviolet-color: #371542;
+  --active-link-color:#F2E3C7;
 }
+
+
+em {
+  font-family: "Cedarville Cursive", cursive;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 24px;
+}
+

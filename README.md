@@ -1,14 +1,10 @@
-# React + Vite
+# OCCO Cocktailwebsite: Installatie handleiding
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+_Wanneer je dit doet voor jouw eigen projecten, voeg je in de README.md een begeleidende tekst toe
+waarin je de gebruiker instrueert een_
 
-Currently, two official plugins are available:
+Maak een eigen .env bestand aan en vul deze met de variabel-namen zoals beschreven in env.dist. -> Hier wel de API key aanleveren voor docent
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+RUN NPM run build in de terminal
 
-
-Goed bezig! Wanneer je dit doet voor jouw eigen projecten, voeg je in de README.md een begeleidende tekst toe
-waarin je de gebruiker instrueert een eigen .env bestand aan te maken en deze te vullen met de variabel-namen
-zoals beschreven in env.dist.
-Uiteraard benoem je ook het maken van een build, en waar de gebruiker aan deze variabelen kan komen.G
+Uiteraard benoem je ook het maken van een build, en waar de gebruiker aan deze variabelen kan komen.
