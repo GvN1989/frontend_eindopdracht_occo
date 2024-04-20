@@ -1,5 +1,19 @@
 @import url('https://fonts.googleapis.com/css2?family=Cedarville+Cursive&family=Quicksand:wght@300..700&display=swap');
 
+:root {
+  --primary-color:#F8d15C;
+  --secondary-color: #CA5366;
+  --section-color: #FEFCF9;
+  --detail-color: #F4DBDF;
+  --error-color: #8f3b48;
+  --font-color: #352f36;
+  --element-color: #F5F5F5;
+  --primary-nav-color: #F2E3C7;
+  --darkviolet-color: #371542;
+  --active-link-color:#F2E3C7;
+  --btn-color:#F8D15C;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -17,10 +31,15 @@ body {
   font-family: "Quicksand", sans-serif, "Cedarville Cursive";
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  color: #051524;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  -webkit-text-size-adjust: 100%;
+  text-rendering: optimizeLegibility;
+  font-synthesis: none;
+  line-height: 1.5;
+  font-weight: 400;
+}
+
+button, input, select, textarea {
+  font-family: inherit;
 }
 
 footer{
@@ -28,7 +47,65 @@ footer{
   flex-grow: 1;
 }
 
+header {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  box-shadow: 2px 2px 2px 1px rgb(128 114 145 / 50%);
+  background-color: var(--secondary-color);
+}
+
 h1,h2, h3, h4,h5, h6 {
   font-family: "Quicksand", sans-serif;
 }
 
+button {
+  background-color:var(--btn-color);
+  color: var(--darkviolet-color);
+  border-color: var(--primary-color);
+  font-weight: 600;
+  padding: 12px;
+  border: none;
+  border-radius: 4px;
+  display: inline;
+  width: 214px;
+}
+
+em {
+  font-family: "Cedarville Cursive", cursive;
+}
+/*----------- INNER- EN OUTER CONTAINERS ------------------- */
+
+.outer-content-container {
+  position: relative;
+  z-index: 1;
+  padding: 20px;
+  background-color: var(--section-color);
+  width: calc(100% - 300px);
+  margin-left: 150px;
+  margin-right: 150px;
+}
+
+/* Brede inner container*/
+/* .inner-content-container {
+  flex-basis: 1400px;
+  flex-shrink: 1;
+  flex-grow: 0;
+  align-items: center;
+}*/
+
+/* Smalle inner container voor tekst etc. */
+.inner-content-container__text-restriction {
+  flex-basis: 1000px;
+  flex-shrink: 1;
+  flex-grow: 0;
+  align-items: flex-start;
+}
+
+.inner-content-container,
+.inner-content-container__text-restriction {
+  margin: 0 20px;
+  padding: 100px 0;
+  display: flex;
+  flex-direction: column;
+}

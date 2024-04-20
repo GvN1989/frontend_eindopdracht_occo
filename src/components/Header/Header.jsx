@@ -1,19 +1,22 @@
-import styles from  "../../styles/Header.module.css";
+import styles from "./Header.module.css";
 import Nav from "/src/components/Nav/Nav.jsx";
+import {useNavigate} from "react-router-dom";
 import logo from "../../assets/images/LOGO_OCCO.png";
 
 function Header ( ){
-    return (
-        <header className={styles.headerSite}>
-            <>
-                    <img className={styles.headerLogo}
-                         src={logo}
-                         alt="Logo OCCO"/>
 
-                <Nav className={styles.headerNav}/>
+    const navigate = useNavigate()
+
+    return (
+        <header className={styles["header-site"]}>
+            <>
+                <button type="button" className={styles["header-logo-button"]} onClick={()=> navigate ("/")}>
+                    <img className="logo" src={logo} alt="link-to-home"/>
+                </button>
+                <Nav className="headerNav"/>
+
             </>
         </header>
-
 
     )
 }

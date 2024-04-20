@@ -1,0 +1,9 @@
+.arrow-left{
+    background-color: transparent;
+    fill:var(--secondary-color)
+}
+
+.arrow-right{
+    background-color: transparent;
+    fill:var(--secondary-color);
+}

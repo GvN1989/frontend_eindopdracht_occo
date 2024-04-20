@@ -1,0 +1,67 @@
+.home-inner-content-container{
+    display: flex;
+    flex-direction: column;
+    margin: 3em;
+    background-color: #F4DBDE;
+    flex-basis: 800px;
+    position: relative;
+}
+
+.welcome-image{
+    display: flex;
+    flex-direction: row;
+    width: 321px;
+    height: auto;
+    position: absolute;
+    right: 60px;
+    top: -40px;
+    z-index:1;
+}
+
+.welcome-section{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex-grow: 1;
+    max-width: 40%;
+    margin: 0 15rem 0;
+    }
+
+.main-welcome-title{
+    text-align: center;
+    padding-top: 10px;
+    font-size: 3rem;
+}
+
+.main-welcome-msg {
+    text-align: center;
+    font-size: 18px;
+    margin-top: 50px;
+}
+
+.main-welcome-subtitle {
+    text-align: center;
+    font-size: 1.3rem;
+}
+
+.button-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width:40%;
+    gap: 100px;
+    margin: 3rem 15rem 3rem;
+}
+
+.logo{
+    display: flex;
+    flex-direction: row;
+    flex-shrink: 0;
+    border-radius: 5% 5%;
+    width: 150px;
+    height: auto;
+    position: absolute;
+    left: 40px;
+    top: -40px;
+    z-index:1;
+}
