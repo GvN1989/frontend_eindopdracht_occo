@@ -1,5 +1,5 @@
 import styles from "./Nav.module.css";
-import {NavLink, useNavigate} from 'react-router-dom';
+import {NavLink} from 'react-router-dom';
 import {ReactComponent as SearchGlass} from "../../assets/svg/magnifying-glass.svg";
 import {ReactComponent as ShoppingBasket} from "../../assets/svg/basket.svg";
 import {ReactComponent as Profile} from "../../assets/svg/user.svg";
@@ -10,7 +10,7 @@ function Nav () {
         return (
             <nav className={styles["main-navigation"]}>
                 <div className={styles["right-nav-container"]}>
-                    <ul className={styles["main-navigation-links"]}>
+                    <ul>
                         <NavLink className={({isActive}) => isActive ? styles["active-link"] : styles["default-link"]} to = "/">Home</NavLink>
                         <NavLink className={({isActive}) => isActive ? styles["active-link"] : styles["default-link"]} to = "/quiz">Inspiration Quiz</NavLink>
                         <NavLink className={({isActive}) => isActive ? styles["active-link"] : styles["default-link"]} to = "/productoverview">CocktailFinder</NavLink>

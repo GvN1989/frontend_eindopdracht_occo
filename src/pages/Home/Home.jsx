@@ -11,7 +11,9 @@ function Home () {
         <section className="outer-content-container">
             <div
                 className={styles["home-inner-content-container"]}>
-                <img src={welcomeImage} className={styles["welcome-image"]} alt="welcome-ladies-having-a-cocktail"/>
+                    <span className={styles["welcome-image"]}>
+                        <img src={welcomeImage} alt="welcome-ladies-having-a-cocktail"/>
+                    </span>
                 <img src={logo} className={styles["logo"]} alt="OCCO-logo"/>
                     <section className={styles["welcome-section"]}>
                     <h1 className={styles["main-welcome-title"]}> <em>Welcome to Occo </em> </h1>

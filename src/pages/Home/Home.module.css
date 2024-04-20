@@ -1,30 +1,38 @@
 .home-inner-content-container{
     display: flex;
     flex-direction: column;
-    margin: 3em;
+    margin: 3rem 0 3rem;
     background-color: #F4DBDE;
     flex-basis: 800px;
-    position: relative;
+    border-radius: 1%;
 }
 
 .welcome-image{
-    display: flex;
-    flex-direction: row;
-    width: 321px;
-    height: auto;
     position: absolute;
-    right: 60px;
-    top: -40px;
-    z-index:1;
+    align-self: flex-end;
+    flex-shrink: 1;
+    margin-top: 50px;
+    margin-right: 100px;
+    max-width: 280px;
+    height: 420px;
+    border: var(--primary-color) 5px solid;
+
+
+}
+img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 .welcome-section{
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
+    align-items: center;
+    flex-basis: auto;
     flex-grow: 1;
-    max-width: 40%;
-    margin: 0 15rem 0;
+    flex-shrink: 1;
     }
 
 .main-welcome-title{
@@ -36,21 +44,23 @@
 .main-welcome-msg {
     text-align: center;
     font-size: 18px;
-    margin-top: 50px;
+    padding: 3rem 10rem 1rem;
+    width: 60%;
 }
 
 .main-welcome-subtitle {
     text-align: center;
     font-size: 1.3rem;
+    width: 60%;
 }
 
 .button-container{
     display: flex;
     flex-direction: row;
     justify-content: center;
-    width:40%;
+    width:100%;
     gap: 100px;
-    margin: 3rem 15rem 3rem;
+    padding: 3rem 15rem 3rem;
 }
 
 .logo{
@@ -61,7 +71,7 @@
     width: 150px;
     height: auto;
     position: absolute;
-    left: 40px;
-    top: -40px;
+    left: 120px;
+    top: 20px;
     z-index:1;
 }
