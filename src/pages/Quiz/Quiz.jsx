@@ -24,10 +24,9 @@ function Quiz () {
             for (const letter of alphabet){
                 const url= `${endpoint}${letter}`;
                 try {
-                    const response = await fetch(url);
-                    const data = await response.json();
-                    if (data.drinks) {
-                        allDrinks.push(...data.drinks);
+                    const response = await axios.get(url);
+                    if (response.data.drinks) {
+                        allDrinks.push(...response.data.drinks);
                     }
                 } catch (error) {
                     console.error (`Failed to fetch drinks starting with ${letter}:`, error)
