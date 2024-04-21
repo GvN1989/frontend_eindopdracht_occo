@@ -4,7 +4,7 @@ import Footer from "./components/Footer/Footer.jsx";
 import Home from "./pages/Home/Home.jsx"
 import NotFound from "./pages/NotFound/NotFound.jsx";
 import Quiz from "./pages/Quiz/Quiz.jsx"
-import QuizResult from "./pages/QuizResult/QuizResult.jsx";
+import ResultPage from "./pages/QuizOutcome/QuizOutcome.jsx";
 import ProductDetail from "./pages/ProductDetail/ProductDetail.jsx";
 import ProductOverview from "./pages/ProductOverview/ProductOveriew.jsx";
 import styles from "./components/Header/Header.module.css";
@@ -22,7 +22,7 @@ function App() {
               <Routes>
                   <Route path="/" element={<Home/>}/>
                   <Route path="/quiz" element={<Quiz/>}/>
-                  <Route path="/quizresult" element={<QuizResult/>}/>
+                  <Route path="/quizresult" element={<ResultPage/>}/>
                   <Route path="/productdetail/:id" element={<ProductDetail/>}/>
                   <Route path="/productoverview" element={<ProductOverview/>}/>
                   <Route path="*" element={<NotFound/>}/>
