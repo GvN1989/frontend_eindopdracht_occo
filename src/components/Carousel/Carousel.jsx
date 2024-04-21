@@ -39,7 +39,7 @@ function Carousel() {
         return () => {
             controller.abort();
         }
-    }, [endpoint]);
+    }, []);
 
     const handleNext = () => {
         setCurrentIndex((prevIndex => {
