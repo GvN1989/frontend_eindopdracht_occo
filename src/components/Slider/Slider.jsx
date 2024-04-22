@@ -1,19 +1,17 @@
-import styles from "./Carousel.module.css"
+import styles from "./Slider.module.css"
 import Button from "../Button/Button.jsx";
 import {ReactComponent as IconLeft} from "../../assets/svg/caret-circle-left.svg";
 import {ReactComponent as IconRight} from "../../assets/svg/caret-circle-right.svg";
 import {useEffect, useState} from "react";
 import axios from 'axios';
 
-
-
-function Carousel() {
+function Slider() {
     const [popularCocktails, setPopularCocktails] = useState([]);
     const [loading, toggleLoading] = useState(false);
     const [error, toggleError] = useState(false);
     const [currentIndex, setCurrentIndex] = useState(0);
 
-    const endpoint = `https://www.thecocktaildb.com/api/json/v2/9973533/popular.php`
+    const endpoint = `https://www.thecocktaildb.com/api/json/v2/${import.meta.env.VITE_API_KEY}/popular.php`
 
     useEffect(() => {
         const controller = new AbortController();
@@ -84,4 +82,4 @@ function Carousel() {
             </section>
         </> )
 }
-export default Carousel;
+export default Slider;

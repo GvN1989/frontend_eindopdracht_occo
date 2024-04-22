@@ -1,84 +1,64 @@
-import styles from "./Results.module.css"
-import {useState} from "react";
+import useFetchCocktails from "../useFetchCocktails/useFetchCocktails.jsx";
+import {useEffect, useState} from "react";
 
 
 function Results () {
-        const [occasion, setOccasion] = useState('');
-        const [flavor, setFlavor] = useState('');
-        const [alcohol, setAlcohol] = useState('');
-        const [temperature, setTemperature] = useState('');
+
+        const {cocktails, isLoading, error}  = useFetchCocktails()
+        const [ingredientMap, setIngredientMap] = useState({});
+
+        useEffect(() => {
+            if(!isLoading && cocktails.length>0) {
+                createIngredientMap(cocktails)
+            }
+    }, [cocktails,isLoading]);
 
 
-    const fetchCocktails= () => {
+        function createIngredientMap(drinks) {
+                const map = {};
+                drinks.forEach(drink => {
+                    for (let i = 1; i <= 15; i++) {
+                        const ingredientKey = `strIngredient${i}`;
+                        const ingredient = drink[ingredientKey];
+                        if (ingredient) {
+                            const ingredientLowerCase = ingredient.toLowerCase();
+                            if (!ingredientMap[ingredientLowerCase]) {
+                                ingredientMap[ingredientLowerCase] = [];
+                            }
+                            ingredientMap[ingredientLowerCase].push(drink.idDrink);
+                        }
+                    }
+                });
 
-        const apiKey= 9973533
-        let baseUrl='/api/json/v2/9973533/filter.php?'
-        let queries= [];
+                setIngredientMap(map);
+            }
+            function checkForAnyIngredients(ingredientMap, ingredients) {
+                    const drinksFound = new Set();  // Using a set to avoid duplicates
 
-        switch (occasion) {
-            case 'relaxing' :
-                queries.push ('c=Coffee%20/%20Tea');
-                break;
-            case 'party':
-                queries.push('c=Punch%20/%20Party%20Drink');
-                break;
-            case 'dinner':
-                queries.push('c=Ordinary_Drink');
-                break;
-            case 'special event':
-                queries.push('c=Cocktail')
-                break;
-            case 'exploring' :
-                queries.push('c=Other%20/%20Unknown');
-                break;
-            default:
-                queries.push('c=Cocktail');
-                break;
-        }
+                    ingredients.forEach(ingredient => {
+                        const lowerIngredient = ingredient.toLowerCase();
+                        if (ingredientMap[lowerIngredient]) {
+                            ingredientMap[lowerIngredient].forEach(drinkId => {
+                                drinksFound.add(drinkId);
+                            });
+                        }
+                    });
 
-        switch (flavor) {
-            case 'Sweet' :
-                queries.push ('i=sugar');
-                break;
-            case 'Bitter' :
-                queries.push ('i=bitters');
-                break;
-            case 'Sour' :
-                queries.push ('i=lemon%20juice');
-                break;
-            case 'Savory' :
-                queries.push ('i=salt');
-                break;
-        }
+                console.log('Drinks with any of the listed ingredients:', Array.from(drinksFound));
+                }
 
-        if(alcohol === 'alcoholic') {
-            queries.push('a-Alcoholic');
-        } else if (alcohol=== 'non-alcoholic') {
-            queries.push ('a=Non_alcoholic');
-        }
+                useEffect(() => {
+                    if (Object.keys(ingredientMap).length > 0) {
+                        const ingredientsToCheck = ['Lime Juice', 'Mint', 'Sugar'];
+                        checkForAnyIngredients(ingredientsToCheck);
+                    }
+                }, [ingredientMap]);
 
-        let url = baseUrl + queries.join('&')
+                if (isLoading) {
+                    return <div>Loading Cocktails...</div>;
+                }
 
-        console.log('API Request URL:', url);
-        fetch(url)
-            .then(response => response.json())
-            .then(data => {
-                console.log(data.drinks);
-            })
-            .catch(error => console.error('Error fetching data:', error));
-    }
-
-
-
-
-    return (
-
-
-
-
-
-
-    )
-}
-
-export default Results
+                if (error) {
+                    return <div>Error fetching cocktails: {error.message}</div>;
+                }}
+export default Results;

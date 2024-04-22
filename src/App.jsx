@@ -10,6 +10,7 @@ import ProductOverview from "./pages/ProductOverview/ProductOveriew.jsx";
 import styles from "./components/Header/Header.module.css";
 import Nav from "./components/Nav/Nav.jsx";
 import Header from "./components/Header/Header.jsx";
+import QuizOutcome from "./pages/QuizOutcome/QuizOutcome.jsx";
 
 
 
@@ -22,7 +23,7 @@ function App() {
               <Routes>
                   <Route path="/" element={<Home/>}/>
                   <Route path="/quiz" element={<Quiz/>}/>
-                  <Route path="/quizresult" element={<ResultPage/>}/>
+                  <Route path="/quizoutcome" element={<QuizOutcome/>}/>
                   <Route path="/productdetail/:id" element={<ProductDetail/>}/>
                   <Route path="/productoverview" element={<ProductOverview/>}/>
                   <Route path="*" element={<NotFound/>}/>
