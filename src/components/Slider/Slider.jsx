@@ -1,30 +1,27 @@
-import styles from "./Carousel.module.css"
+import styles from "./Slider.module.css"
 import Button from "../Button/Button.jsx";
 import {ReactComponent as IconLeft} from "../../assets/svg/caret-circle-left.svg";
 import {ReactComponent as IconRight} from "../../assets/svg/caret-circle-right.svg";
 import {useEffect, useState} from "react";
 import axios from 'axios';
 
-
-
-function Carousel() {
+function Slider() {
     const [popularCocktails, setPopularCocktails] = useState([]);
     const [loading, toggleLoading] = useState(false);
     const [error, toggleError] = useState(false);
-    const [currentIndex, setCurrentIndex] = useState(0);
+    const [currentIndex, setCurrentIndex] = useState( 0);
 
-    const endpoint = `https://www.thecocktaildb.com/api/json/v2/9973533/popular.php`
+    const endpoint = `https://www.thecocktaildb.com/api/json/v2/${import.meta.env.VITE_API_KEY}/popular.php`
 
     useEffect(() => {
         const controller = new AbortController();
-        const signal = controller.signal;
 
         async function fetchPopularCocktails() {
             toggleLoading(true);
             toggleError(false);
 
             try {
-                const response = await axios.get(endpoint, {signal});
+                const response = await axios.get(endpoint);
                 setPopularCocktails(response.data.drinks);
             } catch (error) {
                 console.error("Failed to fetch cocktails:", error);
@@ -36,10 +33,12 @@ function Carousel() {
 
         fetchPopularCocktails();
 
+
         return () => {
             controller.abort();
         }
-    }, [endpoint]);
+    }, [currentIndex]);
+
 
     const handleNext = () => {
         setCurrentIndex((prevIndex => {
@@ -54,8 +53,8 @@ function Carousel() {
 
     return (
         <>
-            <section className={styles["slider-outer-container"]}>
-                <h2 className={styles["title-slider"]}>MOST POPULAR COCKTAILS</h2>
+            <section className={"product-list-outer-container"}>
+                <h2 className={"title-product-list"}>MOST POPULAR COCKTAILS</h2>
                 {loading && <p className={styles["text"]}>Loading...</p>}
                 {error && <p className={styles["text"]}>Error loading the cocktails!</p>}
                 {!loading && !error && (
@@ -67,8 +66,8 @@ function Carousel() {
                             <IconLeft/>
                         </Button>
                         <ul>
-                            {popularCocktails.slice(currentIndex, currentIndex + 4).map((cocktail, idDrink) => (
-                                <li className={styles["slide-item"]} key={idDrink}>
+                            {popularCocktails.slice(currentIndex, currentIndex + 4).map((cocktail) => (
+                                <li className={styles["product-item"]} key={cocktail.idDrink}>
                                     <img src={cocktail.strDrinkThumb} alt={cocktail.strDrink}/>
                                     <h3>{cocktail.strDrink}</h3>
                                 </li>
@@ -84,4 +83,4 @@ function Carousel() {
             </section>
         </> )
 }
-export default Carousel;
+export default Slider;

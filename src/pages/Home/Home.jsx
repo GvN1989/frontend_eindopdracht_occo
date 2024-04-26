@@ -2,7 +2,7 @@ import styles from "./Home.module.css"
 import Button from "../../components/Button/Button.jsx";
 import logo from "../../assets/images/LOGO_OCCO.png"
 import welcomeImage from "../../assets/images/img_homepage.png"
-import Carousel from "../../components/Carousel/Carousel.jsx";
+import Slider from "../../components/Slider/Slider.jsx";
 
 function Home () {
 
@@ -27,7 +27,7 @@ function Home () {
                     </Button>
                 </div>
             </div>
-            <Carousel/>
+            <Slider/>
         </section>
 
     </>
