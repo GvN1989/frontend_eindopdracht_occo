@@ -1,64 +1,81 @@
-import useFetchCocktails from "../useFetchCocktails/useFetchCocktails.jsx";
-import {useEffect, useState} from "react";
+import useFetchCocktails from"../useFetchCocktails/useFetchCocktails.jsx";
+import{useEffect,useState}from"react";
+import filterFlavor from"../../helpers/filterFlavor.js";
+import filterOccasion from"../../helpers/filterOccasion.js"
+import createCategoryMap from "../../helpers/createCategoryMap.js";
+import shuffleArray from "../../helpers/shuffleArray.js";
+import styles from "../Results/Results.module.css";
 
 
-function Results () {
+function Results ({answers}) {
 
-        const {cocktails, isLoading, error}  = useFetchCocktails()
-        const [ingredientMap, setIngredientMap] = useState({});
+    const{cocktails,isLoading,error}=useFetchCocktails();
+    const[filteredCocktails,setFilteredCocktails]=useState([]);
+    const [isFiltering, setIsFiltering] = useState(false);
 
-        useEffect(() => {
-            if(!isLoading && cocktails.length>0) {
-                createIngredientMap(cocktails)
-            }
-    }, [cocktails,isLoading]);
+     /* console.log("These are the answers from the quiz:",answers) */
 
+    useEffect(()=>{
+        const savedCocktails = localStorage.getItem('filteredCocktails');
+        if (savedCocktails) {
+            setFilteredCocktails(JSON.parse(savedCocktails));
 
-        function createIngredientMap(drinks) {
-                const map = {};
-                drinks.forEach(drink => {
-                    for (let i = 1; i <= 15; i++) {
-                        const ingredientKey = `strIngredient${i}`;
-                        const ingredient = drink[ingredientKey];
-                        if (ingredient) {
-                            const ingredientLowerCase = ingredient.toLowerCase();
-                            if (!ingredientMap[ingredientLowerCase]) {
-                                ingredientMap[ingredientLowerCase] = [];
-                            }
-                            ingredientMap[ingredientLowerCase].push(drink.idDrink);
-                        }
-                    }
+        } else if (!isLoading&&cocktails.length>0) {
+            setIsFiltering(true);
+
+            try{
+                const categoryMap= createCategoryMap(cocktails);
+
+                let filteredByAlcohol = cocktails.filter(drink => {
+                    return answers.alcoholPreference === "both" || drink.strAlcoholic === answers.alcoholPreference;
                 });
 
-                setIngredientMap(map);
+                let filteredByFlavor = answers.flavor ? filterFlavor(answers, filteredByAlcohol) : filteredByAlcohol;
+                if (filteredByFlavor.length === 0 && answers.flavor) {
+                    filteredByFlavor = filteredByAlcohol;
+                }
+
+                let filteredByOccasion = answers.occasion ? filterOccasion(answers, filteredByFlavor, categoryMap) : filteredByFlavor;
+                if (filteredByOccasion.length === 0 && answers.occasion) {
+                    filteredByOccasion = filteredByFlavor;
+                }
+
+                shuffleArray(filteredByOccasion)
+                setFilteredCocktails(filteredByOccasion.slice(0,5));
+                localStorage.setItem('filteredCocktails', JSON.stringify(filteredByOccasion.slice(0, 5)));
+            } catch (e) {
+                console.error("Error during Filtering", e)
+            } finally {
+                setIsFiltering(false);
             }
-            function checkForAnyIngredients(ingredientMap, ingredients) {
-                    const drinksFound = new Set();  // Using a set to avoid duplicates
+        }
 
-                    ingredients.forEach(ingredient => {
-                        const lowerIngredient = ingredient.toLowerCase();
-                        if (ingredientMap[lowerIngredient]) {
-                            ingredientMap[lowerIngredient].forEach(drinkId => {
-                                drinksFound.add(drinkId);
-                            });
-                        }
-                    });
+    },[cocktails,isLoading,answers]);
 
-                console.log('Drinks with any of the listed ingredients:', Array.from(drinksFound));
-                }
+    console.log(filteredCocktails)
 
-                useEffect(() => {
-                    if (Object.keys(ingredientMap).length > 0) {
-                        const ingredientsToCheck = ['Lime Juice', 'Mint', 'Sugar'];
-                        checkForAnyIngredients(ingredientsToCheck);
-                    }
-                }, [ingredientMap]);
 
-                if (isLoading) {
-                    return <div>Loading Cocktails...</div>;
-                }
+    if(isLoading || isFiltering){
+        return<div>LoadingCocktails...</div>;
+    }
 
-                if (error) {
-                    return <div>Error fetching cocktails: {error.message}</div>;
-                }}
+    if(error){
+        return<div> Error fetching cocktails:{error.message}</div>;
+    }
+
+    return(
+<>
+        <h2 className="title-product-list">Top 5 Cocktails</h2>
+        <div className={styles["product-list-inner-container"]}>
+            {filteredCocktails.map((cocktail) => (
+                <div className={styles["product-item"]} key={cocktail.idDrink}>
+                    <img src={cocktail.strDrinkThumb} alt={cocktail.strDrink}/>
+                    <h3>{cocktail.strDrink}</h3></div>
+            ))}
+        </div>
+</>
+    );
+}
+
+
 export default Results;

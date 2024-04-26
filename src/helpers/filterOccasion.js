@@ -1,27 +1,35 @@
-function filterOccasion () {
+import createCategoryMap from "./createCategoryMap.js";
+function filterOccasion (answers, filteredByFlavor) {
 
-    const relaxing= ['Ordinary Drink', 'Coffee / Tea', "Cocoa", "Cocktail", "Shake" ]
-    const party = ['Ordinary Drink', 'Punch / Party Drink','Beer', "Soft Drink", "Shot"]
-    const dinner= ['Ordinary Drink', "Cocktail"]
-    const specialEvent= ['Ordinary Drink', "Cocktail"]
-    const exploreTastes= ['Homemade Liqueur', "Cocoa", "Cocktail", "Other / Uknown"]
-
-    let occasionList;
-
-    if (occasionType === 'relaxing') {
-        occasionList = relaxing;
-    } else if (occasionType === 'party') {
-        occasionList = party;
-    } else if (occasionType === 'dinner') {
-        occasionList = dinner;
-    } else if (occasionType === 'specialEvent') {
-        occasionList = specialEvent;
-    } else if (occasionType === 'exploreTastes') {
-        occasionList = exploreTastes;
-    } else {
-        console.log("Unknown occasion type");
+    if (!answers || !answers.occasion) {
+        console.error("Occasion not provided or answers object is undefined");
         return [];
     }
-    return drinks.filter(drink => occasionList.includes(drink.category.toLowerCase())
-    );
+
+    const occasions = {
+        relaxing: ['Ordinary Drink', 'Coffee / Tea', "Cocoa", "Cocktail", "Shake"],
+        party: ['Punch / Party Drink', 'Beer', "Soft Drink", "Shot"],
+        dinner: ['Ordinary Drink', "Cocktail"],
+        specialEvent: ['Ordinary Drink', "Cocktail"],
+        exploring: ['Homemade Liqueur', "Cocoa", "Cocktail", "Other / Unknown"]
+    }
+
+    const occasionList = occasions[answers.occasion]
+    if (!occasionList) {
+        console.error("unknown occasion type");
+        return [];
+    }
+
+    const occasionMap = createCategoryMap(filteredByFlavor);
+    console.log("occasionMap", occasionMap )
+
+
+    const result = filteredByFlavor.filter(drink =>
+        occasionList.includes(occasionMap[drink.idDrink]));
+
+    console.log("Filtered by occasion:", result);
+
+    return result
 }
+
+export default filterOccasion;

@@ -4,13 +4,14 @@ import axios from "axios";
 function useFetchCocktails() {
 
     const [cocktails, setCocktails] = useState([]);
-    const [isLoading, setIsLoading] = useState(false);
-    const [error, setError] = useState(null);
+    const [isLoading, toggleIsLoading] = useState(false);
+    const [error, toggleError] = useState(null);
 
     useEffect(() => {
+        const controller = new AbortController();
 
         async function fetchCocktails () {
-            setIsLoading(true);
+            toggleIsLoading(true);
             const endpoint = `https://www.thecocktaildb.com/api/json/v2/${import.meta.env.VITE_API_KEY}/search.php?f=`
             const allData = []
             const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split('');
@@ -27,14 +28,16 @@ function useFetchCocktails() {
                 }
             } catch (error) {
                 console.error(`Failed to fetch drinks:`, error)
-                setError(error);
+                toggleError(error);
             } finally {
                 setCocktails(allData);
-                setIsLoading(false);
+                toggleIsLoading(false);
             }
         }
 
         fetchCocktails();
+
+        return () => controller.abort();
 
     }, []);
 

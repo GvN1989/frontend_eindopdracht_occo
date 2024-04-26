@@ -23,9 +23,9 @@ function App() {
               <Routes>
                   <Route path="/" element={<Home/>}/>
                   <Route path="/quiz" element={<Quiz/>}/>
-                  <Route path="/quizoutcome" element={<QuizOutcome/>}/>
+                  <Route path="/quiz-outcome" element={<QuizOutcome/>}/>
                   <Route path="/productdetail/:id" element={<ProductDetail/>}/>
-                  <Route path="/productoverview" element={<ProductOverview/>}/>
+                  <Route path="/product-overview" element={<ProductOverview/>}/>
                   <Route path="*" element={<NotFound/>}/>
               </Routes>
           </main>

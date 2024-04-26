@@ -9,20 +9,19 @@ function Slider() {
     const [popularCocktails, setPopularCocktails] = useState([]);
     const [loading, toggleLoading] = useState(false);
     const [error, toggleError] = useState(false);
-    const [currentIndex, setCurrentIndex] = useState(0);
+    const [currentIndex, setCurrentIndex] = useState( 0);
 
     const endpoint = `https://www.thecocktaildb.com/api/json/v2/${import.meta.env.VITE_API_KEY}/popular.php`
 
     useEffect(() => {
         const controller = new AbortController();
-        const signal = controller.signal;
 
         async function fetchPopularCocktails() {
             toggleLoading(true);
             toggleError(false);
 
             try {
-                const response = await axios.get(endpoint, {signal});
+                const response = await axios.get(endpoint);
                 setPopularCocktails(response.data.drinks);
             } catch (error) {
                 console.error("Failed to fetch cocktails:", error);
@@ -34,10 +33,12 @@ function Slider() {
 
         fetchPopularCocktails();
 
+
         return () => {
             controller.abort();
         }
-    }, []);
+    }, [currentIndex]);
+
 
     const handleNext = () => {
         setCurrentIndex((prevIndex => {
@@ -52,8 +53,8 @@ function Slider() {
 
     return (
         <>
-            <section className={styles["slider-outer-container"]}>
-                <h2 className={styles["title-slider"]}>MOST POPULAR COCKTAILS</h2>
+            <section className={"product-list-outer-container"}>
+                <h2 className={"title-product-list"}>MOST POPULAR COCKTAILS</h2>
                 {loading && <p className={styles["text"]}>Loading...</p>}
                 {error && <p className={styles["text"]}>Error loading the cocktails!</p>}
                 {!loading && !error && (
@@ -65,8 +66,8 @@ function Slider() {
                             <IconLeft/>
                         </Button>
                         <ul>
-                            {popularCocktails.slice(currentIndex, currentIndex + 4).map((cocktail, idDrink) => (
-                                <li className={styles["slide-item"]} key={idDrink}>
+                            {popularCocktails.slice(currentIndex, currentIndex + 4).map((cocktail) => (
+                                <li className={styles["product-item"]} key={cocktail.idDrink}>
                                     <img src={cocktail.strDrinkThumb} alt={cocktail.strDrink}/>
                                     <h3>{cocktail.strDrink}</h3>
                                 </li>
