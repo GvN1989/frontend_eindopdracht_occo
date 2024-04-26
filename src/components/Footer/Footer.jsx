@@ -10,7 +10,6 @@ function Footer () {
                 <Link to="/" className={styles.navLink}> Bestelling</Link>
                 <Link to="/" className={styles.navLink}> Contact</Link>
             </nav>
-
             <p className={styles.footerText}> © OCCO 2024</p>
         </footer>
     )

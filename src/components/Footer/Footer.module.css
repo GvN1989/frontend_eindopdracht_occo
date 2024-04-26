@@ -32,7 +32,7 @@ nav a.navLink:hover{
     display: flex;
     flex-direction: row;
     justify-content: flex-end;
-    padding-right: 30px;
-    width: 300px;
+    width: 100%;
+    padding-right: 75px;
 
 }
