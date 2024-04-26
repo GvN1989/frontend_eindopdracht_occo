@@ -1,0 +1,126 @@
+.quiz-intro{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.quiz_title {
+    padding: 50px 50px 0;
+    text-align: center;
+    font-size: 2rem;
+}
+
+.quiz-container{
+    border: var(--secondary-color) 3px solid;
+}
+
+.quiz_text {
+    text-align: center;
+    padding: 50px 200px 15px;
+    font-size: 1.4rem;
+}
+
+.quiz-button-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.survey_title {
+    width: 10%;
+    text-align: center;
+    margin-left: 100px;
+    padding: 10px 10px 10px;
+    border: var(--secondary-color) 3px solid;
+    background-color: var(--detail-color);
+    border-radius: 5px;
+    position: relative;
+    z-index: 1;
+    top: 30px;
+}
+
+.quiz-container{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    column-gap: 10px;
+    flex-basis: 800px;
+    border-radius: 5px;
+    padding: 100px 50px 100px;
+    margin: 0 50px 50px;
+}
+
+.form-label{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-wrap: wrap;
+    width: 50%;
+    gap: 20px 20px;
+    font-size: 1.1rem;
+}
+
+
+.form-dropdown{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-wrap: wrap;
+    width: 50%;
+    gap: 30px 20px;
+}
+
+select {
+    flex-shrink: inherit;
+    padding: 8px 12px;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    background-color: white;
+    color: #555;
+    width: 300px;
+    font-size: 1.1rem;
+
+}
+
+
+select option {
+    color: black;
+}
+
+select option[value=""] {
+    color: rgb(128, 128, 128);
+}
+
+label {
+    padding: 8px 12px;
+    border: var(--secondary-color) 3px solid;
+    background-color: var(--detail-color);
+    border-radius: 5px;
+    width: 600px;
+}
+
+.result-button-container{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    column-gap: 25rem;
+    padding: 2rem 0 2rem;
+}
+
+
+.outroText {
+    text-align: center;
+    padding: 50px 200px 50px;
+    font-size: 1.2rem;
+
+}
+
+.btn-reset {
+    border: var(--secondary-color) 3px solid;
+    background-color: var(--secondary-color);
+
+}
+
+
