@@ -13,6 +13,7 @@
     display: flex;
     flex-direction: row;
     align-items: center;
+    align-content: center;
     margin-left: 5px;
     min-width: 50%;
     flex:1;
@@ -68,15 +69,18 @@
 
 .active-link{
     color:var(--darkviolet-color);
+    font-size: 1.8rem;
     padding-right: 40px;
     padding-left: 40px;
-    text-decoration: underline;
+    text-decoration: none;
+    font-weight: bold;
     border: solid 2px transparent;
     border-right-color: var(--darkviolet-color);
 }
 
 .default-link{
     color: var(--primary-nav-color);
+    font-size: 1.8rem;
     text-decoration: none;
     padding-right: 40px;
     padding-left: 40px;
@@ -89,10 +93,16 @@
     text-decoration: none;
 }
 
-.navSvg-default path {
+.nav-button-default path {
     fill: var(--primary-nav-color);
 }
 
-.navSvg-active path {
+.nav-button-default{
+    fill: var(--primary-color);
+    display: inline-flex;
+}
+
+.nav-button-active path {
     fill: var(--darkviolet-color);
 }
+

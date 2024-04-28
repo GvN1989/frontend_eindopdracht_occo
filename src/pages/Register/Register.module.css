@@ -1,0 +1,30 @@
+.register-title {
+    text-align: center;
+}
+
+.register {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-basis: 1200px;
+}
+
+.register-form {
+    display: flex;
+    flex-direction: row;
+    border: 4px red solid;
+}
+
+.register-fieldset{
+    border: transparent 3px solid;
+}
+
+.register-image-container{
+    border: 4px red solid;
+    display: flex;
+    flex-basis: 400px;
+}
+
+img {
+    transform: scale(0.8);
+}

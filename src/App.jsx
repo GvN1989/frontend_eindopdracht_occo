@@ -6,26 +6,33 @@ import NotFound from "./pages/NotFound/NotFound.jsx";
 import Quiz from "./pages/Quiz/Quiz.jsx"
 import ProductDetail from "./pages/ProductDetail/ProductDetail.jsx";
 import ProductOverview from "./pages/ProductOverview/ProductOveriew.jsx";
-import styles from "./components/Header/Header.module.css";
-import Nav from "./components/Nav/Nav.jsx";
 import Header from "./components/Header/Header.jsx";
-
+import Profile from "./pages/Profile/Profile.jsx";
+import Register from "./pages/Register/Register.jsx";
+import Login from "./pages/Login/Login.jsx";
+import ShoppingBasket from "./pages/ShoppingBasket/ShoppingBasket.jsx";
+import {useContext} from "react";
+import {AuthContext} from "./context/AuthContext.jsx";
 
 
 function App() {
 
+    const {isAuth} = useContext(AuthContext);
+
   return (
       <>
           <Header/>
-          <main>
               <Routes>
-                  <Route path="/" element={<Home/>}/>
-                  <Route path="/quiz" element={<Quiz/>}/>
-                  <Route path="/productdetail/:id" element={<ProductDetail/>}/>
-                  <Route path="/product-overview" element={<ProductOverview/>}/>
-                  <Route path="*" element={<NotFound/>}/>
+                  <Route path="/" element={<Home />}/>
+                  <Route path="/quiz" element={<Quiz />}/>
+                  <Route path="/productdetail/:id" element={<ProductDetail />}/>
+                  <Route path="/productoverview" element={<ProductOverview />}/>
+                  <Route path="/profile" element={<Profile />}/>
+                  <Route path="/register" element={<Register />}/>
+                  <Route path="/login" element={<Login />}/>
+                  <Route path="/shoppingbasket" element={<ShoppingBasket />}/>
+                  <Route path="*" element={<NotFound />}/>
               </Routes>
-          </main>
           <Footer/>
       </>
   );

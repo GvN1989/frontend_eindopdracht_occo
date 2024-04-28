@@ -65,8 +65,8 @@ function Results ({answers}) {
 
     return(
 <>
-        <h2 className="title-product-list">Top 5 Cocktails</h2>
-        <div className={styles["product-list-inner-container"]}>
+        <h2 className="topFiveElement-title">Top 5 Cocktails</h2>
+        <div className={styles["productListContainer"]}>
             {filteredCocktails.map((cocktail) => (
                 <div className={styles["product-item"]} key={cocktail.idDrink}>
                     <img src={cocktail.strDrinkThumb} alt={cocktail.strDrink}/>

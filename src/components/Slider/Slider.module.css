@@ -1,14 +1,33 @@
-.slides-element {
+.slider{
+    border-radius: 1%;
+    background-color: var(--element-color);
+    margin: 8rem 8rem 3rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    flex-basis: auto;
+    flex-grow: 1;
+    flex-shrink: 1;
+}
+
+.sliderTitle{
+    align-self: flex-start;
+    padding: 30px;
+}
+
+
+.sliderElement {
     display: flex;
     flex-direction: row;
     align-content: stretch;
     align-items: center;
-    width:100%;
+    width:80%;
     padding: 20px 10px 20px;
 
 }
 
-.product-item {
+.productItem {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -17,8 +36,8 @@
     border-radius: 5px;
 }
 
-.product-item img {
-    max-width: 200px;
+.productItem img {
+    max-width: 400px;
     height: auto;
     border-radius: 5px;
     border: #D9D9D9 solid 5px;
@@ -34,21 +53,17 @@ ul {
     flex: 1;
    }
 
-.btn-slider {
-    height: 50px;
-    width: 50px;
-    background-color: transparent;
-    border: none;
-    border-radius: 15px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
 
-.btn-slider:hover {
+.btnEffect :hover {
     background-color: var(--detail-color);
+    border-radius: 5px;
 }
 
-.text {
+.sliderText {
     text-align: center;
     padding: 100px;
+}
+
+.changeFill{
+    fill: var(--secondary-color) !important;
 }
