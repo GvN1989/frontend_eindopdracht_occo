@@ -40,7 +40,7 @@ function Nav () {
                 <NavLink className={({isActive}) => isActive ? styles["nav-button-default"] : styles["nav-button-default"]} to = {isAuth? "/profile" : "/login"}>{isAuth ? <Loggedin className={styles["icon-svg"]} /> : <LoggedOut />}</NavLink>
                 <NavLink className={({isActive}) => isActive ? styles["nav-button-active"] : styles["nav-button-default"]} to = "/favorites"><Favorite className={styles["icon-svg"]}  /></NavLink>
                 <NavLink className={({isActive}) => isActive ? styles["nav-button-active"] : styles["nav-button-default"]} to = "/shoppingbasket"><ShoppingBasket className={styles["icon-svg"]}  /></NavLink>
-                <IconButton icon="logout"  ariaLabel="Log out" />
+                <IconButton icon="logout"  ariaLabel="Log out" onClick={logout} />
             </div>
             </nav>
 

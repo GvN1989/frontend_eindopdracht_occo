@@ -1,6 +1,6 @@
 
 .content-container{
-    margin: 200px 600px 200px ;
+    margin: 200px 400px 200px ;
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -11,14 +11,6 @@
     background-color: #F4DBDE;
 }
 
-.form-container{
-    border: 3px solid transparent;
-    border-left-color: var(--secondary-color);
-    clip-path: inset(2% 0 2% 0);
-    width: 690px;
-    height: 500px;
-}
-
 .boxTitle{
     text-align: center;
     padding-top: 30px;
@@ -26,15 +18,22 @@
 
 .login-box {
     display: flex;
-    align-self: flex-end;
     flex-direction: column;
     align-items: center;
     gap: 10px;
-
-
+    border: 3px solid transparent;
+    border-left-color: var(--secondary-color);
+    clip-path: inset(2% 0 2% 0);
+    width: 690px;
+    height: 500px;
 }
 
 .register-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: space-evenly ;
+    gap: 100px;
     border: 3px solid transparent;
     border-right-color: var(--secondary-color);
     clip-path: inset(2% 0 2% 0);
@@ -42,32 +41,40 @@
     height: 500px;
 }
 
+.loginForm{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
 .login-input {
     display: flex;
     flex-direction: column;
+    justify-content: flex-start;
     width: 20rem;
+    position: relative;
 }
 
 .login-label{
-    padding: 20px 20px 5px;
+    font-size: 1.3rem;
+    padding: 20px 0 5px;
+    width:400px;
 }
 
 input{
-    flex-shrink: inherit;
     padding: 8px 12px;
     border: 2px solid #ccc;
     border-radius: 4px;
     background-color: white;
     color: #555;
-    width: 20rem;
-    font-size: 1.1rem;
+    width: 320px;
+    font-size: 1.3rem;
 }
 
 .login-warning{
     display: flex;
     flex-direction: row;
-    justify-content: flex-start;
-    width: 20rem;
+    width:400px;
 
 }
 
@@ -89,15 +96,12 @@ input{
     row-gap: 50px;
 }
 
-#btn-lr {
-    cursor: pointer;
-}
-
 #specialText{
     font-size: 2rem;
 }
 
 #registerText{
+    padding: 30px 0 30px;
     width: 70%;
 }
 
@@ -107,4 +111,21 @@ input{
     margin-top: 4px;
     cursor: pointer;
     text-decoration: underline;
+}
+
+.eyeIcon {
+    position: absolute;
+    right: 25px;
+    top: 75%;
+    z-index: 10;
+    transform: translateY(-50%) scale(0.80);
+    cursor: pointer;
+}
+
+.btnBox{
+   display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-basis: 800px;
+    width: 100%;
 }

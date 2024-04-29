@@ -12,7 +12,7 @@ function Slider() {
     const [error, toggleError] = useState(false);
     const [currentIndex, setCurrentIndex] = useState( 0);
 
-    const endpoint = `https://www.thecocktaildb.com/api/json/v2/${import.meta.env.VITE_API_KEY}/popular.php`
+    const endpoint = `https://www.thecocktaildb.com/api/json/v2/${import.meta.env.VITE_API_KEY1}/popular.php`
 
     useEffect(() => {
         const controller = new AbortController();

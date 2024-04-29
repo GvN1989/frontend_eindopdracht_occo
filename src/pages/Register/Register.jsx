@@ -3,13 +3,55 @@ import {useForm} from 'react-hook-form'
 import validateDOB from "../../helpers/validateDOB.js";
 import Button from "../../components/Button/Button.jsx";
 import registerImage from "../../assets/images/img_registerpage.png";
+import {Link,useNavigate} from "react-router-dom";
+import {useEffect, useState} from "react";
+import axios from "axios";
 function Register () {
 
-    const { register, handleSubmit, formState: {errors}} = useForm();
+    const { handleSubmit, register} = useForm();
+    const [error, toggleError] = useState(false);
+    const [loading, toggleLoading] = useState(false);
+    const navigate = useNavigate();
+    const source = axios.CancelToken.source();
 
-    const onSubmit = data => {
-        console.log(data);
-    };
+    useEffect(() => {
+        return function cleanup() {
+            source.cancel();
+        }
+    }, [])
+
+    async function onSubmit(data) {
+        console.log("Submitting form data:", data);
+        toggleError(false)
+        toggleLoading(true)
+
+    try {
+        console.log("API request headers:", {
+            'Content-Type': 'application/json',
+            'X-Api-Key': `${import.meta.env.VITE_API_KEY2}`
+        });
+        const response = await axios.post('https://api.datavortex.nl/occo/users', {
+            username: data.name,
+            email: data.email,
+            password: data.password,
+            info: ""
+        }, {
+            headers: {
+                'Content-Type': 'application/json',
+                'X-Api-Key': `${import.meta.env.VITE_API_KEY2}`
+            }
+        }); if(response.status === 200 ){
+        console.log("Registration successful", response);
+        navigate('/profile');}
+    } catch (e) {
+        console.error("Registration error:",e);
+        toggleError(true)
+    }
+
+    toggleLoading(false);
+    console.log("Loading finished");
+}
+
 
     return(
         <section className="outer-section-container">
@@ -18,36 +60,19 @@ function Register () {
             <form onSubmit={handleSubmit(onSubmit)} className={styles["register-form"]}>
         <fieldset className={styles["register-fieldset"]}>
             <div className={styles["form-field"]}>
-            <label className={styles["form-field__label"]} htmlFor="firstName-field">
-                    First name:
+            <label className={styles["form-field__label"]} htmlFor="name-field">
+                    First and Last name:
                     <input
                         type="text"
-                        id="firstName-field"
-                        {...register("firstName",{
-                        required: "First name is required",
+                        id="name-field"
+                        {...register("name",{
+                        required: "Name is required",
                         minLength:{
                             value:2,
-                            message: "First name must be at least 2 characters"
+                            message: " Name field must at least contain 2 characters"
                         }})}
                     />
-                    {errors.firstname && <p className={styles["form-field__error"]}>{errors.firstName.message}</p>}
-                </label>
-            </div>
-            <div className={styles["form-field"]}>
-            <label className={styles["form-field__label"]} htmlFor="lastName-field">
-                    Last name:
-                    <input
-                        type="text"
-                        id="lastName-field"
-                        {...register("lastName",{
-                            required: "Last name is required",
-                            minLength: {
-                                value: 2,
-                                message: "Last name must be at least 2 characters"
-                            }
-                        })}
-                    />
-                    {errors.lastName && <p className={styles["form-field__error"]}>{errors.lastName.message}</p>}
+                    {error.name && <p className={styles["form-field__error"]}>{error.name.message}</p>}
                 </label>
             </div>
             <div className={styles["form-field"]}>
@@ -64,7 +89,7 @@ function Register () {
                             }
                         })}
                     />
-                    {errors.email && <p className={styles["form-field__error"]}>{errors.email.message}</p>}
+                    {error.email && <p className={styles["form-field__error"]}>{error.email.message}</p>}
                 </label>
             </div>
             <div className={styles["form-field"]}>
@@ -78,17 +103,37 @@ function Register () {
                             validate: value => validateDOB(value) || "Invalid date of birth"
                         })}
                     />
-                    {errors.dob && <p className={styles["form-field__error"]}>{errors.dob.message}</p>}
+                    {error.dob && <p className={styles["form-field__error"]}>{error.dob.message}</p>}
                 </label>
             </div>
-                <Button type={"button"} className={"primary"}
-                >Submit</Button>
+            <div className={styles["form-field"]}>
+                <label className={styles["form-field__label"]} htmlFor="firstName-field">
+                    Password:
+                    <input
+                        type="password"
+                        id="password-field"
+                        {...register("password",{
+                            required: "password is required",
+                            minLength:{
+                                value:8,
+                                message: "Password must be at least 8 characters long"
+                            }})}
+                    />
+                    {error.password && <p className={styles["form-field__error"]}>{error.password.message}</p>}
+                </label>
+                {error && <p className="error">Dit account bestaat al. Probeer een ander emailadres.</p>}
+            </div>
+            <div className={styles.btnContainer}>
+                <Button type={"submit"} className={"primary"} disabled={loading}
+                >Create Account</Button>
+            </div>
+            <p>Do you already have an account? You can login <Link to="/login">here</Link>.</p>
             </fieldset>
             </form>
-            <div className={styles["register-image-container"]}>
-                <span className={styles["register-image"]}>
-                        <img src={registerImage} alt="happy-women-drinkinga-cocktail"/>
-                </span>
+
+
+            <div className={styles["register-img-box"]}>
+                    <img src={registerImage} alt="happy-women-drinking-a-cocktail"/>
             </div>
             </div>
         </section>

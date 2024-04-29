@@ -4,7 +4,7 @@
     display: flex;
     flex-basis: 500px;
     flex-direction: column;
-    margin: 8rem 8rem 8rem;
+    margin: 10rem 8rem 10rem;
     background-color: #F4DBDE;
     border-radius: 1%;
 }
@@ -45,8 +45,8 @@
     justify-content: flex-end;
     align-items: center;
     height: 600px;
-    right: 230px;
-    top: 50px;
+    right: 300px;
+    top: 100px;
     z-index: 1;
     position: absolute;
     }

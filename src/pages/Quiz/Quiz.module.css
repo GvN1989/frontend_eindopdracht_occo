@@ -7,7 +7,7 @@
 
 .intro-title {
     text-align: center;
-    padding: 15px 50px 15px;
+    padding: 50px 50px 15px;
     font-size: 2rem;
 }
 
@@ -24,7 +24,6 @@
 
 
 /*----------- Quiz CSS ------------------- */
-
 
 .legend_quiz {
     width: 10%;
@@ -106,8 +105,7 @@ select option[value=""] {
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 100%;
-    padding:150px 0 150px;
+    padding:100px 0 100px;
 }
 
 /*----------- Quiz CSS ------------------- */

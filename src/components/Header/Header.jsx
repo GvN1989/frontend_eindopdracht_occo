@@ -2,6 +2,8 @@ import styles from "./Header.module.css";
 import Nav from "/src/components/Nav/Nav.jsx";
 import {useNavigate} from "react-router-dom";
 import logo from "../../assets/images/LOGO_OCCO.png";
+import {useContext} from "react";
+import {AuthContext} from "../../context/AuthContext.jsx";
 
 function Header ( ){
 

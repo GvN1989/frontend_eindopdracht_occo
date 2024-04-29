@@ -1,4 +1,4 @@
-import {Routes,Route} from 'react-router-dom';
+import {Routes, Route, Navigate} from 'react-router-dom';
 import './App.css';
 import Footer from "./components/Footer/Footer.jsx";
 import Home from "./pages/Home/Home.jsx"
@@ -27,7 +27,7 @@ function App() {
                   <Route path="/quiz" element={<Quiz />}/>
                   <Route path="/productdetail/:id" element={<ProductDetail />}/>
                   <Route path="/productoverview" element={<ProductOverview />}/>
-                  <Route path="/profile" element={<Profile />}/>
+                  <Route path="/profile" element={isAuth ? <Profile /> : <Navigate to="/login"/>}/>
                   <Route path="/register" element={<Register />}/>
                   <Route path="/login" element={<Login />}/>
                   <Route path="/shoppingbasket" element={<ShoppingBasket />}/>
