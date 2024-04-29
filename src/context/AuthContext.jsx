@@ -15,7 +15,7 @@ function AuthContextProvider({ children }) {
 
     const navigate = useNavigate();
 
-    useEffect(() => {
+   /* useEffect(() => {
         const storedToken = localStorage.getItem ("token");
         console.log("Retrieved token:", storedToken);
 
@@ -28,7 +28,7 @@ function AuthContextProvider({ children }) {
                 console.log("Token is invalid or not present");
                 void logout()
             }
-        }, [] );
+        }, [] ); */
 
     const login = async (jwtToken) => {
         console.log(jwtDecode(jwtToken));
