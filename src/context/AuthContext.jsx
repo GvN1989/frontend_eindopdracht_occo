@@ -15,7 +15,7 @@ function AuthContextProvider({ children }) {
 
     const navigate = useNavigate();
 
-   /* useEffect(() => {
+   useEffect(() => {
         const storedToken = localStorage.getItem ("token");
         console.log("Retrieved token:", storedToken);
 
@@ -28,23 +28,32 @@ function AuthContextProvider({ children }) {
                 console.log("Token is invalid or not present");
                 void logout()
             }
-        }, [] ); */
+        }, [] );
 
-    const login = async (jwtToken) => {
-        console.log(jwtDecode(jwtToken));
+    const login = async (jwt) => {
+        console.log("Received token:", jwt);
+        if (typeof jwt !== 'string' || jwt.trim() === '') {
+            console.error('Invalid token: Token must be a non-empty string.', jwt);
+            // Handle the error appropriately
+            return;
+        }
 
-        const decodedToken = jwtDecode(jwtToken);
+        console.log(jwtDecode(jwt));
+
+        const decodedToken = jwtDecode(jwt);
 
         console.log("Decoded token:", decodedToken);
 
-        localStorage.setItem("token", jwtToken);
+        localStorage.setItem("token", jwt);
+
+        console.log(decodedToken.sub)
 
         try {
             console.log("Sending request to backend");
             const response = await axios.get(`https://api.datavortex.nl/occo/users/${decodedToken.sub}/info`, {
                 headers: {
                     "Content-Type": "application/json",
-                    Authorization: `Bearer ${jwtToken}`,
+                    Authorization: `Bearer ${jwt}`,
                 }
             });
             console.log("Received response from backend:", response.data);
@@ -92,6 +101,7 @@ function AuthContextProvider({ children }) {
 
 
     return (
+
         <AuthContext.Provider value={data}>
             {authState.status ==="done" ? children : <p>Loading...</p>}
         </AuthContext.Provider>

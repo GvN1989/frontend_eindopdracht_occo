@@ -32,23 +32,25 @@ function Login () {
     }, []); */
 
     async function onSubmit (data)  {
-        console.log("Submitting form data:", data);
+        console.log("Submitting inlog form data:", data);
         toggleError(false);
 
         try {
-            const response = await axios.post("https://api.datavortex.nl/occo/users/authenticate",
+            const response = await axios.post(`https://api.datavortex.nl/occo/users/authenticate`,
                 {
-                email:data.email,
-                password: data.password,
-                username: data.name
-            }); if(response.status ===200) {
-                console.log(response);
-                login(response.data.jwt);
-            }
+                    username: `${data.username}`,
+                    password: `${data.password}`
+                });
+
+            console.log("API response:", response);
+            login(response.data.jwt)
+
         } catch (e) {
-            console.error(e)
+            console.error("Caught an error during form submission:", e);
+            if (e.response) {
+                console.error("Server responded with:", e.response.status, e.response.data);
             toggleError(true);
-        }
+        }}
     }
 
 
@@ -67,13 +69,13 @@ function Login () {
                 <div className={styles["login-box"]}>
                     <h1 className={styles.boxTitle}> LOGIN </h1>
                     <div className={styles["login-input"]}>
-                    <label htmlFor="email-field" className={styles["login-label"]}>
-                        Email adres
+                    <label htmlFor="username-field" className={styles["username-label"]}>
+                        Username
                     <input
-                        type="email"
-                        id="email"
-                        {...register("email")}
-                        placeholder= "Enter email adress"
+                        type="username"
+                        id="username"
+                        {...register("username")}
+                        placeholder= "Enter username"
                     />
                     </label>
                     <label htmlFor="password" className={styles["login-label"]}>

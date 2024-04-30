@@ -31,7 +31,7 @@ function Register () {
             'X-Api-Key': `${import.meta.env.VITE_API_KEY2}`
         });
         const response = await axios.post('https://api.datavortex.nl/occo/users', {
-            username: data.name,
+            username: data.username,
             email: data.email,
             password: data.password,
             info: ""
@@ -60,19 +60,19 @@ function Register () {
             <form onSubmit={handleSubmit(onSubmit)} className={styles["register-form"]}>
         <fieldset className={styles["register-fieldset"]}>
             <div className={styles["form-field"]}>
-            <label className={styles["form-field__label"]} htmlFor="name-field">
+            <label className={styles["form-field__label"]} htmlFor="username-field">
                     First and Last name:
                     <input
                         type="text"
-                        id="name-field"
-                        {...register("name",{
+                        id="username-field"
+                        {...register("username",{
                         required: "Name is required",
                         minLength:{
                             value:2,
                             message: " Name field must at least contain 2 characters"
                         }})}
                     />
-                    {error.name && <p className={styles["form-field__error"]}>{error.name.message}</p>}
+                    {error.username && <p className={styles["form-field__error"]}>{error.name.message}</p>}
                 </label>
             </div>
             <div className={styles["form-field"]}>
