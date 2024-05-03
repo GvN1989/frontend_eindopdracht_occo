@@ -11,7 +11,7 @@ import axios from "axios";
 
 
 function Login () {
-    const { handleSubmit, register} = useForm();
+    const {handleSubmit, register} = useForm();
 
     const [isVisible, setIsVisible] = useState(false);
     const toggleVisibility = () => {
@@ -21,22 +21,22 @@ function Login () {
     const {login} = useContext(AuthContext)
     const [error, toggleError] = useState(false);
 
-    const source= axios.CancelToken.source();
+    const source = axios.CancelToken.source();
 
     const navigate = useNavigate()
 
-   /* useEffect(() => {
-        return function cleanup() {
-            source.cancel();
-        }
-    }, []); */
+    useEffect(() => {
+         return function cleanup() {
+             source.cancel();
+         }
+     }, []);
 
-    async function onSubmit (data)  {
+    async function onSubmit(data) {
         console.log("Submitting inlog form data:", data);
         toggleError(false);
 
         try {
-            const response = await axios.post(`https://api.datavortex.nl/occo/users/authenticate`,
+            const response = await axios.post("https://api.datavortex.nl/occo/users/authenticate",
                 {
                     username: `${data.username}`,
                     password: `${data.password}`
@@ -49,9 +49,11 @@ function Login () {
             console.error("Caught an error during form submission:", e);
             if (e.response) {
                 console.error("Server responded with:", e.response.status, e.response.data);
-            toggleError(true);
-        }}
+                toggleError(true);
+            }
+        }
     }
+
 
 
     return(
@@ -83,8 +85,8 @@ function Login () {
                         <input
                             type={isVisible ? 'text' : 'password'}
                             id="password"
-                            {...register("password")}
                             placeholder= "Enter password"
+                            {...register("password") }
                         />
                     </label>
                         {isVisible?(

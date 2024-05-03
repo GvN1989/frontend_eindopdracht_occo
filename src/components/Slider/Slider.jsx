@@ -1,7 +1,4 @@
 import styles from "./Slider.module.css"
-import Button from "../Button/Button.jsx";
-import {ReactComponent as IconLeft} from "../../assets/svg/caret-circle-left.svg";
-import {ReactComponent as IconRight} from "../../assets/svg/caret-circle-right.svg";
 import {useEffect, useState} from "react";
 import axios from 'axios';
 import IconButton from "../IconButton/IconButton.jsx";
@@ -38,7 +35,7 @@ function Slider() {
         return () => {
             controller.abort();
         }
-    }, [currentIndex]);
+    }, [currentIndex,endpoint]);
 
 
     const handleNext = () => {

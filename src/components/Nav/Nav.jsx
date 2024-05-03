@@ -7,8 +7,6 @@ import {ReactComponent as Favorite} from "../../assets/svg/heart.svg";
 import {AuthContext} from "../../context/AuthContext.jsx";
 import {useContext} from "react";
 import IconButton from "../IconButton/IconButton.jsx";
-import { ReactComponent as LogoutIcon } from "../../assets/svg/sign-out.svg";
-import { ReactComponent as SearchIcon } from "../../assets/svg/magnifying-glass.svg";
 
 function Nav () {
 

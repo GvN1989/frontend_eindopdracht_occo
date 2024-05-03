@@ -61,7 +61,7 @@ function Register () {
         <fieldset className={styles["register-fieldset"]}>
             <div className={styles["form-field"]}>
             <label className={styles["form-field__label"]} htmlFor="username-field">
-                    First and Last name:
+                    Username
                     <input
                         type="text"
                         id="username-field"
@@ -69,7 +69,7 @@ function Register () {
                         required: "Name is required",
                         minLength:{
                             value:2,
-                            message: " Name field must at least contain 2 characters"
+                            message: "Name field must at least contain 2 characters"
                         }})}
                     />
                     {error.username && <p className={styles["form-field__error"]}>{error.name.message}</p>}
