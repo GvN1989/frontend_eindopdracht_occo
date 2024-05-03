@@ -12,7 +12,7 @@ function useFetchCocktails() {
 
         async function fetchCocktails () {
             toggleIsLoading(true);
-            const endpoint = `https://www.thecocktaildb.com/api/json/v2/${import.meta.env.VITE_API_KEY}/search.php?f=`
+            const endpoint = `https://www.thecocktaildb.com/api/json/v2/${import.meta.env.VITE_API_KEY1}/search.php?f=`
             const allData = []
             const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split('');
 

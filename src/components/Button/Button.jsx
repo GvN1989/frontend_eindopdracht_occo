@@ -1,10 +1,19 @@
 import styles from "./Button.module.css"
 
-function Button ({ children, onClick, type = 'button', className }) {
+function Button ({ type = 'button', children, onClick, className='', disabled}) {
+
+    const buttonClassName = `${styles.button} ${styles[className] || ''}`.trim();
+
+
 
     return(
 
-        <button type={type} onClick={onClick} className={className}>
+        <button
+            type={type}
+            disabled={disabled}
+            onClick={onClick}
+            className={buttonClassName}
+        >
             {children}
         </button>
     )

@@ -51,27 +51,27 @@ function Quiz () {
 
 
     return (
-            <section className="outer-content-container">
+            <section className={"outer-section-container"}>
                 {!isSubmitted ? (
                     <>
-                <div className={styles["quiz-intro"]}>
-                    <h1 className={styles["quiz_title"]}> Find Your Flavor with the OCCO Inspiration Quiz! </h1>
-                    <p className={styles["quiz_text"]}>Not sure what to sip next? Answer a few quick questions and
+                <div className={styles["intro"]}>
+                    <h1 className={styles["intro-title"]}> Find Your Flavor with the OCCO Inspiration Quiz! </h1>
+                    <p className={styles["intro-text"]}>Not sure what to sip next? Answer a few quick questions and
                         we'll match you with cocktails that suit your taste and mood. Whether you're hosting a party,
                         relaxing at home, or celebrating a special occasion, let OCCO lead the way to your perfect
                         cocktail.</p>
                 </div>
-                        <h2 className={styles["survey_title"]}>QUIZ</h2>
-                        <form onSubmit={handleSubmit} className={styles["quiz-container"]}>
-                            <div className={styles["form-label"]}>
-                                <label htmlFor="alcoholPreference"> 1. Do you prefer a cocktail or a mocktail?
+                        <h2 className={styles["legend_quiz"]}>QUIZ</h2>
+                        <form onSubmit={handleSubmit} className={styles["form-container"]}>
+                            <div className={styles["form-label-flex"]}>
+                                <label className={styles["form-label"]} htmlFor="alcoholPreference"> 1. Do you prefer a cocktail or a mocktail?
                                 </label>
-                                <label htmlFor="flavor"> 2. What flavor profile do you enjoy?
+                                <label className={styles["form-label"]} htmlFor="flavor"> 2. What flavor profile do you enjoy?
                                 </label>
-                                <label htmlFor="occasion"> 3. What is the occasion for enjoying a cocktail?
+                                <label className={styles["form-label"]} htmlFor="occasion"> 3. What is the occasion for enjoying a cocktail?
                                 </label>
                             </div>
-                            <div className={styles["form-dropdown"]}>
+                            <div className={styles["form-dropdown-flex"]}>
                                 <select
                                     value={answers.alcoholPreference}
                                     onChange={handleChange}
@@ -108,10 +108,10 @@ function Quiz () {
                                 </select>
                             </div>
                     </form>
-                <div className={styles["quiz-button-container"]}>
+                <div className={styles["quiz-submit-flex"]}>
                     <Button
                         type="submit"
-                        className={styles["quiz"]}
+                        className="primary"
                         onClick={handleSubmit}
                     > Submit </Button>
                 </div>
@@ -119,22 +119,24 @@ function Quiz () {
                     ) :
                     (
                         <>
-                                <h1 className={styles["quiz_title"]}> CHEERS TO YOUR PERFECT MATCH! </h1>
-                                <p className={styles["quiz_text"]}> Based on your selections, here are the top 5 cocktails that we think you'll love:</p>
-                                <div className={"product-list-outer-container"}>
+                                <h1 className={styles["intro-title"]}> CHEERS TO YOUR PERFECT MATCH! </h1>
+                                <p className={styles["intro-text"]}> Based on your selections, here are the top 5 cocktails that we think you'll love:</p>
+                                <div className={styles["topFiveElement"]}>
                                     <Results
                                     answers={answers}
                                     />
                                 </div>
-                                <p className={styles["outroText"]}>Why these cocktails? Each recommendation is tailored to match the occasion you're celebrating and the flavors you enjoy. Click on each cocktail to discover recipes, order the cocktail set etc.. Not quite right? Try our quiz again or explore our full cocktail gallery to find other drinks that might catch your eye. Enjoy responsibly and let the good times pour!</p>
+                                <p className={styles["outro-text"]}>Why these cocktails? Each recommendation is tailored to match the occasion you're celebrating and the flavors you enjoy. Click on each cocktail to discover recipes, order the cocktail set etc.. Not quite right? Try our quiz again or explore our full cocktail gallery to find other drinks that might catch your eye. Enjoy responsibly and let the good times pour!</p>
                             <div className={styles["result-button-container"]}>
                                 <Button
                                     type="button"
-                                    onClick={handleReset}>Take the quiz again</Button>
+                                    onClick={handleReset}
+                                    className="primary"
+                                >Take the quiz again</Button>
                                 <Button
                                     type="button"
-                                    className={styles["btn-reset"]}
                                     onClick= {handleNavigation}
+                                    className="secondary"
                                 >Go explore some more</Button>
                             </div>
                         </>

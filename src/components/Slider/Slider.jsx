@@ -1,9 +1,7 @@
 import styles from "./Slider.module.css"
-import Button from "../Button/Button.jsx";
-import {ReactComponent as IconLeft} from "../../assets/svg/caret-circle-left.svg";
-import {ReactComponent as IconRight} from "../../assets/svg/caret-circle-right.svg";
 import {useEffect, useState} from "react";
 import axios from 'axios';
+import IconButton from "../IconButton/IconButton.jsx";
 
 function Slider() {
     const [popularCocktails, setPopularCocktails] = useState([]);
@@ -11,7 +9,7 @@ function Slider() {
     const [error, toggleError] = useState(false);
     const [currentIndex, setCurrentIndex] = useState( 0);
 
-    const endpoint = `https://www.thecocktaildb.com/api/json/v2/${import.meta.env.VITE_API_KEY}/popular.php`
+    const endpoint = `https://www.thecocktaildb.com/api/json/v2/${import.meta.env.VITE_API_KEY1}/popular.php`
 
     useEffect(() => {
         const controller = new AbortController();
@@ -37,7 +35,7 @@ function Slider() {
         return () => {
             controller.abort();
         }
-    }, [currentIndex]);
+    }, [currentIndex,endpoint]);
 
 
     const handleNext = () => {
@@ -53,32 +51,36 @@ function Slider() {
 
     return (
         <>
-            <section className={"product-list-outer-container"}>
-                <h2 className={"title-product-list"}>MOST POPULAR COCKTAILS</h2>
-                {loading && <p className={styles["text"]}>Loading...</p>}
-                {error && <p className={styles["text"]}>Error loading the cocktails!</p>}
+            <section className={styles.slider}>
+                <h2 className={styles.sliderTitle}>MOST POPULAR COCKTAILS</h2>
+                {loading && <p className={styles.sliderText}>Loading...</p>}
+                {error && <p className={styles.sliderText}>Error loading the cocktails!</p>}
                 {!loading && !error && (
-                    <div className={styles["slides-element"]}>
-                        <Button
-                            className={styles["btn-slider"]}
+                    <div className={styles.sliderElement}>
+                        <IconButton
+                            icon="icon-left"
+                            ariaLabel="go-left"
                             onClick={handlePrev}
-                            disabled={currentIndex === 0}>
-                            <IconLeft/>
-                        </Button>
+                            disabled={currentIndex === 0}
+                            className={styles.btnEffect}
+                            svgClassName={styles.changeFill}
+                        />
                         <ul>
                             {popularCocktails.slice(currentIndex, currentIndex + 4).map((cocktail) => (
-                                <li className={styles["product-item"]} key={cocktail.idDrink}>
+                                <li className={styles.productItem} key={cocktail.idDrink}>
                                     <img src={cocktail.strDrinkThumb} alt={cocktail.strDrink}/>
                                     <h3>{cocktail.strDrink}</h3>
                                 </li>
                             ))}
                         </ul>
-                        <Button
-                            className={styles["btn-slider"]}
+                        <IconButton
+                            icon="icon-right"
+                            ariaLabel="go-right"
                             onClick={handleNext}
-                            disabled={currentIndex + 4 >= popularCocktails.length}>
-                                <IconRight/>
-                        </Button>
+                            disabled={currentIndex + 4 >= popularCocktails.length}
+                            className={styles.btnEffect}
+                            svgClassName={styles.changeFill}
+                        />
                     </div>)}
             </section>
         </> )

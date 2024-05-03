@@ -1,33 +1,31 @@
-.quiz-intro{
+.intro{
     display: flex;
     flex-direction: column;
     justify-content: center;
+    padding: 50px 0 50px;
 }
 
-.quiz_title {
-    padding: 50px 50px 0;
+.intro-title {
     text-align: center;
+    padding: 50px 50px 15px;
     font-size: 2rem;
+}
+
+.intro-text {
+    margin: 50px;
+    text-align: start;
+    padding: 10px 0 10px;
+    font-size: 1.4rem;
 }
 
 .quiz-container{
     border: var(--secondary-color) 3px solid;
 }
 
-.quiz_text {
-    text-align: center;
-    padding: 50px 200px 15px;
-    font-size: 1.4rem;
-}
 
-.quiz-button-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-}
+/*----------- Quiz CSS ------------------- */
 
-.survey_title {
+.legend_quiz {
     width: 10%;
     text-align: center;
     margin-left: 100px;
@@ -40,35 +38,46 @@
     top: 30px;
 }
 
-.quiz-container{
+.form-container{
+    border: var(--secondary-color) 3px solid;
     display: flex;
     flex-direction: row;
     align-items: center;
-    column-gap: 10px;
+    column-gap: 20px;
     flex-basis: 800px;
     border-radius: 5px;
-    padding: 100px 50px 100px;
+    padding: 200px 50px 200px;
     margin: 0 50px 50px;
 }
 
-.form-label{
+.form-label-flex{
     display: flex;
     flex-direction: column;
     align-items: center;
     flex-wrap: wrap;
     width: 50%;
-    gap: 20px 20px;
+    gap: 40px 40px;
     font-size: 1.1rem;
 }
 
+.form-label {
+    align-content: center;
+    padding: 8px 12px;
+    border: var(--secondary-color) 3px solid;
+    background-color: var(--detail-color);
+    border-radius: 5px;
+    width: 1000px;
+    height: 60px;
+    font-size: 1.4rem;
+}
 
-.form-dropdown{
+.form-dropdown-flex{
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
     flex-wrap: wrap;
     width: 50%;
-    gap: 30px 20px;
+    gap: 40px 20px;
 }
 
 select {
@@ -78,11 +87,11 @@ select {
     border-radius: 4px;
     background-color: white;
     color: #555;
-    width: 300px;
-    font-size: 1.1rem;
+    height: 60px;
+    width: 500px;
+    font-size: 1.4rem;
 
 }
-
 
 select option {
     color: black;
@@ -92,12 +101,34 @@ select option[value=""] {
     color: rgb(128, 128, 128);
 }
 
-label {
-    padding: 8px 12px;
-    border: var(--secondary-color) 3px solid;
-    background-color: var(--detail-color);
-    border-radius: 5px;
-    width: 600px;
+.quiz-submit-flex {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding:100px 0 100px;
+}
+
+/*----------- Quiz CSS ------------------- */
+
+.topFiveElement{
+    padding: 50px 50px 50px;
+    border-radius: 1%;
+    background-color: var(--element-color);
+    margin: 3rem 8rem 3rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    flex-basis: auto;
+    flex-grow: 1;
+    flex-shrink: 1;
+}
+
+.outro-text {
+    margin: 50px;
+    text-align: start;
+    padding: 50px 100px 50px;
+    font-size: 1.4rem;
 }
 
 .result-button-container{
@@ -106,21 +137,8 @@ label {
     flex-direction: row;
     justify-content: center;
     column-gap: 25rem;
-    padding: 2rem 0 2rem;
+    padding: 4rem 0 4rem;
 }
 
-
-.outroText {
-    text-align: center;
-    padding: 50px 200px 50px;
-    font-size: 1.2rem;
-
-}
-
-.btn-reset {
-    border: var(--secondary-color) 3px solid;
-    background-color: var(--secondary-color);
-
-}
 
 

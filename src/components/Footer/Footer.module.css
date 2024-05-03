@@ -1,13 +1,9 @@
-
-footer.siteFooter{
-    background: var(--secondary-color);
-    color: var(--primary-nav-color);
+.footer-body-content{
     display: flex;
     flex-direction: row;
-    justify-content: flex-start;
     align-items: center;
-    width: 100%;
-    height: 50px;
+    background-color: var(--secondary-color);
+    height: 6rem;
 }
 
 nav a.navLink{
