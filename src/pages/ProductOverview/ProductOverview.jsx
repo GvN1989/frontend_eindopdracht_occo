@@ -1,62 +1,62 @@
 import styles from "./ProductOverview.module.css"
 import useFetchCocktails from "../../components/useFetchCocktails/useFetchCocktails.jsx";
 import {useEffect, useState} from "react";
-import Button from "../../components/Button/Button.jsx";
+import IconButton from "../../components/IconButton/IconButton.jsx";
+import Filter from "../../components/Filter/Filter.jsx";
+import ProductList from "../../components/ProductList/ProductList.jsx";
+import filteredCocktails from "../../components/filteredCocktails/filteredCocktails.jsx";
+
 
 function ProductOverview () {
 
     const{cocktails,isLoading,error}=useFetchCocktails();
+    const [filters, setFilters] = useState({
+        category: [],
+        type: [],
+        ingredients: []
+    });
     const [displayedCocktails, setDisplayedCocktails] = useState([]);
-    const [itemCount, setItemCount] = useState(48);
+    const [showFilter, setShowFilter] = useState(false);
 
     useEffect(() => {
-        if (cocktails) {
-            setDisplayedCocktails(cocktails.slice(0, itemCount));
+        console.log("Filters before applying:", filters);
+
+        if (cocktails.length) {
+            const filtered = filteredCocktails(cocktails, filters);
+            console.log("FilteredCocktails", filtered)
+            setDisplayedCocktails(filtered);
         }
-    }, [cocktails, itemCount]);
+    }, [cocktails, filters]);
 
-    const handleLoadMore = () => {
-        setItemCount(prevItemCount => prevItemCount + 48);  // Increase count by 50 each time
+    const toggleFilterPanel = () => {
+        setShowFilter(!showFilter);
+        console.log("Filter panel toggled", !showFilter);
     };
-
-    if (isLoading) {
-        return <p>Loading...</p>;  // Displays a loading message until cocktails are fetched
-    }
-
-    if (error) {
-        return <p>Error fetching cocktails: {error}</p>;  // Displays an error message if there is an error in fetching data
-    }
-
-    console.log(cocktails.length)
 
     return(
         <>
-        <section className="outer-section-container">
-            <h1 className={styles.h1}> COCKTAILFINDER </h1>
-            <div>
-                <button> icon button filter </button>
-                <button> icon button sort </button>
-            </div>
-                <div className={styles["productListContainer"]}>
-                {cocktails.length > 0 ? (
-                        <ul className={styles["cocktail-list"]}>
-                            {displayedCocktails.map((cocktail) => (
-                            <li className={styles.productItem} key= {cocktail.idDrink}>
-                            <img src={cocktail.strDrinkThumb} alt={cocktail.strDrink}/>
-                            <p>{cocktail.strDrink}</p>
-                        </li>
-                        ))}
-                        </ul>
-            ) : (
-                    <p> No cocktails found </p>
-
-                    )}
-
-                    {cocktails && cocktails.length > displayedCocktails.length && (
-                        <Button onClick={handleLoadMore}>Load More</Button>
-                    )}
-                </div>
-        </section>
+            <Filter isVisible={showFilter} onFilterChange={setFilters} onClose={toggleFilterPanel}/>
+            <main>
+                <section className="outer-section-container">
+                    <h1 className={styles["product-overview-title"]}> COCKTAILFINDER </h1>
+                    <div className={styles["option-bar"]}>
+                        <IconButton
+                            icon={"filter"}
+                            ariaLabel="filter"
+                            className={styles.btnSpecs}
+                            svgClassName={styles.changeFill}
+                            onClick={toggleFilterPanel}
+                        />
+                        <IconButton
+                            icon={"sort"}
+                            ariaLabel="filter"
+                            className={styles.btnSpecs}
+                            svgClassName={styles.changeFill}
+                        />
+                    </div>
+                    <ProductList cocktails={displayedCocktails} isLoading={isLoading} error={error} />
+                </section>
+            </main>
         </>
     )
 }

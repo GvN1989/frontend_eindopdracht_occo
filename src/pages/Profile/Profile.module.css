@@ -2,22 +2,21 @@
     display: flex;
     flex-direction: column;
     position: relative;
-    padding-bottom: 800px;
+    padding-bottom: 20px;
 
 }
 .profileHeader {
-    margin: 50px 50px 50px ;
+    margin: 50px ;
     font-size: 3rem;
 
 }
 .profile-nav-container{
     background-color: var(--detail-color);
     display: flex;
-    align-items: flex-start;
-    flex-basis: 80px;
-    padding-bottom: 100px;
-    padding-top: 20px;
-    z-index: 1;
+    justify-content: space-between;
+    align-items: center;
+    padding: 50px 20px;
+    z-index: 2;
 }
 
 .profile-nav-list{
@@ -25,16 +24,14 @@
     flex-direction: row;
     justify-content: flex-start;
     align-items: center;
-    flex-basis: 800px;
     gap: 80px;
-    margin-left: 50px;
 }
 
 .profile-link{
     color: var(--secondary-color);
     font-size: 1.7rem;
     text-decoration: none;
-    padding: 20px 50px 50px
+    padding: 20px 50px;
 }
 
 .profile-logout{
@@ -44,8 +41,6 @@
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    flex-basis: 100px;
-    margin-right: 100px;
     padding: 20px;
     z-index: 2;
 }
@@ -55,23 +50,25 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    flex-basis: 800px;
-    width: 2100px;
-    height: 880px;
-    margin: 0 50px 0;
-    position: absolute;
-    top: -80px;
-    left: 150px;
-    z-index: 2;
+    width: calc(100% - 100px);
+    height: auto;
+    margin-left: 50px;
+    margin-right: 50px;
+    position: relative;
+    top: -35px;
+    z-index: 1;
 }
 .profile-inner-container{
     display: flex;
     flex-direction: row;
-    justify-content: flex-start;
-    align-items: center;
-    width: inherit;
+    align-items: stretch;
+    width: 100%;
     height: 100%;
     gap: 20px;
+}
+
+.profile-inner-container > div{
+    flex: 1;
 }
 
 .title-left-flex{
@@ -79,12 +76,13 @@
     flex-direction: column;
     justify-content: flex-start;
     padding-top: 100px;
-    align-items: center;
+    align-items: stretch;
     flex-basis: 600px;
-    height: 100%;
+    height: auto;
     border: 4px solid transparent;
     border-right-color: var(--secondary-color);
     clip-path: inset(2% 0 2% 0);
+    margin-left: 50px;
 }
 
 .section-title{
@@ -141,4 +139,10 @@
     font-size: 1.5rem;
     font-weight: bolder;
     gap: 60px;
+}
+
+@media (max-width: 768px) {
+    .profile-nav-container {
+        flex-direction: column;
+    }
 }

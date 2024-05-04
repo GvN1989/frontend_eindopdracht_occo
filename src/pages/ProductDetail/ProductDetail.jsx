@@ -1,43 +1,35 @@
 import styles from "./ProductDetail.module.css"
 import {useEffect, useState} from "react";
 import axios from 'axios';
-import {Link} from "react-router-dom";
+import {Link, useParams} from "react-router-dom";
 import Button from "../../components/Button/Button.jsx";
+import useFetchCocktailData from "../../components/useFetchCocktailData/useFetchCocktailData.jsx";
 
 function ProductDetail () {
+    const {id} = useParams();
+    const{cocktailData,isLoading,error}=useFetchCocktailData(`https://www.thecocktaildb.com/api/json/v2/${import.meta.env.VITE_API_KEY1}/lookup.php?i=${id}`);
+
+    if (isLoading) return <p>Loading...</p>;
+    if (error) return <p>Error loading details: {error.message}</p>;
+    if (!cocktailData.length) return <p>No cocktail details available.</p>
+
+    const cocktail=cocktailData[0];
 
     return(
 
         <article>
-            <>
-                <p> go back (moet een linkje worden) </p>
-                <h2> cocktail name</h2>
-                <div>
-                <img/>
-                </div>
-                <div>
-                    <h3> Ingredients</h3>
-                    <p> ingredient 1 + selectie vakje ervoor </p>
-                    <p> ingredient 2</p>
-                    <p> ingredient 4 </p>
-                    <p> ingredient 5</p>
-                    <p> ingredient 5</p>
-                    <div>
-                        <button> + </button>
-                        <p>  1 </p>
-                        <button> - </button>
-                        <p>€ 4.95 </p>
-                    </div>
-                    <Button> Add to Basket </Button>
-                    <div>
-                        <h4>Steps to make the drink</h4>
-                        <p>{instructions}</p>
-                    </div>
-
-                </div>
-
-            </>
-
+            <Link to="/"> Go back </Link>
+            <h2>{cocktail.strDrink} </h2>
+            <img src={cocktail.strDrinkThumb} alt={cocktail.strDrink} />
+            <h3> Ingredients</h3>
+                {Array.from(Array(15)).map((_, i) => {
+                    const ingredient = cocktail[`strIngredient${i+1}`];
+                    if (!ingredient) return null;
+                    return <p key={i}>{ingredient}</p>;
+                })}
+            <h4>Instructions</h4>
+            <p>{cocktail.strInstructions}</p>
+            <Button>Add to Cart</Button>
         </article>
     )
 }

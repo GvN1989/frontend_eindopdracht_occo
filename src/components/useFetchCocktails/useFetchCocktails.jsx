@@ -23,9 +23,10 @@ function useFetchCocktails() {
                     const response = await axios.get(url);
                     if (response.data && response.data.drinks) {
                         allData.push(...response.data.drinks);
-
                     }
                 }
+                setCocktails(allData);
+                console.log("All data fetched", allData);
             } catch (error) {
                 console.error(`Failed to fetch drinks:`, error)
                 toggleError(error);

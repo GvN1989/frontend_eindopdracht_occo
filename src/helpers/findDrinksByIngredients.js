@@ -1,24 +1,20 @@
 function findDrinksByIngredients(cocktails, ingredients) {
-    const filteredDrinks=[];
+    if(!Array.isArray(ingredients) || ingredients.length===0) {
+        console.error ("Invalid or empty ingredients provided:", ingredients);
+        return cocktails;
+    }
 
-    const searchIngredients= ingredients.map(ingredient => ingredient.toLowerCase());
+    const searchIngredients= new Set(ingredients.map(ingredient => ingredient.toLowerCase()));
 
-    for (const cocktail of cocktails) {
-
-        let drinkHasDesiredIngredient= false;
-
-        for (let i = 0; i<= 15 && !drinkHasDesiredIngredient; i++) {
-            const drinkIngredient = cocktail[`strIngredient${i}`];
-            if (drinkIngredient) {
-                const lowerCaseIngredient = drinkIngredient.toLowerCase();
-                if (searchIngredients.some(ingredient => lowerCaseIngredient.includes(ingredient))) {
-                    filteredDrinks.push(cocktail);
-                    drinkHasDesiredIngredient =true;
-                }
+    return cocktails.filter (cocktail => {
+        for (let i=1; i <= 15; i++) {
+            const ingredient = cocktail[`strIngredient${i}`]
+            if (ingredient && searchIngredients.has(ingredient.toLowerCase())) {
+                return true;
             }
         }
-    }
-    return filteredDrinks
+        return false;
+    })
 }
 
 export default findDrinksByIngredients;
