@@ -5,8 +5,11 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    padding: 5px;
+    padding: 10px;
+    transform: scale(1.8);
+    width: 5rem;
 }
+
 
 .icon-svg{
     fill: var(--primary-nav-color)

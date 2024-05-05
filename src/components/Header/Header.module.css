@@ -4,12 +4,13 @@
     justify-content: flex-start;
     align-items: center;
     background-color: var(--secondary-color);
+    padding-left: 30px;
 }
 
 .headerButton{
     border: none;
-    width: 80px;
-    height: 80px;
+    width: 150px;
+    height: 150px;
     background: none;
     cursor: pointer;
     display: flex;

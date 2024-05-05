@@ -15,19 +15,25 @@ function Nav () {
 
         return (
             <nav className={styles["main-navigation"]}>
-                <div className={styles["right-nav-container"]}>
-                    <ul>
+                <div className={styles["left-nav-container"]}>
+                    <ul className={styles.headerUl}>
                         <NavLink className={({isActive}) => isActive ? styles["active-link"] : styles["default-link"]} to = "/">Home</NavLink>
                         <NavLink className={({isActive}) => isActive ? styles["active-link"] : styles["default-link"]} to = "/quiz">Inspiration Quiz</NavLink>
                         <NavLink className={({isActive}) => isActive ? styles["active-link"] : styles["default-link"]} to = "/productoverview">CocktailFinder</NavLink>
                     </ul>
                 </div>
-            <div className={styles["left-nav-container"]}>
+            <div className={styles["right-nav-container"]}>
                 <SearchFunction/>
                 <NavLink className={({isActive}) => isActive ? styles["nav-button-active"] : styles["nav-button-default"]} to = {isAuth? "/profile" : "/login"}>{isAuth ? <Loggedin className={styles["nav-button-auth"]} /> : <LoggedOut />}</NavLink>
                 <NavLink className={({isActive}) => isActive ? styles["nav-button-active"] : styles["nav-button-default"]} to = "/favorites"><Favorite className={styles["icon-svg"]}  /></NavLink>
                 <NavLink className={({isActive}) => isActive ? styles["nav-button-active"] : styles["nav-button-default"]} to = "/shoppingbasket"><ShoppingBasket className={styles["icon-svg"]}  /></NavLink>
-                <IconButton icon="logout"  ariaLabel="Log out" onClick={logout} />
+                <IconButton
+                    icon="logout"
+                    ariaLabel="Log out"
+                    onClick={logout}
+                    classnameBtn={styles.logoutBtn}
+                    classnameSvg={styles.logoutSvg}
+                />
             </div>
             </nav>
 

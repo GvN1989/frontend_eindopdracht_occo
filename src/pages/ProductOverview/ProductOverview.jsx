@@ -11,7 +11,6 @@ import findDrinksByType from "../../helpers/findDrinkByType.js";
 
 function ProductOverview () {
     const{ cocktails,isLoading,error}=useFetchCocktails();
-    console.log("Cocktails: ", cocktails, "Is Loading: ", isLoading, "Error: ", error);
     const pageSize = 48;
     const [currentPage, setCurrentPage] = useState(1);
     const [filters, setFilters] = useState({
@@ -19,41 +18,23 @@ function ProductOverview () {
         categories: []
     });
     const [showFilter, setShowFilter] = useState(false);
-    const [showSort, setShowSort] = useState(false);
-    const [sortCriteria, setSortCriteria] = useState('')
+
 
     const filteredCocktails = useMemo(() => {
-        if (!filters) return cocktails;
 
         let result = cocktails;
+
         if (filters.types.length > 0) {
             result = findDrinksByType(result, filters.types);
         }
-        /*if (filters.ingredients.length > 0) {
-            result = findDrinksByIngredients(result, filters.ingredients);
-        }*/
+
         if (filters.categories.length > 0) {
             result = findDrinksByCategory(result, filters.categories);
         }
         return result;
-    }, [cocktails, filters]);
+    }, [cocktails, filters.types, filters.categories]);
 
     console.log("filtered Cocktails variable:", filteredCocktails);
-
-   /* const sortedAndFilteredCocktails = useMemo(() => {
-        let sortedCocktails = [...filteredCocktails]; // Copy to avoid mutating the original array
-        if (sortCriteria) {
-            sortedCocktails.sort((a, b) => {
-                if (sortCriteria === 'name') {
-                    return a.strDrink.localeCompare(b.strDrink);
-                } else if (sortCriteria === 'value') {
-                    return a.value - b.value;
-                }
-                return 0;
-            });
-        }
-        return sortedCocktails;
-    }, [filteredCocktails, sortCriteria]); */
 
     const displayedCocktails = useMemo (() => {
         const startIndex = (currentPage - 1) * pageSize;
@@ -72,15 +53,21 @@ function ProductOverview () {
     }, []);
 
     const toggleFilterPanel = () => {
-        setShowFilter(!showFilter);
+        setShowFilter(prev => !prev);
     };
 
-    const toggleSortPanel = () => {
-        setShowSort(!showSort);
-    };
 
     if (isLoading) {
         return <p>Loading...</p>;
+    }
+
+    if (!displayedCocktails || displayedCocktails.length === 0) {
+        return <div>
+            No products found.
+            <Button onClick={() => setFilters({types: [], categories: []})}>
+                Reset Filters
+            </Button>
+        </div>;
     }
 
     if (error) return <p>Error fetching cocktails: {error.toString()} </p>;
@@ -95,17 +82,15 @@ function ProductOverview () {
                     <div className={styles["option-bar"]}>
                         <IconButton
                             icon={"filter"}
-                            ariaLabel="filter"
-                            className={styles.btnSpecs}
+                            ariaLabel="Toggle filter panel"
+                            className={`${styles.btnSpecs} ${showFilter ? styles.active : ''}`}
                             svgClassName={styles.changeFill}
-                            onClick={toggleFilterPanel}
+                            onClick={() => setShowFilter(!showFilter)}
                         />
                         <IconButton
                             icon={"sort"}
-                            ariaLabel="filter"
-                            className={styles.btnSpecs}
+                            ariaLabel="Toggle sort panel"
                             svgClassName={styles.changeFill}
-                            onClick={toggleSortPanel}
                         />
                     </div>
                     <div className={styles["productListContainer"]}>
@@ -118,14 +103,15 @@ function ProductOverview () {
                                         title={cocktail.strDrink}
                                         image={cocktail.strDrinkThumb}
                                         alt={cocktail.strDrink}
+                                        classname={styles.customImage}
                                     />
                                 ))}
                             </ul>
                         ) : <p> No cocktails found </p>}
 
-                        <div className={styles.navigation}>
-                            <Button onClick={handleNextPage} disabled={currentPage === 1}>Previous</Button>
-                            <Button onClick={handlePrevPage}  disabled={currentPage === Math.ceil(filteredCocktails.length / pageSize)}>Next</Button>
+                        <div className={styles.pageNavigation}>
+                            <Button onClick={handlePrevPage} disabled={currentPage === 1}>Previous</Button>
+                            <Button onClick={handleNextPage}  disabled={currentPage === Math.ceil(filteredCocktails.length / pageSize)}>Next</Button>
                         </div>
                     </div>
                 </section>

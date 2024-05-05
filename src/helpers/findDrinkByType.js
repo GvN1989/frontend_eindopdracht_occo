@@ -1,17 +1,13 @@
-
-
 function findDrinksByType(cocktails, types) {
     if(!types || !Array.isArray(types) || types.length === 0) {
         return cocktails;
     }
 
-    const lowerCaseTypes = types.map(type => type.toLowerCase());
-
-    return cocktails.filter(cocktail =>
-        lowerCaseTypes.includes(cocktail.strAlcoholic?.toLowerCase())
-
+    return cocktails.filter(cocktail => types.some(type => cocktail.strAlcoholic.toLowerCase() === type.toLowerCase())
     );
 
 }
+
+
 
 export default findDrinksByType;

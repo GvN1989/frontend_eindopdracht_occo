@@ -5,7 +5,7 @@ function findDrinksByCategory(cocktails,categories) {
     }
 
         return cocktails.filter(cocktail =>
-            categories.some(cat => cocktail.strCategory?.toLowerCase() === cat.toLowerCase())
+            categories.some(cat => cocktail.strCategory ?.toLowerCase() === cat.toLowerCase())
     );
 }
 

@@ -4,8 +4,11 @@ import {ReactComponent as IconLeft} from "../../assets/svg/caret-circle-left.svg
 import {ReactComponent as IconRight} from "../../assets/svg/caret-circle-right.svg";
 import {ReactComponent as Sort} from "../../assets/svg/sort-ascending.svg"
 import {ReactComponent as Filter} from "../../assets/svg/sliders-horizontal.svg"
-import {ReactComponent as Close} from "../../assets/svg/minus.svg"
+import {ReactComponent as Minus} from "../../assets/svg/minus.svg"
 import styles from "../IconButton/IconButton.module.css"
+import {ReactComponent as ArrowOpen} from "../../assets/svg/caret-down.svg"
+import {ReactComponent as ArrowClose} from "../../assets/svg/caret-up.svg"
+import {ReactComponent as Plus} from "../../assets/svg/plus.svg"
 
 export const IconButton = ({ icon, onClick, ariaLabel, svgClassName, className, disabled }) => {
     let Icon;
@@ -29,7 +32,19 @@ export const IconButton = ({ icon, onClick, ariaLabel, svgClassName, className, 
             Icon= Filter;
             break;
         case 'close':
-            Icon= Close;
+            Icon= Minus;
+            break;
+        case 'arrow-open':
+            Icon=ArrowOpen;
+            break;
+        case 'arrow-close':
+            Icon=ArrowClose;
+            break;
+        case 'plus':
+            Icon=Plus;
+            break;
+        case 'minus':
+            Icon=Minus;
             break;
         default:
             return null;

@@ -1,6 +1,6 @@
 .product-overview-title{
     margin: 50px 50px 50px ;
-    font-size: 3rem;
+    font-size: 5rem;
 }
 
 .option-bar {
@@ -26,9 +26,21 @@
     height: 100%;
 }
 
+.productListContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 
-@media (max-width: 768px) {
-    .productItem {
-        flex: 0 1 50%;
-    }
+.pageNavigation{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 60px;
+    height: 180px;
+}
+
+.customImage{
+    width: 400px;
 }

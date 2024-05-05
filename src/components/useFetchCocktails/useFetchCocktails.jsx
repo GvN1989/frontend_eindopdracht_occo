@@ -4,6 +4,7 @@ import axios from "axios";
 function useFetchCocktails() {
 
     const [cocktails, setCocktails] = useState([]);
+    const [categories, setCategories] = useState({});
     const [isLoading, toggleIsLoading] = useState(false);
     const [error, toggleError] = useState(null);
 
@@ -41,6 +42,7 @@ function useFetchCocktails() {
         return () => controller.abort();
 
     }, []);
+
 
         return {cocktails, isLoading, error};
 

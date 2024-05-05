@@ -1,8 +1,7 @@
 .filterPanel {
-    position: fixed;
-    left:600px;
-    top: 0px;
-    width: 600px;
+    position: absolute;
+    left:1600px;
+    width: 100rem;
     height: 100%;
     background-color: var(--section-color);
     box-shadow: 2px 0 5px rgba(0,0,0,0.5);
@@ -16,4 +15,47 @@
 
 .filterPanel.visible {
     transform: translateX(0);
+}
+
+.filterTitle{
+    font-size: 2em;
+}
+
+.filterContainer {
+    padding-top: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    font-size: 1.5em;
+    gap: 50px;
+}
+
+.changeFill{
+    fill: var(--darkviolet-color)
+}
+
+.flexIconButton{
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 10px;
+}
+
+.btnSpecs{
+    width: 100%;
+    display: block;
+}
+
+.filterBtnContainer{
+    display: flex;
+    flex-direction: row;
+    gap: 50px;
+    height: 160px;
+    padding-top: 60px;
+}
+
+.resetButton{
+    background-color:rgb(213,116,132);
+    color: var(--darkviolet-color);
+    border-color: var(--secondary-color);
 }

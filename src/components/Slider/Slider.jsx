@@ -2,10 +2,15 @@ import styles from "./Slider.module.css"
 import {useState} from "react";
 import IconButton from "../IconButton/IconButton.jsx";
 import useFetchCocktailData from "../useFetchCocktailData/useFetchCocktailData.jsx";
+import {Link} from "react-router-dom";
 
 function Slider() {
-    const {cocktailData: popularCocktails, isLoading: loadingPopularCocktails, error: errorPopularCocktails } = useFetchCocktailData(`https://www.thecocktaildb.com/api/json/v2/${import.meta.env.VITE_API_KEY1}/popular.php`)
-    const [currentIndex, setCurrentIndex] = useState( 0);
+    const {
+        cocktailData: popularCocktails,
+        isLoading: loadingPopularCocktails,
+        error: errorPopularCocktails
+    } = useFetchCocktailData(`https://www.thecocktaildb.com/api/json/v2/${import.meta.env.VITE_API_KEY1}/popular.php`)
+    const [currentIndex, setCurrentIndex] = useState(0);
 
     const handleNext = () => {
         setCurrentIndex((prevIndex => {
@@ -39,11 +44,14 @@ function Slider() {
                         />
                         <ul>
                             {currentDisplay.map((cocktail) => (
-                                <li className={styles.productItem} key={cocktail.idDrink}>
-                                    <img src={cocktail.strDrinkThumb} alt={cocktail.strDrink}/>
-                                    <h3>{cocktail.strDrink}</h3>
+                                <li className={"productItem"} key={cocktail.idDrink}>.
+                                    <Link to={`/productdetail/${cocktail.idDrink}`} className={"productLink"}>
+                                        <img src={cocktail.strDrinkThumb} alt={cocktail.strDrink}/>
+                                        <h3>{cocktail.strDrink}</h3>
+                                    </Link>
                                 </li>
                             ))}
+
                         </ul>
                         <IconButton
                             icon="icon-right"
@@ -54,6 +62,7 @@ function Slider() {
                         />
                     </div>)}
             </section>
-        </> )
+        </>)
 }
+
 export default Slider;

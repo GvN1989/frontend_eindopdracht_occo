@@ -6,7 +6,6 @@ import registerImage from "../../assets/images/img_registerpage.png";
 import {Link,useNavigate} from "react-router-dom";
 import {useContext, useEffect, useState} from "react";
 import axios from "axios";
-import authContext, {AuthContext} from "../../context/AuthContext.jsx";
 import dobToString from "../../helpers/dobToString.js";
 function Register () {
 

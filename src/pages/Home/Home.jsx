@@ -28,7 +28,7 @@ function Home () {
                         <Button type="button" className="primary" onClick={() => navigate("/quiz")}>
                             QUIZ ME!
                         </Button>
-                        <Button type="button" className="secondary" onClick={() => navigate("/productoverview")}>
+                        <Button type="button" className={styles["findCocktailBtn"]} onClick={() => navigate("/productoverview")}>
                             FIND MY COCKTAIL
                         </Button>
                     </div>

@@ -1,52 +1,66 @@
 import styles from "./Filter.module.css";
 import {useMemo, useState} from 'react';
 import Button from "../Button/Button.jsx";
-import useFetchCocktailData from "../useFetchCocktailData/useFetchCocktailData.jsx";
 import Select from 'react-select';
 import makeAnimated from 'react-select/animated';
 import IconButton from "../IconButton/IconButton.jsx";
+import useFetchCocktails from "../useFetchCocktails/useFetchCocktails.jsx";
+import filterByAlcoholPreference from "../../helpers/filterAlcoholPreference.js";
 
 function Filter({isVisible, onFilterChange, onClose}){
 
-    const {cocktailData: categories,isLoading: loadingCategories, error: errorCategories} = useFetchCocktailData(`https://www.thecocktaildb.com/api/json/v2/${import.meta.env.VITE_API_KEY1}/list.php?c=list`)
-    const {cocktailData: types,isLoading: loadingTypes,error: errorTypes} = useFetchCocktailData(`https://www.thecocktaildb.com/api/json/v2/${import.meta.env.VITE_API_KEY1}/list.php?a=list`)
-
-
+    const{ cocktails,isLoading,error}=useFetchCocktails();
     const [selectedCategories, setSelectedCategories] = useState([]);
-    const [selectedTypes, setSelectedTypes] = useState([])
+    const [selectedTypes, setSelectedTypes] = useState([]);
 
-    const typeOptions= useMemo (()=> types?.map(type=> ({value: type.strAlcoholic, label: type.strAlcoholic})), [types]);
-    const categoryOptions =  useMemo(() => categories?.map(cat=> ({value: cat.strCategory, label: cat.strCategory})), [categories]);
+    const typeOptions = useMemo(() => [
+        { value: 'Alcoholic', label: 'Alcoholic' },
+        { value: 'Non Alcoholic', label: 'Non Alcoholic' },
+    ], []);
+
+    const categoryOptions = useMemo(() => {
+        if (!cocktails) return [];
+        const uniqueCategories = new Set(cocktails.map(cocktail => cocktail.strCategory));
+        return Array.from(uniqueCategories).map(category => ({ value: category, label: category }));
+    }, [cocktails]);
 
     const animatedComponents = useMemo(()=>makeAnimated(), []);
 
-    const applyFilters= () => {
-        const newFilters ={
+    const applyFilters = () => {
+        const setFilters = {
             types: selectedTypes,
             categories: selectedCategories
-        }
+        };
 
-        console.log('Applying filters:', newFilters);
-
-        onFilterChange(newFilters);
-    }
+        console.log('Applying filters:', setFilters);
+        onFilterChange(setFilters);
+    };
 
     const resetFilters = () => {
         setSelectedCategories([]);
         setSelectedTypes([]);
         onFilterChange({
             categories: [],
-            types: []
-        })
-    }
+            types: [],
+        });
+    };
     return isVisible ? (
             <aside className={styles.filterPanel}>
-                <h4>Filters</h4>
-                <div>
+                <div className={styles.flexIconButton}>
+                <IconButton
+                    icon={"close"}
+                    ariaLabel="close"
+                    className={styles.btnSpecs}
+                    svgClassName={styles.changeFill}
+                    onClick={onClose}
+                />
+                </div>
+                <h4 className={styles.filterTitle}>Filters</h4>
+                <div className={styles.filterContainer}>
                     <label>
                         Alcohol preference
-                        {loadingTypes ? <p> Loading...</p> :
-                        errorTypes ? <p> Error loading types. </p> :
+                        {isLoading ? <p> Loading...</p> :
+                        error ? <p> Error loading types. </p> :
                             <Select
                                 components={animatedComponents}
                                 isMulti
@@ -58,8 +72,8 @@ function Filter({isVisible, onFilterChange, onClose}){
                     </label>
                     <label>
                         Category
-                        {loadingCategories ? <p> Loading...</p> :
-                        errorCategories ? <p> Error loading categories. </p> :
+                        {isLoading ? <p> Loading...</p> :
+                        error ? <p> Error loading categories. </p> :
                         <Select
                             components={animatedComponents}
                             isMulti
@@ -70,15 +84,11 @@ function Filter({isVisible, onFilterChange, onClose}){
                         />}
                     </label>
                 </div>
-                <Button className={"primary"} onClick={applyFilters}>Apply Filters</Button>
-                <Button className={"secondary"} onClick={resetFilters}>Reset Filters</Button>
-                <IconButton
-                    icon={"close"}
-                    ariaLabel="close"
-                    className={styles.btnSpecs}
-                    svgClassName={styles.changeFill}
-                    onClick={onClose}
-                />
+                <div className={styles.filterBtnContainer}>
+                    <Button className={"primary"} onClick={applyFilters}>Apply Filters</Button>
+                    <Button className={styles.resetButton} onClick={resetFilters}>Reset Filters</Button>
+                </div>
+
         </aside>
 
     ) : null;
