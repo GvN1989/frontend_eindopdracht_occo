@@ -5,7 +5,6 @@ import Select from 'react-select';
 import makeAnimated from 'react-select/animated';
 import IconButton from "../IconButton/IconButton.jsx";
 import useFetchCocktails from "../useFetchCocktails/useFetchCocktails.jsx";
-import filterByAlcoholPreference from "../../helpers/filterAlcoholPreference.js";
 
 function Filter({isVisible, onFilterChange, onClose}){
 
@@ -32,7 +31,6 @@ function Filter({isVisible, onFilterChange, onClose}){
             categories: selectedCategories
         };
 
-        console.log('Applying filters:', setFilters);
         onFilterChange(setFilters);
     };
 

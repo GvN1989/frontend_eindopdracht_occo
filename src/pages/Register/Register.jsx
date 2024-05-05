@@ -7,6 +7,7 @@ import {Link,useNavigate} from "react-router-dom";
 import {useContext, useEffect, useState} from "react";
 import axios from "axios";
 import dobToString from "../../helpers/dobToString.js";
+import {AuthContext} from "../../context/AuthContext.jsx";
 function Register () {
 
     const { handleSubmit, register} = useForm();
