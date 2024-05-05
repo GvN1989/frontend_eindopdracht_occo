@@ -1,0 +1,61 @@
+.filterPanel {
+    position: absolute;
+    left:1600px;
+    width: 100rem;
+    height: 100%;
+    background-color: var(--section-color);
+    box-shadow: 2px 0 5px rgba(0,0,0,0.5);
+    transform: translateX(-100%);
+    transition: transform 0.3s ease-in-out;
+    overflow-y: auto;
+    z-index: 1000;
+    padding: 50px;
+}
+
+
+.filterPanel.visible {
+    transform: translateX(0);
+}
+
+.filterTitle{
+    font-size: 2em;
+}
+
+.filterContainer {
+    padding-top: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    font-size: 1.5em;
+    gap: 50px;
+}
+
+.changeFill{
+    fill: var(--darkviolet-color)
+}
+
+.flexIconButton{
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 10px;
+}
+
+.btnSpecs{
+    width: 100%;
+    display: block;
+}
+
+.filterBtnContainer{
+    display: flex;
+    flex-direction: row;
+    gap: 50px;
+    height: 160px;
+    padding-top: 60px;
+}
+
+.resetButton{
+    background-color:rgb(213,116,132);
+    color: var(--darkviolet-color);
+    border-color: var(--secondary-color);
+}

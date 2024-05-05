@@ -4,8 +4,9 @@ import validateDOB from "../../helpers/validateDOB.js";
 import Button from "../../components/Button/Button.jsx";
 import registerImage from "../../assets/images/img_registerpage.png";
 import {Link,useNavigate} from "react-router-dom";
-import {useEffect, useState} from "react";
+import {useContext, useEffect, useState} from "react";
 import axios from "axios";
+import dobToString from "../../helpers/dobToString.js";
 function Register () {
 
     const { handleSubmit, register} = useForm();
@@ -13,6 +14,8 @@ function Register () {
     const [loading, toggleLoading] = useState(false);
     const navigate = useNavigate();
     const source = axios.CancelToken.source();
+
+    const {login} = useContext(AuthContext)
 
     useEffect(() => {
         return function cleanup() {
@@ -34,15 +37,16 @@ function Register () {
             username: data.username,
             email: data.email,
             password: data.password,
-            info: ""
+            info: data.dob ? dobToString(data.dob) : '',
         }, {
             headers: {
                 'Content-Type': 'application/json',
                 'X-Api-Key': `${import.meta.env.VITE_API_KEY2}`
             }
         }); if(response.status === 200 ){
-        console.log("Registration successful", response);
-        navigate('/profile');}
+            console.log("Registration successful", response);
+            login(response.data.token);
+            navigate('/profile');}
     } catch (e) {
         console.error("Registration error:",e);
         toggleError(true)

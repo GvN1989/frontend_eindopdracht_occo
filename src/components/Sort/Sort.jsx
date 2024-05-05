@@ -1,64 +1,71 @@
-import axios from "axios";
-import {useState} from "react";
+import styles from "./Filter.module.css";
+import {useMemo, useState} from 'react';
+import Button from "../Button/Button.jsx";
+import useFetchCocktailData from "../useFetchCocktailData/useFetchCocktailData.jsx";
+import Select from 'react-select';
+import makeAnimated from 'react-select/animated';
+import IconButton from "../IconButton/IconButton.jsx";
 
-function Sort () {
+function Sort({isVisible, onFilterChange, onClose}){
 
-    const setIsLoading = (isLoading) => console.log(`Loading: ${isLoading}`);
-    const setCocktails = (cocktails) => console.log('Cocktails set:', cocktails);
-    const setError = (error) => console.log('Error:', error);
-
-    const fetchCocktails = async () => {
-        setIsLoading(true);
-        const endpoint = `https://www.thecocktaildb.com/api/json/v2/${import.meta.env.VITE_API_KEY}/search.php?f=`
-        const allData = []
-        const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split('');
-
-
-
-            for (const letter of alphabet) {
-            try {
-                const url = `${endpoint}${letter}`;
-                const response = await axios.get(url);
-                if (response.data && response.data.drinks) {
-                    allData.push(...response.data.drinks);
-
+    const sortedAndFilteredCocktails = useMemo(() => {
+        let sortedCocktails = [...filteredCocktails]; // Copy to avoid mutating the original array
+        if (sortCriteria) {
+            sortedCocktails.sort((a, b) => {
+                if (sortCriteria === 'name') {
+                    return a.strDrink.localeCompare(b.strDrink); // Sort by name
+                } else if (sortCriteria === 'value') {
+                    return a.value - b.value; // Sort by value, assuming 'value' is a numeric property
                 }
-        } catch (error) {
-            console.error(`Failed to fetch drinks:`, error)
-            setError(error);
-        } finally {
-            setCocktails(allData);
-            setIsLoading(false);
-            return allData;
-
+                return 0;
+            });
         }
-    }
+        return sortedCocktails;
+    }, [filteredCocktails, sortCriteria]);
 
-    async function createIngredientMap() {
-        const drinks = await fetchCocktails();
-        const ingredientMap = {};
 
-        drinks.forEach(drink => {
-            for (let i = 1; i <= 15; i++) {
-                const ingredientKey = `strIngredient${i}`;
-                const ingredient = drink[ingredientKey];
-                if (ingredient) {
-                    const ingredientLowerCase = ingredient.toLowerCase();
-                    if (!ingredientMap[ingredientLowerCase]) {
-                        ingredientMap[ingredientLowerCase] = [];
-                    }
-                    ingredientMap[ingredientLowerCase].push(drink.idDrink);
-                }
-            }
-        });
+    return isVisible ? (
+        <aside className={styles.filterPanel}>
+            <h4>Sort</h4>
+            <div>
+                <label>
+                    Alcohol preference
+                    {loadingTypes ? <p> Loading...</p> :
+                        errorTypes ? <p> Error loading types. </p> :
+                            <Select
+                                components={animatedComponents}
+                                isMulti
+                                options={typeOptions}
+                                onChange={selectedOptions => setSelectedTypes(selectedOptions.map(option => option.value))}
+                                placeholder="Select drink type ..."
 
-        return ingredientMap;
-    }
+                            />}
+                </label>
+                <label>
+                    Category
+                    {loadingCategories ? <p> Loading...</p> :
+                        errorCategories ? <p> Error loading categories. </p> :
+                            <Select
+                                components={animatedComponents}
+                                isMulti
+                                options={categoryOptions}
+                                onChange={selectedOptions => setSelectedCategories(selectedOptions.map(option => option.value))}
+                                placeholder="Select categories..."
 
-    createIngredientMap().then(ingredientMap => {
-        // Find drink IDs with 'lime juice'
-        if (ingredientMap['lime juice']) {
-            console.log('Drink IDs with Lime Juice:', ingredientMap['lime juice']);
-        }
-    });
-}}
+                            />}
+                </label>
+            </div>
+            <Button className={"primary"} onClick={applyFilters}>Apply Filters</Button>
+            <Button className={"secondary"} onClick={resetFilters}>Reset Filters</Button>
+            <IconButton
+                icon={"close"}
+                ariaLabel="close"
+                className={styles.btnSpecs}
+                svgClassName={styles.changeFill}
+                onClick={onClose}
+            />
+        </aside>
+
+    ) : null;
+}
+

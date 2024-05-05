@@ -43,7 +43,7 @@ function Login () {
                 });
 
             console.log("API response:", response);
-            login(response.data.jwt)
+            login(response.data.jwt, true)
 
         } catch (e) {
             console.error("Caught an error during form submission:", e);

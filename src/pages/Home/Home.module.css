@@ -46,7 +46,7 @@
     align-items: center;
     height: 600px;
     right: 300px;
-    top: 100px;
+    top: 200px;
     z-index: 1;
     position: absolute;
     }
@@ -57,7 +57,7 @@
 }
 
 .welcome-logo {
-    top: 100px;
+    top: 200px;
     left: 250px;
     z-index: 5;
     position: absolute;
@@ -80,3 +80,8 @@
     padding: 3rem 15rem 3rem;
 }
 
+.findCocktailBtn{
+    background-color:rgb(213,116,132);
+    color: var(--darkviolet-color);
+    border-color: var(--secondary-color);
+}

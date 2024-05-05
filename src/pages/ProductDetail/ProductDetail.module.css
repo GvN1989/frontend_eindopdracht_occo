@@ -1,0 +1,168 @@
+
+/*----------- flexbox CSS ------------------- */
+
+.outerContainer{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    margin: 25px 150px 25px;
+    column-gap: 50px;
+    height: 100%;
+}
+
+.left-flex-box, .right-flex-box {
+    flex: 1 1 50%;
+}
+
+.productDetailImg{
+    display: flex;
+    width: 65rem;
+    height: auto;
+    border-radius: 5px;
+    border: #D9D9D9 solid 5px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.16);
+}
+
+.productDetailTitle {
+    font-size: 2em;
+    padding-left: 50px;
+}
+
+.goBackLink{
+    font-size: 1.5em;
+    padding-left: 50px;
+    text-decoration: none;
+}
+
+.left-flex-box{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding-left: 50px;
+    row-gap: 20px;
+}
+
+.right-flex-box{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: flex-start;
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+    background: var(--section-color);
+    width: 100%;
+
+}
+
+/*----------- Counter CSS ------------------- */
+
+.counterOuterBox{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 50px;
+    padding-right: 50px;
+    font-size:1.5rem;
+    width: 100%;
+}
+.counterInnerBox{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 60px;
+    padding-left: 50px;
+    width: 800px;
+}
+
+.spacer{
+    display: flex;
+    flex-direction: row;
+    align-self: flex-end;
+    align-items: center;
+    margin-right: 200px;
+
+}
+
+/*----------- Ingredients CSS ------------------- */
+
+.ingredients-box{
+    display: flex;
+    flex-direction: column;
+    font-size: 1.9rem;
+    width: 100%;
+}
+
+.ingredients-title{
+    padding-bottom: 20px;
+    padding-left: 200px;
+}
+
+.ingredientItem {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+    height: 70px;
+    font-size:1.5rem;
+}
+
+.ingredientCheckbox{
+    transform: scale(3);
+    width:15rem;
+    margin-left: 4em;
+}
+
+
+.ingredient-label{
+    margin: 0;
+    font-size:24px;
+    width: 100%;
+}
+
+/*----------- Cart and instructions CSS ------------------- */
+
+.cartBtn{
+    margin-left: 50px;
+}
+
+.instructionBox{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    border: 3px solid transparent;
+    border-top-color: var(--secondary-color);
+    border-bottom-color: var(--secondary-color);
+}
+
+.instructionBox,.instructionHeader {
+    padding: 0;
+    margin: 0;
+    width: 100%;
+}
+
+.instructionHeader{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 10px;
+}
+
+/*----------- general lay out Productdetail page CSS ------------------- */
+
+.ingredients-title, .ingredient-label, .productDetailText{
+    font-size: 1.5em;
+}
+
+.changeFill{
+    fill: var(--secondary-color);
+}
+
+.productDetailText{
+    margin-left: 20px;
+}
+
+
+

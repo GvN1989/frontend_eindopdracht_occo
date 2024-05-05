@@ -111,7 +111,6 @@ function Quiz () {
                 <div className={styles["quiz-submit-flex"]}>
                     <Button
                         type="submit"
-                        className="primary"
                         onClick={handleSubmit}
                     > Submit </Button>
                 </div>

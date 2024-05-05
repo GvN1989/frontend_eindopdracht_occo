@@ -1,43 +1,106 @@
 import styles from "./ProductDetail.module.css"
 import {useEffect, useState} from "react";
-import axios from 'axios';
-import {Link} from "react-router-dom";
+import {Link, useParams} from "react-router-dom";
 import Button from "../../components/Button/Button.jsx";
+import useFetchCocktailData from "../../components/useFetchCocktailData/useFetchCocktailData.jsx";
+import IconButton from "../../components/IconButton/IconButton.jsx";
+import Counter from "../../components/Counter/Counter.jsx";
 
-function ProductDetail () {
 
-    return(
+function ProductDetail() {
+    const {id} = useParams();
+    const {
+        cocktailData,
+        isLoading,
+        error
+    } = useFetchCocktailData(`https://www.thecocktaildb.com/api/json/v2/${import.meta.env.VITE_API_KEY1}/lookup.php?i=${id}`);
+    const [ingredientChecks, setIngredientChecks] = useState({});
+    const [showInstructions, setShowInstructions] = useState(false);
+    const [cocktailCount, setCocktailCount] = useState(0);
 
-        <article>
-            <>
-                <p> go back (moet een linkje worden) </p>
-                <h2> cocktail name</h2>
-                <div>
-                <img/>
+    const toggleInstructions = () => setShowInstructions(prev => !prev);
+
+    useEffect(() => {
+        if (cocktailData.length) {
+            const initialChecks = {};
+            Array.from(Array(15)).forEach((_, i) => {
+                const key = `strIngredient${i + 1}`;
+                if (cocktailData[0][key]) {
+                    initialChecks[key] = false; // Initialize all checkboxes as unchecked
+                }
+            });
+            setIngredientChecks(initialChecks);
+        }
+    }, [cocktailData]);
+
+    const handleCheckboxChange = (ingredient) => {
+        setIngredientChecks(prev => ({
+            ...prev,
+            [ingredient]: !prev[ingredient]
+        }));
+    };
+
+
+    if (isLoading) return <p>Loading...</p>;
+    if (error) return <p>Error loading details: {error.message}</p>;
+    if (!cocktailData.length) return <p>No cocktail details available.</p>
+
+    const cocktail = cocktailData[0];
+
+    return (
+        <article className={styles.outerContainer}>
+            <div className={styles["left-flex-box"]}>
+                <Link className={styles.goBackLink} to="/"> Go back </Link>
+                <h2 className={styles.productDetailTitle}>{cocktail.strDrink} </h2>
+                <img className={styles.productDetailImg} src={cocktail.strDrinkThumb} alt={cocktail.strDrink}/>
+            </div>
+            <div className={styles["right-flex-box"]}>
+                <div className={styles["ingredients-box"]}>
+                    <h3 className={styles["ingredients-title"]}> Ingredients</h3>
+                    {Object.keys(ingredientChecks).map((key, i) => {
+                        return (
+                            <div key={i} className={styles.ingredientItem}>
+                                <label key={i} className={styles["ingredient-label"]}>
+                                    <input
+                                        type="checkbox"
+                                        checked={ingredientChecks[key]}
+                                        onChange={() => handleCheckboxChange(key)}
+                                        className={styles.ingredientCheckbox}
+                                    />
+                                    {cocktail[key]}
+                                </label>
+                            </div>
+                        );
+                    })}
                 </div>
-                <div>
-                    <h3> Ingredients</h3>
-                    <p> ingredient 1 + selectie vakje ervoor </p>
-                    <p> ingredient 2</p>
-                    <p> ingredient 4 </p>
-                    <p> ingredient 5</p>
-                    <p> ingredient 5</p>
-                    <div>
-                        <button> + </button>
-                        <p>  1 </p>
-                        <button> - </button>
-                        <p>€ 4.95 </p>
+                <div className={styles.counterOuterBox}>
+                    <div className={styles.counterInnerBox}>
+                        <Counter
+                            cocktailCount={cocktailCount}
+                            setCocktailCount={setCocktailCount}
+                            classnameBtn={styles.counterBtn}
+                            classnameSvg={styles.changeFill}
+                            className={styles.productDetailText}
+                        />
                     </div>
-                    <Button> Add to Basket </Button>
-                    <div>
-                        <h4>Steps to make the drink</h4>
-                        <p>{instructions}</p>
+                    <div className={styles.spacer}>
+                        <p className={styles.productDetailText}> € 4.95 </p>
                     </div>
-
                 </div>
-
-            </>
-
+                <Button className={styles.cartBtn}>Add to Cart</Button>
+                <div className={styles.instructionBox}>
+                    <div className={styles.instructionHeader}>
+                        <h4 className={styles.productDetailText}>Instructions</h4>
+                        <IconButton
+                            icon={showInstructions ? 'arrow-close' : 'arrow-open'}
+                            ariaLabel="Toggle instructions"
+                            onClick={toggleInstructions}
+                            svgClassName={styles.changeFill}
+                        />
+                    </div>
+                    {showInstructions && <p className={styles.productDetailText}>{cocktail.strInstructions}</p>}
+                </div>
+            </div>
         </article>
     )
 }

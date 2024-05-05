@@ -4,6 +4,7 @@ import logo from "../../assets/images/LOGO_OCCO.png"
 import welcomeImage from "../../assets/images/img_homepage.png"
 import Slider from "../../components/Slider/Slider.jsx";
 import {useNavigate} from "react-router-dom";
+import ErrorBoundary from "../../components/ErrorBoundary/ErrorBoundary.jsx";
 
 function Home () {
 
@@ -27,7 +28,7 @@ function Home () {
                         <Button type="button" className="primary" onClick={() => navigate("/quiz")}>
                             QUIZ ME!
                         </Button>
-                        <Button type="button" className="secondary" onClick={() => navigate("/productoverview")}>
+                        <Button type="button" className={styles["findCocktailBtn"]} onClick={() => navigate("/productoverview")}>
                             FIND MY COCKTAIL
                         </Button>
                     </div>
@@ -35,7 +36,9 @@ function Home () {
                 <div className={styles["welcome-image"]}>
                         <img src={welcomeImage} alt="welcome-ladies-having-a-cocktail"/>
                 </div>
+                <ErrorBoundary>
                 <Slider/>
+                </ErrorBoundary>
             </section>
         </>
     );

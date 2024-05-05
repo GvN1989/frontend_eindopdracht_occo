@@ -8,14 +8,14 @@
 .intro-title {
     text-align: center;
     padding: 50px 50px 15px;
-    font-size: 2rem;
+    font-size: 5rem;
 }
 
 .intro-text {
     margin: 50px;
-    text-align: start;
-    padding: 10px 0 10px;
-    font-size: 1.4rem;
+    text-align: center;
+    padding: 10px 300px 10px;
+    font-size: 3rem;
 }
 
 .quiz-container{
@@ -66,9 +66,9 @@
     border: var(--secondary-color) 3px solid;
     background-color: var(--detail-color);
     border-radius: 5px;
-    width: 1000px;
-    height: 60px;
-    font-size: 1.4rem;
+    width: 30em;
+    height: 150px;
+    font-size: 3rem;
 }
 
 .form-dropdown-flex{
@@ -87,9 +87,9 @@ select {
     border-radius: 4px;
     background-color: white;
     color: #555;
-    height: 60px;
-    width: 500px;
-    font-size: 1.4rem;
+    width: 30em;
+    height: 150px;
+    font-size: 3rem;
 
 }
 
@@ -111,24 +111,23 @@ select option[value=""] {
 /*----------- Quiz CSS ------------------- */
 
 .topFiveElement{
-    padding: 50px 50px 50px;
     border-radius: 1%;
     background-color: var(--element-color);
-    margin: 3rem 8rem 3rem;
+    margin: 3em 8em 3em;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
     flex-basis: auto;
     flex-grow: 1;
-    flex-shrink: 1;
+    flex-shrink: 0;
 }
 
 .outro-text {
     margin: 50px;
-    text-align: start;
-    padding: 50px 100px 50px;
-    font-size: 1.4rem;
+    text-align: center;
+    font-size: 3rem;
+    padding: 50px 200px 50px;
 }
 
 .result-button-container{

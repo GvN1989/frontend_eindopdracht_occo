@@ -2,7 +2,13 @@ import { ReactComponent as LogoutIcon } from "../../assets/svg/sign-out.svg";
 import { ReactComponent as SearchIcon } from "../../assets/svg/magnifying-glass.svg";
 import {ReactComponent as IconLeft} from "../../assets/svg/caret-circle-left.svg";
 import {ReactComponent as IconRight} from "../../assets/svg/caret-circle-right.svg";
+import {ReactComponent as Sort} from "../../assets/svg/sort-ascending.svg"
+import {ReactComponent as Filter} from "../../assets/svg/sliders-horizontal.svg"
+import {ReactComponent as Minus} from "../../assets/svg/minus.svg"
 import styles from "../IconButton/IconButton.module.css"
+import {ReactComponent as ArrowOpen} from "../../assets/svg/caret-down.svg"
+import {ReactComponent as ArrowClose} from "../../assets/svg/caret-up.svg"
+import {ReactComponent as Plus} from "../../assets/svg/plus.svg"
 
 export const IconButton = ({ icon, onClick, ariaLabel, svgClassName, className, disabled }) => {
     let Icon;
@@ -19,8 +25,29 @@ export const IconButton = ({ icon, onClick, ariaLabel, svgClassName, className, 
         case 'icon-right':
             Icon = IconRight;
             break;
+        case 'sort':
+            Icon= Sort;
+            break;
+        case 'filter':
+            Icon= Filter;
+            break;
+        case 'close':
+            Icon= Minus;
+            break;
+        case 'arrow-open':
+            Icon=ArrowOpen;
+            break;
+        case 'arrow-close':
+            Icon=ArrowClose;
+            break;
+        case 'plus':
+            Icon=Plus;
+            break;
+        case 'minus':
+            Icon=Minus;
+            break;
         default:
-            return null;  // or handle the default case as needed
+            return null;
     }
 
     return (

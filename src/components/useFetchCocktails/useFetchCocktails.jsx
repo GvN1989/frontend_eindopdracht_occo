@@ -4,6 +4,7 @@ import axios from "axios";
 function useFetchCocktails() {
 
     const [cocktails, setCocktails] = useState([]);
+    const [categories, setCategories] = useState({});
     const [isLoading, toggleIsLoading] = useState(false);
     const [error, toggleError] = useState(null);
 
@@ -23,9 +24,10 @@ function useFetchCocktails() {
                     const response = await axios.get(url);
                     if (response.data && response.data.drinks) {
                         allData.push(...response.data.drinks);
-
                     }
                 }
+                setCocktails(allData);
+                console.log("All data fetched", allData);
             } catch (error) {
                 console.error(`Failed to fetch drinks:`, error)
                 toggleError(error);
@@ -40,6 +42,7 @@ function useFetchCocktails() {
         return () => controller.abort();
 
     }, []);
+
 
         return {cocktails, isLoading, error};
 
