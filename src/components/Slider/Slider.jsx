@@ -4,7 +4,7 @@ import IconButton from "../IconButton/IconButton.jsx";
 import useFetchCocktailData from "../useFetchCocktailData/useFetchCocktailData.jsx";
 
 function Slider() {
-    const {cocktailData: popularCocktails, isLoading: loadingPopularCocktails, error: errorPopularCocktails } = useFetchCocktailData(`www.thecocktaildb.com/api/json/v2/${import.meta.env.VITE_API_KEY1}/popular.php`)
+    const {cocktailData: popularCocktails, isLoading: loadingPopularCocktails, error: errorPopularCocktails } = useFetchCocktailData(`https://www.thecocktaildb.com/api/json/v2/${import.meta.env.VITE_API_KEY1}/popular.php`)
     const [currentIndex, setCurrentIndex] = useState( 0);
 
     const handleNext = () => {
@@ -18,11 +18,8 @@ function Slider() {
         setCurrentIndex(prevIndex => (prevIndex - 4 >= 0) ? prevIndex - 4 : prevIndex);
     }
 
-    console.log(popularCocktails)
-
     const currentDisplay = popularCocktails?.slice(currentIndex, currentIndex + 4);
 
-    console.log(currentDisplay)
 
     return (
         <>

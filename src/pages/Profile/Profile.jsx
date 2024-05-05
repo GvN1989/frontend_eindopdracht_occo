@@ -1,13 +1,44 @@
 import styles from "./Profile.module.css"
 import Button from "../../components/Button/Button.jsx";
 import IconButton from "../../components/IconButton/IconButton.jsx";
-import {useContext, useState} from "react";
+import {useContext, useEffect, useState} from "react";
 import {AuthContext} from "../../context/AuthContext.jsx";
+import EditMyProfile from "../../components/EditMyProfile/EditMyProfile.jsx";
+import {useNavigate} from "react-router-dom";
 
 function Profile () {
     const [activeSection, setActiveSection] = useState("profile");
+    const [isEditing, setIsEditing] = useState(false);
 
-    const {logout} = useContext(AuthContext)
+    const {user, isAuth, logout} = useContext(AuthContext)
+
+    const navigate = useNavigate();
+
+    console.log(user)
+
+    useEffect(() => {
+        if (!isAuth) {
+
+            console.log("Not authenticated, redirecting...");
+            logout();
+            navigate("/login", { replace: true });
+        }
+    }, [isAuth, logout, navigate]);
+
+    const handleEdit = () => {
+        setIsEditing(!isEditing);
+    };
+
+    useEffect(() => {
+
+        console.log("User data updated", user);
+
+    }, [user]);
+
+    if (!user) {
+        return <div>Loading your profile...</div>;
+    }
+
 
     const renderSection = () => {
         switch (activeSection) {
@@ -21,13 +52,19 @@ function Profile () {
                                 </div>
                                 <div className={styles["profile-personal-info"]}>
                                     <ul className={styles["profile-info"]}>
-                                        <li>Username:</li>
-                                        <li>Date of Birth:</li>
-                                        <li>Email:</li>
+                                        <li>Username: {user.username}  </li>
+                                        <li>Date of Birth: {user.info}  </li>
+                                        <li>Email: {user.email} </li>
                                     </ul>
-                                    <div className={styles["profile-button-container"]}>
-                                        <Button Button type="button" className="primary"> Edit My Profile </Button>
-                                        <Button Button type="button" className="secondary"> Change Password </Button>
+                                    <div className={isEditing ? styles["profile-editing-container"] : styles["profile-button-container"]}>
+                                        <Button
+                                            onClick={handleEdit}
+                                            Button type="button"
+                                            className={isEditing ? styles.editingBtn : styles.cancelBtn }
+                                        >
+                                            {isEditing ? 'Cancel Edit' : 'Edit Profile'}
+                                        </Button>
+                                        {isEditing && <EditMyProfile />}
                                     </div>
                                 </div>
                                 <div className={styles["profile-shipping-info"]}>
@@ -91,7 +128,7 @@ function Profile () {
 
 return (
     <>
-        <h1 className={styles.profileHeader}> Hello (User) </h1>
+        <h1 className={styles.profileHeader}> Hello {user.username}   </h1>
         <div className={styles["profile-nav-container"]}>
             <ul className={styles["profile-nav-list"]}>
                 <a href="#" onClick={() => setActiveSection('profile')} className={styles["profile-link"]}>MY PROFILE</a>

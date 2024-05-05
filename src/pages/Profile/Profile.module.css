@@ -97,6 +97,7 @@
     border-left-color: var(--secondary-color);
     clip-path: inset(2% 0 2% 0);
     height:100%;
+
 }
 
 .profile-button-container {
@@ -105,6 +106,7 @@
     padding: 50px 0 100px;
     width: inherit;
     gap: 100px;
+
 }
 
 .profile-info{
@@ -140,6 +142,30 @@
     font-weight: bolder;
     gap: 60px;
 }
+
+.profile-editing-container {
+    border: 5px var(--darkviolet-color) solid;
+    background-color: var(--detail-color);
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: center;
+    align-items: flex-end;
+    width: 900px;
+    height: 500px;
+    margin: 25px;
+    padding-right: 50px;
+    padding-bottom: 50px;
+}
+
+.editingBtn {
+    background-color:rgb(213,116,132);
+    color: var(--darkviolet-color);
+    border-color: var(--secondary-color);
+    width: 20em;
+
+}
+
+
 
 @media (max-width: 768px) {
     .profile-nav-container {

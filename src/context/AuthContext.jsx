@@ -10,6 +10,7 @@ function AuthContextProvider({ children }) {
     const [authState, setAuthState] = useState({
         isAuth: false,
         user: null,
+        token: null,
         status: "done"
     });
 
@@ -17,84 +18,82 @@ function AuthContextProvider({ children }) {
 
    useEffect(() => {
         const storedToken = localStorage.getItem ("token");
-        console.log("Retrieved token:", storedToken);
-
         if ( storedToken && checkTokenValidity(storedToken) ) {
-            console.log("Token is valid");
             {
                 void login(storedToken)
             }
         } else{
-                console.log("Token is invalid or not present");
                 void logout()
             }
         }, [] );
 
-    const login = async (jwt) => {
-        console.log("Received token:", jwt);
+    const login = async (jwt, redirectOnLogin= false) => {
         if (typeof jwt !== 'string' || jwt.trim() === '') {
-            console.error('Invalid token: Token must be a non-empty string.', jwt);
-            // Handle the error appropriately
             return;
         }
 
-        console.log(jwtDecode(jwt));
-
         const decodedToken = jwtDecode(jwt);
-
-        console.log("Decoded token:", decodedToken);
-
         localStorage.setItem("token", jwt);
 
-        console.log(decodedToken.sub)
+        console.log("Decoded Token:", decodedToken)
+
+
+        console.log("jwt:", jwt)
 
         try {
-            console.log("Sending request to backend");
-            const response = await axios.get(`https://api.datavortex.nl/occo/users/${decodedToken.sub}/info`, {
+            const response = await axios.get(`https://api.datavortex.nl/occo/users/${decodedToken.sub}`, {
                 headers: {
-                    "Content-Type": "application/json",
-                    Authorization: `Bearer ${jwt}`,
+                    "Content-Type": 'application/json',
+                    "Authorization": `Bearer ${jwt}`
                 }
             });
-            console.log("Received response from backend:", response.data);
+            console.log("API response for user info:", response);
             setAuthState({
                 ...authState,
                 isAuth: true,
                 user: {
                     username: response.data.username,
                     email: response.data.email,
+                    info: response.data.info
                 },
+                token: jwt,
                 status: "done"
             });
+            if (redirectOnLogin) {
+                navigate("/profile", { replace: true });
+            }
         } catch (e) {
-            console.error("Error during login:", e);
             setAuthState({
                 ...authState,
                 isAuth: false,
                 user: null,
+                token: null,
                 status: "error"
         })}
-        navigate("/profile");
-        console.log("De gebruiker  is ingelogd 🔓");
     };
+
+    console.log(authState.user)
 
 
     const logout = ()=> {
-        console.log("Logging out, clearing auth state and local storage");
-        setAuthState( {
-            ...authState,
+        localStorage.removeItem('token');
+
+        setAuthState( prevState => ({
+            ...prevState,
             isAuth: false,
             user: null,
+            token: null,
             status: "done",
-            });
-        localStorage.removeItem('token');
-        navigate ("/login")
-        console.log( 'Gebruiker is uitgelogd!' );
+            }));
+
+        navigate("/login", { replace: true });
+
     }
 
     const data = {
         isAuth: authState.isAuth,
         user: authState.user,
+        token: authState.token,
         logout,
         login,
     };

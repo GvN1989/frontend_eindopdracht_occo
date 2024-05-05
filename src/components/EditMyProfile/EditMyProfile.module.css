@@ -1,0 +1,24 @@
+.update-form{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    height: 100%;
+    align-items: center;
+    width: 900px;
+    font-size: 1.5rem;
+}
+
+.form-field__label{
+    display: flex;
+    flex-direction: column;
+}
+
+.form-field__label input{
+    padding: 20px;
+    width: 400px;
+    height: 40px;
+}
+
+.btnUpdate{
+    margin-top: 30px;
+}

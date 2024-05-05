@@ -8,36 +8,34 @@ import IconButton from "../IconButton/IconButton.jsx";
 
 function Filter({isVisible, onFilterChange, onClose}){
 
-    const {data: categories,isLoading: loadingCategories,errorCategories} = useFetchCocktailData(`https://www.thecocktaildb.com/api/json/v2/${import.meta.env.VITE_API_KEY1}/list.php?c=list`)
-    const {data: ingredients,isLoading: loadingIngredients,error: errorIngredients} = useFetchCocktailData( `https://www.thecocktaildb.com/api/json/v2/${import.meta.env.VITE_API_KEY1}/list.php?i=list`)
-    const {data: types,isLoading: loadingTypes,error: errorTypes} = useFetchCocktailData(`https://www.thecocktaildb.com/api/json/v2/${import.meta.env.VITE_API_KEY1}/list.php?a=list`)
+    const {cocktailData: categories,isLoading: loadingCategories, error: errorCategories} = useFetchCocktailData(`https://www.thecocktaildb.com/api/json/v2/${import.meta.env.VITE_API_KEY1}/list.php?c=list`)
+    const {cocktailData: types,isLoading: loadingTypes,error: errorTypes} = useFetchCocktailData(`https://www.thecocktaildb.com/api/json/v2/${import.meta.env.VITE_API_KEY1}/list.php?a=list`)
 
 
     const [selectedCategories, setSelectedCategories] = useState([]);
-    const [selectedIngredients, setSelectedIngredients] = useState([]);
     const [selectedTypes, setSelectedTypes] = useState([])
 
-    const ingredientOptions= useMemo(() => ingredients?.map(ing=> ({value: ing.strIngredient1, label: ing.strIngredient1})), [ingredients]);
     const typeOptions= useMemo (()=> types?.map(type=> ({value: type.strAlcoholic, label: type.strAlcoholic})), [types]);
     const categoryOptions =  useMemo(() => categories?.map(cat=> ({value: cat.strCategory, label: cat.strCategory})), [categories]);
 
     const animatedComponents = useMemo(()=>makeAnimated(), []);
 
     const applyFilters= () => {
-        onFilterChange({
-            categories: selectedCategories,
-            ingredients: selectedIngredients,
-            types: selectedTypes
-        })
+        const newFilters ={
+            types: selectedTypes,
+            categories: selectedCategories
+        }
+
+        console.log('Applying filters:', newFilters);
+
+        onFilterChange(newFilters);
     }
 
     const resetFilters = () => {
         setSelectedCategories([]);
-        setSelectedIngredients([]);
         setSelectedTypes([]);
         onFilterChange({
             categories: [],
-            ingredients: [],
             types: []
         })
     }
@@ -69,18 +67,6 @@ function Filter({isVisible, onFilterChange, onClose}){
                             onChange={selectedOptions => setSelectedCategories(selectedOptions.map(option => option.value))}
                             placeholder="Select categories..."
 
-                        />}
-                    </label>
-                    <label>
-                        Ingredients
-                        {loadingIngredients ? <p>Loading...</p> :
-                            errorIngredients ? <p>Error loading ingredients.</p> :
-                       <Select
-                           components={animatedComponents}
-                           isMulti
-                           options={ingredientOptions}
-                           onChange={selectedOptions => setSelectedIngredients(selectedOptions.map(option => option.value))}
-                           placeholder="Select ingredients..."
                         />}
                     </label>
                 </div>

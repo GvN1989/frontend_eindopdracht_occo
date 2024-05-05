@@ -6,6 +6,9 @@
     border-radius: 4px;
     transition: background-color 0.3s, border-color 0.3s, color 0.3s;
     cursor: pointer;
+    background-color:var(--btn-color);
+    color: var(--darkviolet-color);
+    border-color: rgb(245,186,12);
 }
 
 .button:disabled{
