@@ -67,8 +67,6 @@ function AuthContextProvider({ children }) {
         })}
     };
 
-    console.log(authState.user)
-
 
     const logout = ()=> {
         localStorage.removeItem('token');

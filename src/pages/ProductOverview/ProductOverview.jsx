@@ -58,8 +58,8 @@ function ProductOverview () {
     }
 
     if (!displayedCocktails || displayedCocktails.length === 0) {
-        return <div>
-            No products found.
+        return <div className={styles["not-found-container"]}>
+            We are sorry, there are no cocktails found with your selection. Please try again.
             <Button onClick={() => setFilters({types: [], categories: []})}>
                 Reset Filters
             </Button>

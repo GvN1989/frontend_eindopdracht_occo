@@ -55,7 +55,7 @@ function ProductDetail() {
     const cocktail = cocktailData[0];
 
     return (
-        <article className={styles.outerContainer}>
+        <section className={styles["outer-productDetail-container"]}>
             <div className={styles["left-flex-box"]}>
                 <a href="/" className={styles.goBackLink} onClick={handleClick}>
                     Go back
@@ -110,7 +110,7 @@ function ProductDetail() {
                     {showInstructions && <p className={styles.productDetailText}>{cocktail.strInstructions}</p>}
                 </div>
             </div>
-        </article>
+        </section>
     )
 }
 

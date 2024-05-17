@@ -74,6 +74,20 @@
     margin: 10px;
 }
 
+/*------------------------ not found container styling -----------------------*/
+
+.not-found-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 100px;
+    border: transparent 1px solid;
+    margin: 0 150px 0;
+    background-color: var(--section-color);
+    height: 100%;
+    padding: 25rem;
+}
+
 /*------------------------media Queries -----------------------*/
 
 @media (min-width: 1200px) {

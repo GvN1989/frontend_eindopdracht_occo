@@ -5,7 +5,6 @@ import filterOccasion from "../../helpers/filterOccasion.js"
 import createCategoryMap from "../../helpers/createCategoryMap.js";
 import shuffleArray from "../../helpers/shuffleArray.js";
 import styles from "../Results/Results.module.css";
-import {Link} from "react-router-dom";
 import ProductItem from "../ProductItem/ProductItem.jsx";
 
 
