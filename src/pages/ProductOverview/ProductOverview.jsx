@@ -19,7 +19,6 @@ function ProductOverview () {
     });
     const [showFilter, setShowFilter] = useState(false);
 
-
     const filteredCocktails = useMemo(() => {
 
         let result = cocktails;
@@ -34,14 +33,11 @@ function ProductOverview () {
         return result;
     }, [cocktails, filters.types, filters.categories]);
 
-    console.log("filtered Cocktails variable:", filteredCocktails);
 
     const displayedCocktails = useMemo (() => {
         const startIndex = (currentPage - 1) * pageSize;
         return filteredCocktails.slice(startIndex, startIndex + pageSize);
     }, [filteredCocktails, currentPage, pageSize]);
-
-    console.log("displayedCocktails variable:", displayedCocktails);
 
     const handleNextPage = useCallback(() => {
         const pageCount = Math.ceil(filteredCocktails.length / pageSize);
@@ -75,7 +71,12 @@ function ProductOverview () {
 
     return (
         <>
-            <Filter isVisible={showFilter} onFilterChange={setFilters} onClose={toggleFilterPanel}/>
+            <Filter
+                isVisible={showFilter}
+                onFilterChange={setFilters}
+                onClose={toggleFilterPanel}
+                cocktails={cocktails}
+                    />
             <main>
                 <section className="outer-section-container">
                     <h1 className={styles["product-overview-title"]}> COCKTAILFINDER </h1>

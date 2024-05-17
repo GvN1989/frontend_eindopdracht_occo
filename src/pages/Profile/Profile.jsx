@@ -9,17 +9,11 @@ import {useNavigate} from "react-router-dom";
 function Profile () {
     const [activeSection, setActiveSection] = useState("profile");
     const [isEditing, setIsEditing] = useState(false);
-
     const {user, isAuth, logout} = useContext(AuthContext)
-
     const navigate = useNavigate();
-
-    console.log(user)
 
     useEffect(() => {
         if (!isAuth) {
-
-            console.log("Not authenticated, redirecting...");
             logout();
             navigate("/login", { replace: true });
         }
@@ -30,8 +24,6 @@ function Profile () {
     };
 
     useEffect(() => {
-
-        console.log("User data updated", user);
 
     }, [user]);
 

@@ -2,23 +2,55 @@
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
-    height: 100%;
+    height: auto;
     align-items: center;
-    width: 900px;
-    font-size: 1.5rem;
+    width: 100%;
+    font-size: 1.8rem;
+    position: relative;
+}
+
+.form-field {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    position: relative;
 }
 
 .form-field__label{
     display: flex;
     flex-direction: column;
+    width: 100%;
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
 }
 
-.form-field__label input{
-    padding: 20px;
-    width: 400px;
-    height: 40px;
+input[type="date"] {
+    width: 100%;
+    padding: 1rem;
+    font-size: 2rem;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
 }
+
+.form-field__error {
+    color: red;
+    font-size: 1rem;
+    margin-top: 0.5rem;
+}
+
 
 .btnUpdate{
     margin-top: 30px;
+    font-size: 1.8rem;
+}
+
+.eyeIcon {
+    position: absolute;
+    top: 70%;
+    left: 33rem;
+    z-index: 10;
+    transform: translateY(-50%) scale(1.20);
+    cursor: pointer;
 }

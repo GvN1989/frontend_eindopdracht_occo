@@ -1,13 +1,19 @@
+/*-------------------global style home page----------------*/
+
 .home-inner-container{
     position: relative;
     z-index: 1;
     display: flex;
     flex-basis: 500px;
     flex-direction: column;
-    margin: 10rem 8rem 10rem;
+    margin: 10rem 8rem;
     background-color: #F4DBDE;
     border-radius: 1%;
+    padding: 2rem;
+    box-sizing: border-box;
 }
+
+/*-------------------style welcome section----------------*/
 
 .welcome-section{
     display: flex;
@@ -17,26 +23,31 @@
     flex-basis: 200px;
     flex-grow: 1;
     flex-shrink: 1;
+    padding: 1rem;
 }
 
 .main-welcome-title{
     text-align: center;
     padding-top: 10px;
-    font-size: 5rem;
+    font-size: 4rem;
 }
 
 .main-welcome-msg {
     text-align: center;
     font-size: 1.5rem;
-    padding: 3rem 10rem 1rem;
-    width: 60%;
+    padding: 3rem 2rem 1rem;
+    width: 80%;
+    box-sizing: border-box;
 }
 
 .main-welcome-subtitle {
     text-align: center;
     font-size: 2rem;
-    width: 60%;
+    width: 80%;
+    box-sizing: border-box;
 }
+
+/*-------------------style welcome-img section----------------*/
 
 .welcome-image {
     margin-top: 30px;
@@ -44,25 +55,28 @@
     flex-direction: row;
     justify-content: flex-end;
     align-items: center;
-    height: 600px;
-    right: 300px;
-    top: 200px;
+    height: 5em;
+    right: 5%;
+    top: 12rem;
     z-index: 1;
     position: absolute;
     }
 
 .welcome-image img {
     border: var(--primary-color) 5px solid;
-    width: 70%;
+    width: 100%;
+    max-width: 600px;
 }
 
 .welcome-logo {
     top: 200px;
-    left: 250px;
+    left: 10%;
     z-index: 5;
     position: absolute;
     display: inline-block;
 }
+
+/*-------------------style logo-img section----------------*/
 
 .logo-image img {
     border-radius: 5% 5%;
@@ -70,14 +84,15 @@
     height: auto;
 }
 
+/*-------------------style button welcome section----------------*/
 
 .button-container{
     display: flex;
     flex-direction: row;
     justify-content: center;
     width:100%;
-    gap: 100px;
-    padding: 3rem 15rem 3rem;
+    gap: 2rem;
+    padding: 3rem 2rem;
 }
 
 .findCocktailBtn{
@@ -85,3 +100,84 @@
     color: var(--darkviolet-color);
     border-color: var(--secondary-color);
 }
+
+/*-------------------media queries-------------------*/
+
+@media (min-width: 1200px) {
+    .main-welcome-title {
+        font-size: 5rem;
+    }
+
+    .main-welcome-msg, .main-welcome-subtitle {
+        width: 60%;
+        font-size: 2rem;
+    }
+
+    .button-container {
+        gap: 100px;
+        padding: 3rem 15rem;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1199px) {
+    .main-welcome-title {
+        font-size: 4rem;
+    }
+
+    .main-welcome-msg, .main-welcome-subtitle {
+        width: 70%;
+        font-size: 1.75rem;
+    }
+
+    .button-container {
+        gap: 2rem;
+        padding: 2rem 5rem;
+    }
+}
+
+@media (max-width: 767px) {
+    .home-inner-container {
+        margin: 5rem 2rem;
+        padding: 1rem;
+    }
+
+    .main-welcome-title {
+        font-size: 3rem;
+    }
+
+    .main-welcome-msg, .main-welcome-subtitle {
+        width: 90%;
+        font-size: 1.25rem;
+        padding: 1rem;
+    }
+
+    .welcome-image {
+        position: relative;
+        height: auto;
+        top: 0;
+        right: 0;
+        margin-top: 1rem;
+    }
+
+    .welcome-image img {
+        width: 100%;
+    }
+
+    .welcome-logo {
+        position: relative;
+        top: 0;
+        left: 0;
+        margin-top: 1rem;
+    }
+
+    .button-container {
+        flex-direction: column;
+        gap: 1rem;
+        padding: 1rem;
+    }
+
+    .btnSpecs {
+        width: 80px;
+        height: 80px;
+    }
+    }

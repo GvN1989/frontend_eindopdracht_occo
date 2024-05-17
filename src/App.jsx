@@ -10,7 +10,6 @@ import Header from "./components/Header/Header.jsx";
 import Profile from "./pages/Profile/Profile.jsx";
 import Register from "./pages/Register/Register.jsx";
 import Login from "./pages/Login/Login.jsx";
-import ShoppingBasket from "./pages/ShoppingBasket/ShoppingBasket.jsx";
 import {useContext} from "react";
 import {AuthContext} from "./context/AuthContext.jsx";
 
@@ -32,7 +31,6 @@ function App() {
                   <Route path="/profile" element={/*isAuth ?*/ <Profile /> /*: <Navigate to="/login"/>*/}/>
                   <Route path="/register" element={<Register />}/>
                   <Route path="/login" element={<Login />}/>
-                  <Route path="/shoppingbasket" element={<ShoppingBasket />}/>
                   <Route path="*" element={<NotFound />}/>
               </Routes>
           <Footer/>

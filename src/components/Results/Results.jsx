@@ -1,30 +1,31 @@
-import useFetchCocktails from"../useFetchCocktails/useFetchCocktails.jsx";
-import{useEffect,useState}from"react";
-import filterFlavor from"../../helpers/filterFlavor.js";
-import filterOccasion from"../../helpers/filterOccasion.js"
+import useFetchCocktails from "../useFetchCocktails/useFetchCocktails.jsx";
+import {useEffect, useState} from "react";
+import filterFlavor from "../../helpers/filterFlavor.js";
+import filterOccasion from "../../helpers/filterOccasion.js"
 import createCategoryMap from "../../helpers/createCategoryMap.js";
 import shuffleArray from "../../helpers/shuffleArray.js";
 import styles from "../Results/Results.module.css";
+import {Link} from "react-router-dom";
+import ProductItem from "../ProductItem/ProductItem.jsx";
 
 
-function Results ({answers}) {
+function Results({answers}) {
 
-    const{cocktails,isLoading,error}=useFetchCocktails();
-    const[filteredCocktails,setFilteredCocktails]=useState([]);
+    const {cocktails, isLoading, error} = useFetchCocktails();
+    const [filteredCocktails, setFilteredCocktails] = useState([]);
     const [isFiltering, setIsFiltering] = useState(false);
 
-     /* console.log("These are the answers from the quiz:",answers) */
 
-    useEffect(()=>{
+    useEffect(() => {
         const savedCocktails = localStorage.getItem('filteredCocktails');
         if (savedCocktails) {
             setFilteredCocktails(JSON.parse(savedCocktails));
 
-        } else if (!isLoading&&cocktails.length>0) {
+        } else if (!isLoading && cocktails.length > 0) {
             setIsFiltering(true);
 
-            try{
-                const categoryMap= createCategoryMap(cocktails);
+            try {
+                const categoryMap = createCategoryMap(cocktails);
 
                 let filteredByAlcohol = cocktails.filter(drink => {
                     return answers.alcoholPreference === "both" || drink.strAlcoholic === answers.alcoholPreference;
@@ -41,7 +42,7 @@ function Results ({answers}) {
                 }
 
                 shuffleArray(filteredByOccasion)
-                setFilteredCocktails(filteredByOccasion.slice(0,5));
+                setFilteredCocktails(filteredByOccasion.slice(0, 5));
                 localStorage.setItem('filteredCocktails', JSON.stringify(filteredByOccasion.slice(0, 5)));
             } catch (e) {
                 console.error("Error during Filtering", e)
@@ -50,30 +51,34 @@ function Results ({answers}) {
             }
         }
 
-    },[cocktails,isLoading,answers]);
-
-    console.log(filteredCocktails)
+    }, [cocktails, isLoading, answers]);
 
 
-    if(isLoading || isFiltering){
-        return<div>LoadingCocktails...</div>;
+    if (isLoading || isFiltering) {
+        return <div>LoadingCocktails...</div>;
     }
 
-    if(error){
-        return<div> Error fetching cocktails:{error.message}</div>;
+    if (error) {
+        return <div> Error fetching cocktails:{error.message}</div>;
     }
 
-    return(
-<>
-        <h2 className="topFiveElement-title">Top 5 Cocktails</h2>
-        <div className={styles["productListContainer"]}>
-            {filteredCocktails.map((cocktail) => (
-                <div className={styles["product-item"]} key={cocktail.idDrink}>
-                    <img src={cocktail.strDrinkThumb} alt={cocktail.strDrink}/>
-                    <h3>{cocktail.strDrink}</h3></div>
-            ))}
-        </div>
-</>
+    return (
+        <>
+            <div className={styles["productListContainer"]}>
+                {filteredCocktails.map((cocktail) => (
+                    <div className={styles["product-item"]} key={cocktail.idDrink}>
+                            <ProductItem
+                                key={cocktail.idDrink}
+                                id={cocktail.idDrink}
+                                title={cocktail.strDrink}
+                                image={cocktail.strDrinkThumb}
+                                alt={cocktail.strDrink}
+                                classname={styles.customImage}
+                            />
+                    </div>
+                ))}
+            </div>
+        </>
     );
 }
 

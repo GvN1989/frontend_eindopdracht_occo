@@ -7,6 +7,4 @@ function filterByAlcoholPreference(cocktails,alcoholPreference) {
         });
 }
 
-
-
 export default filterByAlcoholPreference;

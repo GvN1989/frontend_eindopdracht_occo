@@ -6,13 +6,13 @@ import {useContext, useEffect, useState} from "react";
 import {AuthContext} from "../../context/AuthContext.jsx";
 import Button from "../Button/Button.jsx";
 import dobToString from "../../helpers/dobToString.js";
+import {ReactComponent as OpenEye} from '../../assets/svg/eye.svg';
+import {ReactComponent as ClosedEye} from '../../assets/svg/eye-closed.svg';
 
 
 function EditMyProfile () {
 
     const {user, token} = useContext(AuthContext)
-
-
     const { handleSubmit, register, formState: {errors}, reset} = useForm({
         defaultValues: {
             username: user.username,
@@ -25,6 +25,11 @@ function EditMyProfile () {
     const [loading, setLoading] = useState(false);
     const [formError, setFormError] = useState(null);
     const [successMessage, setSuccessMessage] = useState("");
+
+    const [isVisible, setIsVisible] = useState(false);
+    const toggleVisibility = () => {
+        setIsVisible(!isVisible);
+    };
 
     useEffect(() => {
         reset({
@@ -138,7 +143,7 @@ function EditMyProfile () {
                     <label className={styles["form-field__label"]} htmlFor="firstName-field">
                         Password:
                         <input
-                            type="password"
+                            type={isVisible ? 'text' : 'password'}
                             id="password-field"
                             {...register("password",{
                                 minLength:{
@@ -148,7 +153,17 @@ function EditMyProfile () {
                         />
                         {errors.password && <p className={styles["form-field__error"]}>{errors.password.message}</p>}
                     </label>
-                    {formError && <p className="error">{formError}</p>}
+                    {isVisible ? (
+                        <ClosedEye
+                            onClick={toggleVisibility}
+                            className={styles.eyeIcon}
+                        />
+                    ) : (
+                        <OpenEye
+                            onClick={toggleVisibility}
+                            className={styles.eyeIcon}
+                        />
+                    )}
                 </div>
                 <Button type="submit" className={styles.btnUpdate} disabled={loading}>
                     {loading ? "Updating..." : "Update Profile"}

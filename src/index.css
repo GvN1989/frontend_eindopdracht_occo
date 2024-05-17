@@ -54,8 +54,8 @@ header {
 }
 
 .main{
-    position: relative;
-    z-index: 5;
+  position: relative;
+  z-index: 5;
 }
 
 .footer {
@@ -98,8 +98,6 @@ em {
 }
 
 .productItem img {
-  max-width: 400px;
-  height: auto;
   border-radius: 5px;
   border: #D9D9D9 solid 5px;
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.16);
@@ -119,15 +117,15 @@ button {
 }
 
 button:disabled {
-  background-color: #cccccc;
-  color: #666666;
+  color: var(--detail-color);
   cursor: not-allowed;
   opacity: 0.5;
   border-color: #cccccc;
 }
 
 button :hover {
-  background-color: #0056b3;
+  background-color: var(--darkviolet-color);
+  border-radius: 5px;
 }
 
 

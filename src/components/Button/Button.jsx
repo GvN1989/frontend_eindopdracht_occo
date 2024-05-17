@@ -5,7 +5,6 @@ function Button ({ type = 'button', children, onClick, className='', disabled}) 
     const buttonClassName = `${styles.button} ${styles[className] || ''}`.trim();
 
 
-
     return(
 
         <button

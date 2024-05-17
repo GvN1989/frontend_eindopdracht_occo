@@ -11,7 +11,7 @@ function AuthContextProvider({ children }) {
         isAuth: false,
         user: null,
         token: null,
-        status: "done"
+        status: "loading"
     });
 
     const navigate = useNavigate();
@@ -34,11 +34,6 @@ function AuthContextProvider({ children }) {
 
         const decodedToken = jwtDecode(jwt);
         localStorage.setItem("token", jwt);
-
-        console.log("Decoded Token:", decodedToken)
-
-
-        console.log("jwt:", jwt)
 
         try {
             const response = await axios.get(`https://api.datavortex.nl/occo/users/${decodedToken.sub}`, {
@@ -86,8 +81,7 @@ function AuthContextProvider({ children }) {
             status: "done",
             }));
 
-        navigate("/login", { replace: true });
-
+        navigate("/login", {replace: true });
     }
 
     const data = {

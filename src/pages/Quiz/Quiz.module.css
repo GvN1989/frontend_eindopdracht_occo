@@ -1,41 +1,46 @@
+/*----------- Global Style Home Page ----------------*/
+
 .intro{
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding: 50px 0 50px;
+    padding: 5rem 0;
 }
 
 .intro-title {
     text-align: center;
-    padding: 50px 50px 15px;
+    padding: 5rem 5rem 1.5rem;
     font-size: 5rem;
 }
 
 .intro-text {
-    margin: 50px;
+    margin: 5rem;
     text-align: center;
-    padding: 10px 300px 10px;
-    font-size: 3rem;
+    padding: 1rem 15%;
+    font-size: 2.5rem;
 }
 
 .quiz-container{
     border: var(--secondary-color) 3px solid;
+    padding: 2rem;
+    margin: 2rem;
 }
 
 
-/*----------- Quiz CSS ------------------- */
+/*----------- Quiz style ------------------- */
 
 .legend_quiz {
     width: 10%;
     text-align: center;
-    margin-left: 100px;
-    padding: 10px 10px 10px;
+    margin-left: 1rem auto;
+    padding: 1rem;
     border: var(--secondary-color) 3px solid;
     background-color: var(--detail-color);
     border-radius: 5px;
     position: relative;
     z-index: 1;
     top: 30px;
+    left: 10em;
 }
 
 .form-container{
@@ -43,11 +48,11 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    column-gap: 20px;
-    flex-basis: 800px;
+    gap: 2rem;
     border-radius: 5px;
-    padding: 200px 50px 200px;
-    margin: 0 50px 50px;
+    padding: 5rem 2rem;
+    margin: 0 5%;
+    width: 90%;
 }
 
 .form-label-flex{
@@ -55,42 +60,41 @@
     flex-direction: column;
     align-items: center;
     flex-wrap: wrap;
-    width: 50%;
-    gap: 40px 40px;
-    font-size: 1.1rem;
+    width: 100%;
+    gap: 2rem;
 }
 
 .form-label {
     align-content: center;
-    padding: 8px 12px;
+    padding: 0.5rem 1rem;
     border: var(--secondary-color) 3px solid;
     background-color: var(--detail-color);
     border-radius: 5px;
-    width: 30em;
-    height: 150px;
-    font-size: 3rem;
+    width: 100%;
+    max-width: 60rem;
+    height: auto;
+    font-size: 2.5rem;
 }
 
 .form-dropdown-flex{
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
     flex-wrap: wrap;
-    width: 50%;
-    gap: 40px 20px;
+    width: 100%;
+    gap: 2rem;
 }
 
 select {
-    flex-shrink: inherit;
-    padding: 8px 12px;
+    padding: 0.5rem 1rem;
     border: 2px solid #ccc;
     border-radius: 4px;
     background-color: white;
-    color: #555;
-    width: 30em;
-    height: 150px;
-    font-size: 3rem;
-
+    color: rgb(50,48,51);
+    width: 100%;
+    max-width: 40rem;
+    height: auto;
+    font-size: 2.5rem;
 }
 
 select option {
@@ -105,29 +109,27 @@ select option[value=""] {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding:100px 0 100px;
+    padding:4rem 0;
 }
 
-/*----------- Quiz CSS ------------------- */
+/*----------- Result top5 CSS ------------------- */
 
 .topFiveElement{
-    border-radius: 1%;
+    border-radius: 5px;
     background-color: var(--element-color);
-    margin: 3em 8em 3em;
+    margin: 3rem 5%;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    flex-basis: auto;
-    flex-grow: 1;
-    flex-shrink: 0;
+    padding: 2rem;
 }
 
 .outro-text {
-    margin: 50px;
+    margin: 5rem;
     text-align: center;
-    font-size: 3rem;
-    padding: 50px 200px 50px;
+    font-size: 2rem;
+    padding: 2rem 10%;
 }
 
 .result-button-container{
@@ -135,9 +137,98 @@ select option[value=""] {
     display: flex;
     flex-direction: row;
     justify-content: center;
-    column-gap: 25rem;
-    padding: 4rem 0 4rem;
+    column-gap: 5rem;
+    padding: 4rem 0;
 }
 
+.secondary{
+    background-color:rgb(213,116,132);
+    color: var(--darkviolet-color);
+    border-color: var(--secondary-color);
+}
 
+/*----------- UI style ------------------- */
+
+.error-message {
+    color: var(--darkviolet-color);
+    font-weight: bold;
+    font-size: 2rem;
+    text-align: center;
+    margin-top: 10px;
+}
+
+/*----------- Media Queries ------------------- */
+
+@media (max-width: 1200px) {
+    .intro-title, .intro-text {
+        font-size: 4rem;
+    }
+
+    .form-label, select {
+        font-size: 1.5rem;
+    }
+
+    .outro-text {
+        font-size: 1.5rem;
+    }
+
+    .legend_quiz {
+        width: 30%;
+    }
+}
+
+@media (max-width: 768px) {
+    .intro-title, .intro-text {
+        font-size: 3rem;
+    }
+
+    .form-label, select {
+        font-size: 1rem;
+    }
+
+    .outro-text {
+        font-size: 1.2rem;
+    }
+
+    .legend_quiz {
+        width: 50%;
+    }
+
+    .form-container {
+        padding: 3rem 1rem;
+    }
+
+    .quiz-submit-flex, .result-button-container {
+        padding: 2rem 0;
+    }
+}
+
+@media (max-width: 480px) {
+    .intro-title, .intro-text {
+        font-size: 2rem;
+        padding: 2rem 1rem;
+    }
+
+    .form-label, select {
+        font-size: 0.8rem;
+    }
+
+    .outro-text {
+        font-size: 1rem;
+        padding: 1rem;
+    }
+
+    .legend_quiz {
+        width: 70%;
+        padding: 0.5rem;
+    }
+
+    .form-container {
+        padding: 2rem 1rem;
+    }
+
+    .quiz-submit-flex, .result-button-container {
+        padding: 1rem 0;
+    }
+}
 

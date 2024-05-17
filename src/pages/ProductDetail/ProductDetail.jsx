@@ -1,6 +1,6 @@
 import styles from "./ProductDetail.module.css"
 import {useEffect, useState} from "react";
-import {Link, useParams} from "react-router-dom";
+import {Link, useNavigate, useParams} from "react-router-dom";
 import Button from "../../components/Button/Button.jsx";
 import useFetchCocktailData from "../../components/useFetchCocktailData/useFetchCocktailData.jsx";
 import IconButton from "../../components/IconButton/IconButton.jsx";
@@ -9,6 +9,7 @@ import Counter from "../../components/Counter/Counter.jsx";
 
 function ProductDetail() {
     const {id} = useParams();
+    const navigate= useNavigate();
     const {
         cocktailData,
         isLoading,
@@ -40,6 +41,12 @@ function ProductDetail() {
         }));
     };
 
+    const handleClick = (e) => {
+        e.preventDefault();
+        navigate(-1);
+    };
+
+
 
     if (isLoading) return <p>Loading...</p>;
     if (error) return <p>Error loading details: {error.message}</p>;
@@ -50,7 +57,9 @@ function ProductDetail() {
     return (
         <article className={styles.outerContainer}>
             <div className={styles["left-flex-box"]}>
-                <Link className={styles.goBackLink} to="/"> Go back </Link>
+                <a href="/" className={styles.goBackLink} onClick={handleClick}>
+                    Go back
+                </a>
                 <h2 className={styles.productDetailTitle}>{cocktail.strDrink} </h2>
                 <img className={styles.productDetailImg} src={cocktail.strDrinkThumb} alt={cocktail.strDrink}/>
             </div>

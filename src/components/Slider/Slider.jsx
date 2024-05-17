@@ -3,6 +3,7 @@ import {useState} from "react";
 import IconButton from "../IconButton/IconButton.jsx";
 import useFetchCocktailData from "../useFetchCocktailData/useFetchCocktailData.jsx";
 import {Link} from "react-router-dom";
+import ProductItem from "../ProductItem/ProductItem.jsx";
 
 function Slider() {
     const {
@@ -46,8 +47,14 @@ function Slider() {
                             {currentDisplay.map((cocktail) => (
                                 <li className={"productItem"} key={cocktail.idDrink}>.
                                     <Link to={`/productdetail/${cocktail.idDrink}`} className={"productLink"}>
-                                        <img src={cocktail.strDrinkThumb} alt={cocktail.strDrink}/>
-                                        <h3>{cocktail.strDrink}</h3>
+                                        <ProductItem
+                                            key={cocktail.idDrink}
+                                            id={cocktail.idDrink}
+                                            title={cocktail.strDrink}
+                                            image={cocktail.strDrinkThumb}
+                                            alt={cocktail.strDrink}
+                                            classname={styles.customImage}
+                                        />
                                     </Link>
                                 </li>
                             ))}

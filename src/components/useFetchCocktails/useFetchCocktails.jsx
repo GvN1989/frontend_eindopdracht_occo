@@ -27,7 +27,6 @@ function useFetchCocktails() {
                     }
                 }
                 setCocktails(allData);
-                console.log("All data fetched", allData);
             } catch (error) {
                 console.error(`Failed to fetch drinks:`, error)
                 toggleError(error);

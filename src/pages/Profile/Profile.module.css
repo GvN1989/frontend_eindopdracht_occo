@@ -1,21 +1,26 @@
+/*-------------------global style profile page----------------*/
+
 .profileContent{
     display: flex;
     flex-direction: column;
     position: relative;
-    padding-bottom: 20px;
+    padding-bottom: 2rem;
 
 }
+
 .profileHeader {
-    margin: 50px ;
+    margin: 5rem ;
     font-size: 3rem;
-
 }
+
+/*-------------------profile nav bar style---------------------*/
+
 .profile-nav-container{
     background-color: var(--detail-color);
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 50px 20px;
+    padding: 5rem 2rem;
     z-index: 2;
 }
 
@@ -24,14 +29,14 @@
     flex-direction: row;
     justify-content: flex-start;
     align-items: center;
-    gap: 80px;
+    gap: 8rem;
 }
 
 .profile-link{
     color: var(--secondary-color);
-    font-size: 1.7rem;
+    font-size: 2.5rem;
     text-decoration: none;
-    padding: 20px 50px;
+    padding: 2rem 5rem;
 }
 
 .profile-logout{
@@ -41,30 +46,34 @@
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    padding: 20px;
+    padding: 2rem;
     z-index: 2;
 }
+
+/*-------------------global style pages profile---------------------*/
 
 .profile-outer-container{
     background-color: var(--section-color);
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    width: calc(100% - 100px);
+    width: calc(100% - 10rem);
     height: auto;
-    margin-left: 50px;
-    margin-right: 50px;
+    margin: 0 5rem;
     position: relative;
-    top: -35px;
+    top: -3.5rem;
     z-index: 1;
 }
+
+/*-------------------profile page style---------------------*/
+
 .profile-inner-container{
     display: flex;
     flex-direction: row;
     align-items: stretch;
     width: 100%;
     height: 100%;
-    gap: 20px;
+    gap: 2rem;
 }
 
 .profile-inner-container > div{
@@ -75,14 +84,14 @@
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    padding-top: 100px;
+    padding-top: 10rem;
     align-items: stretch;
-    flex-basis: 600px;
+    flex-basis: 60rem;
     height: auto;
     border: 4px solid transparent;
     border-right-color: var(--secondary-color);
     clip-path: inset(2% 0 2% 0);
-    margin-left: 50px;
+    margin-left: 5rem;
 }
 
 .section-title{
@@ -91,7 +100,7 @@
 
 .profile-personal-info{
     display: flex;
-    flex-basis: 800px;
+    flex-basis: 80rem;
     flex-direction: column;
     border: 4px solid transparent;
     border-left-color: var(--secondary-color);
@@ -103,10 +112,9 @@
 .profile-button-container {
     display: flex;
     justify-content: center;
-    padding: 50px 0 100px;
+    padding: 5rem 0 10rem;
     width: inherit;
-    gap: 100px;
-
+    gap: 10rem;
 }
 
 .profile-info{
@@ -114,16 +122,15 @@
     flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;
-    padding: 150px 50px 0;
-    flex-basis: 500px;
+    padding: 15rem 5rem 0;
+    flex-basis: 50rem;
     list-style-type: none;
-    font-size: 1.5rem;
-    font-weight: bolder;
-    gap: 60px;
+    font-size: 2.5rem;
+    gap: 6rem;
 }
 
 .profile-shipping-info{
-    flex-basis: 600px;
+    flex-basis: 60rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -135,13 +142,14 @@
     flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;
-    padding: 150px 50px 0;
-    flex-basis: 500px;
+    padding: 15rem 5rem 0;
+    flex-basis: 50rem;
     list-style-type: none;
-    font-size: 1.5rem;
-    font-weight: bolder;
-    gap: 60px;
+    font-size: 2.5rem;
+    gap: 6rem;
 }
+
+/*-------------------profile update form style---------------------*/
 
 .profile-editing-container {
     border: 5px var(--darkviolet-color) solid;
@@ -150,25 +158,53 @@
     flex-direction: row-reverse;
     justify-content: center;
     align-items: flex-end;
-    width: 900px;
-    height: 500px;
-    margin: 25px;
-    padding-right: 50px;
-    padding-bottom: 50px;
+    width: 90rem;
+    height: 45rem;
+    margin: 2.5rem;
+    padding-right: 5rem;
+    padding-bottom: 5rem;
 }
+
 
 .editingBtn {
     background-color:rgb(213,116,132);
     color: var(--darkviolet-color);
     border-color: var(--secondary-color);
-    width: 20em;
+    width: 20rem;
+    font-size: 2rem;
 
 }
 
+/*-------------------Media Queries---------------------*/
 
 
 @media (max-width: 768px) {
     .profile-nav-container {
         flex-direction: column;
+        padding: 2rem;
+    }
+    .profile-nav-list {
+        gap: 2rem;
+        justify-content: center;
+    }
+
+    .profile-outer-container {
+        width: calc(100% - 5rem);
+        margin: 0 2.5rem;
+    }
+
+    .title-left-flex,
+    .profile-personal-info,
+    .profile-info,
+    .shipping-info,
+    .profile-editing-container {
+        padding: 1rem;
+        margin-left: 2rem;
+        flex-basis: auto;
+    }
+
+    .profile-button-container {
+        flex-direction: column;
+        gap: 2rem;
     }
 }
