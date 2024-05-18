@@ -13,12 +13,15 @@ Note. check of .env is opgenomen in de .gitignore. Als dat niet zo is voeg deze 
 
 Stap 2. Ga naar de terminal en typ in:
 
-npm run build.
+npm install
 
 Stap 3. Blijf in de terminal en type het volgende:
 
-npm install
+npm run build
 
-stap 5. en vervolg dit dan met het volgende:
+Stap 4. en vervolg dit dan met het volgende:
 
 npm run dev
+
+De website zou nu moeten werken, veel plezier! 
+
