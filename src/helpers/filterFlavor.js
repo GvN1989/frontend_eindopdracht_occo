@@ -23,7 +23,6 @@ function filterFlavor (answers, filteredByAlcohol) {
     }
 
     const ingredientMap = createIngredientMap(filteredByAlcohol);
-    /* console.log("ingredientMap", ingredientMap ) */
 
     const drinkIDs = new Set();
 
@@ -34,8 +33,6 @@ function filterFlavor (answers, filteredByAlcohol) {
             ingredientMap[lowerIngredient].forEach(idDrink => drinkIDs.add(idDrink));
         }
     });
-
-     console.log("Filter by flavor", drinkIDs )
 
     return filteredByAlcohol.filter(drink => drinkIDs.has(drink.idDrink));
 

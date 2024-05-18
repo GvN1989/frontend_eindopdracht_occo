@@ -46,8 +46,6 @@ function EditMyProfile () {
             return;
         }
 
-        console.log("Attempting to update profile for", data);
-
         setLoading(true);
         setFormError(null);
 
@@ -70,13 +68,8 @@ function EditMyProfile () {
                     'Content-Type': 'application/json'
                 }
             });
-            console.log("the UpdateData variable", updateData);
-            console.log("Sending update with token:", token);
-            console.log("Username for update:", user.username);
-            console.log("response", response);
 
             if (response.status === 204) {
-                console.log("Profile updated successfully.", response);
                 setSuccessMessage("Profile updated successfully!");
                 reset(updateData);
                 setFormError(null);
@@ -132,11 +125,9 @@ function EditMyProfile () {
                             type="date"
                             id="dob-field"
                             {...register("dob", {
-                                required: "this field is required",
                                 validate: value => validateDOB(value) || "Invalid date of birth"
                             })}
                         />
-                        {errors.dob && <p className={styles["form-field__error"]}>{errors.dob.message}</p>}
                     </label>
                 </div>
                 <div className={styles["form-field"]}>

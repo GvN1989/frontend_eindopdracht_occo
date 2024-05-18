@@ -25,7 +25,7 @@ function Nav () {
             <div className={styles["right-nav-container"]}>
                 <SearchFunction/>
                 <NavLink className={({isActive}) => isActive ? styles["nav-button-active"] : styles["nav-button-default"]} to = {isAuth? "/profile" : "/login"}>{isAuth ? <Loggedin className={styles["nav-button-auth"]} /> : <LoggedOut />}</NavLink>
-                <NavLink className={({isActive}) => isActive ? styles["nav-button-active"] : styles["nav-button-default"]} to = "/favorites"><Favorite className={styles["icon-svg"]}  /></NavLink>
+                <NavLink className={({isActive}) => isActive ? styles["nav-button-active"] : styles["nav-button-default"]} to = "/profile"><Favorite className={styles["icon-svg"]}  /></NavLink>
                 <NavLink className={({isActive}) => isActive ? styles["nav-button-active"] : styles["nav-button-default"]} to = "/shoppingbasket"><ShoppingBasket className={styles["icon-svg"]}  /></NavLink>
                 <IconButton
                     icon="logout"

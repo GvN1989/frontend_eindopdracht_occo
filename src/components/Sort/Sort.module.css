@@ -1,31 +1,35 @@
 .sortPanel {
     position: absolute;
-    right: -1530px;
+    top: 0;
+    right: 0;
     width: 30%;
     min-height: 100%;
     background-color: var(--section-color);
     box-shadow: 2px 0 5px rgba(0,0,0,0.5);
-    transform: translateX(-100%);
+    transform: translateX(100%);
     transition: transform 0.3s ease-in-out;
     overflow: hidden;
     z-index: 1000;
     padding: 50px;
 }
 
+.sortPanel.visible {
+    transform: translateX(0);
+}
+
 .sortTitle{
     text-align: center;
-    padding: 100px;
+    padding: 20px;
     font-size: 2em;
 }
 
 .sortContainer{
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+    flex-direction: column;
     width: 100%;
     border: 5px solid transparent;
     border-top-color: var(--detail-color);
-    padding: 100px;
+    padding: 20px;
 }
 
 .fieldSetStyle{
@@ -53,7 +57,7 @@
 
 .flexIconButton{
     position: absolute;
-    top: 0;
+    top: 10px;
     left: 10px;
     padding: 10px;
 }
@@ -66,9 +70,9 @@
     display: flex;
     flex-direction: row;
     justify-content: center;
-    gap: 50px;
-    height: 160px;
-    padding-top: 60px;
+    gap: 20px;
+    height: auto;
+    padding-top: 20px;
 }
 
 .btnSpecs{
@@ -80,4 +84,32 @@
     background-color:rgb(213,116,132);
     color: var(--darkviolet-color);
     border-color: var(--secondary-color);
+}
+
+/*------------------- Media Queries------------------------ */
+
+@media (max-width: 1024px) {
+    .sortPanel {
+        width: 25rem; /* Adjusted for tablet */
+    }
+
+    .sortTitle {
+        font-size: 1.8em;
+        padding: 10px;
+    }
+
+    .sortContainer {
+        padding: 10px;
+        font-size: 1.3em;
+    }
+
+    .sortOptionsLabel {
+        font-size: 1.3rem;
+    }
+
+    .filterBtnContainer {
+        flex-direction: column;
+        gap: 10px;
+        padding-top: 10px;
+    }
 }

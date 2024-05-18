@@ -23,10 +23,6 @@ function ProductOverview () {
     const [sortOption, setSortOption] = useState('');
     const [showSort, setShowSort] = useState(false);
 
-    useEffect(() => {
-        console.log("Current sort option:", sortOption);
-    }, [sortOption]);
-
     const filteredCocktails = useMemo(() => {
 
         let result = [...cocktails];
@@ -45,8 +41,6 @@ function ProductOverview () {
             result.sort((a, b) => b.strDrink.localeCompare(a.strDrink));
         }
 
-        console.log("Filtered and sorted cocktails:", result);
-
         return result;
     }, [cocktails, filters.types, filters.categories, sortOption]);
 
@@ -55,8 +49,6 @@ function ProductOverview () {
         const startIndex = (currentPage - 1) * pageSize;
         return filteredCocktails.slice(startIndex, startIndex + pageSize);
     }, [filteredCocktails, currentPage, pageSize]);
-
-    console.log(displayedCocktails)
 
     const handleNextPage = useCallback(() => {
         const pageCount = Math.ceil(filteredCocktails.length / pageSize);

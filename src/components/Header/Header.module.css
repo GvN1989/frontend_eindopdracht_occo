@@ -28,6 +28,11 @@
     margin:0;
 }
 
-.header .icon-svg {
-    fill: red;  /* Sets fill color specifically for SVGs in a particular component */
+/* ---------------Media Queries --------------- */
+
+@media (max-width: 1024px) {
+    .headerButton {
+        width: 100px;
+        height: 100px;
+    }
 }

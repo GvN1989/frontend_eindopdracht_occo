@@ -9,11 +9,13 @@
     flex-basis: auto;
     flex-grow: 1;
     flex-shrink: 1;
+    padding: 2rem;
 }
 
 .sliderTitle{
     align-self: flex-start;
     padding: 30px;
+    font-size: 2rem;
 }
 
 
@@ -23,7 +25,8 @@
     align-content: stretch;
     align-items: center;
     width:80%;
-    padding: 20px 10px 20px;
+    padding: 20px 10px;
+    gap: 20px;
 }
 
 
@@ -33,19 +36,46 @@ ul {
     justify-content: space-evenly;
     flex-wrap: wrap;
     flex: 1;
+    list-style: none;
    }
 
 
 .btnEffect :hover {
     background-color: var(--detail-color);
     border-radius: 5px;
+    transition: background-color 0.3s ease;
 }
 
 .sliderText {
     text-align: center;
     padding: 100px;
+    font-size: 1.5rem;
 }
 
 .changeFill{
     fill: var(--secondary-color) !important;
+}
+
+/*----------------Media Queries ------------------*/
+
+@media (max-width: 1024px) {
+    .slider {
+        margin: 4rem 4rem 4rem;
+        padding: 1rem;
+    }
+
+    .sliderTitle {
+        font-size: 1.8rem;
+    }
+
+    .sliderElement {
+        width: 100%;
+        padding: 10px 5px;
+        gap: 10px;
+    }
+
+    .sliderText {
+        padding: 50px;
+        font-size: 1.3rem;
+    }
 }

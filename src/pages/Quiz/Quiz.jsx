@@ -43,7 +43,6 @@ function Quiz() {
             setErrorMessage('Oops... you did not fill out all the fields. Please do so to get an optimal result.');
             return;
         }
-        console.log("Form submitted with: ", answers);
         setIsSubmitted(true);
         localStorage.setItem('isSubmitted', JSON.stringify(true));
         localStorage.setItem('quizAnswers', JSON.stringify(answers));

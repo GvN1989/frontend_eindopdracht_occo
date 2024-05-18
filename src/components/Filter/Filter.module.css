@@ -1,5 +1,7 @@
 .filterPanel {
     position: absolute;
+    right: 0;
+    top: 0;
     left:1600px;
     width: 100rem;
     height: 100%;
@@ -12,7 +14,6 @@
     padding: 50px;
 }
 
-
 .filterPanel.visible {
     transform: translateX(0);
 }
@@ -24,14 +25,14 @@
 }
 
 .filterContainer {
-    padding-top: 50px;
+    padding-top: 20px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     border: 5px solid transparent;
     border-top-color: var(--detail-color);
     font-size: 1.5em;
-    gap: 50px;
+    gap: 20px;
 }
 
 .changeFill{
@@ -40,8 +41,8 @@
 
 .flexIconButton{
     position: absolute;
-    top: 0;
-    right: 0;
+    top: 10px;
+    right: 10px;
     padding: 10px;
 }
 
@@ -53,13 +54,61 @@
 .filterBtnContainer{
     display: flex;
     flex-direction: row;
-    gap: 50px;
-    height: 160px;
-    padding-top: 60px;
+    gap: 20px;
+    height: auto;
+    padding-top: 20px;
 }
 
 .resetButton{
     background-color:rgb(213,116,132);
     color: var(--darkviolet-color);
     border-color: var(--secondary-color);
+}
+
+/*------------------- Media Queries------------------------ */
+
+@media (max-width: 1024px) {
+    .filterPanel {
+        width: 25rem; /* Adjusted for tablet */
+    }
+
+    .filterTitle {
+        font-size: 1.8em;
+        padding: 20px;
+    }
+
+    .filterContainer {
+        padding-top: 20px;
+        font-size: 1.3em;
+        gap: 15px;
+    }
+
+    .filterBtnContainer {
+        flex-direction: column;
+        gap: 15px;
+        padding-top: 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    .filterPanel {
+        width: 20rem; /* Adjusted for mobile */
+    }
+
+    .filterTitle {
+        font-size: 1.5em;
+        padding: 10px;
+    }
+
+    .filterContainer {
+        padding-top: 10px;
+        font-size: 1.1em;
+        gap: 10px;
+    }
+
+    .filterBtnContainer {
+        flex-direction: column;
+        gap: 10px;
+        padding-top: 10px;
+    }
 }

@@ -21,13 +21,10 @@ function filterOccasion (answers, filteredByFlavor) {
     }
 
     const occasionMap = createCategoryMap(filteredByFlavor);
-    console.log("occasionMap", occasionMap )
 
 
     const result = filteredByFlavor.filter(drink =>
         occasionList.includes(occasionMap[drink.idDrink]));
-
-    console.log("Filtered by occasion:", result);
 
     return result
 }

@@ -4,12 +4,6 @@
     border-color: rgb(245,186,12);
 }
 
-.secondary{
-    background-color:rgb(213,116,132);
-    color: var(--darkviolet-color);
-    border-color: var(--secondary-color);
-}
-
 .secondary :hover {
     background-color: #545b62;
 }

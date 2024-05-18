@@ -1,10 +1,10 @@
 import styles from "./ProductDetail.module.css"
 import {useEffect, useState} from "react";
-import {Link, useNavigate, useParams} from "react-router-dom";
 import Button from "../../components/Button/Button.jsx";
 import useFetchCocktailData from "../../components/useFetchCocktailData/useFetchCocktailData.jsx";
 import IconButton from "../../components/IconButton/IconButton.jsx";
 import Counter from "../../components/Counter/Counter.jsx";
+import {useNavigate, useParams} from "react-router-dom";
 
 
 function ProductDetail() {
@@ -68,17 +68,18 @@ function ProductDetail() {
                     <h3 className={styles["ingredients-title"]}> Ingredients</h3>
                     {Object.keys(ingredientChecks).map((key, i) => {
                         return (
-                            <div key={i} className={styles.ingredientItem}>
-                                <label key={i} className={styles["ingredient-label"]}>
-                                    <input
-                                        type="checkbox"
-                                        checked={ingredientChecks[key]}
-                                        onChange={() => handleCheckboxChange(key)}
-                                        className={styles.ingredientCheckbox}
-                                    />
-                                    {cocktail[key]}
-                                </label>
-                            </div>
+
+                                <div key={i} className={styles.ingredientItem}>
+                                    <label key={i} className={styles["ingredient-label"]}>
+                                        <input
+                                            type="checkbox"
+                                            checked={ingredientChecks[key]}
+                                            onChange={() => handleCheckboxChange(key)}
+                                            className={styles.ingredientCheckbox}
+                                        />
+                                        {cocktail[key]}
+                                    </label>
+                                </div>
                         );
                     })}
                 </div>

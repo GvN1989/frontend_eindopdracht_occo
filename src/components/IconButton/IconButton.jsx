@@ -5,6 +5,7 @@ import {ReactComponent as IconRight} from "../../assets/svg/caret-circle-right.s
 import {ReactComponent as Sort} from "../../assets/svg/sort-ascending.svg"
 import {ReactComponent as Filter} from "../../assets/svg/sliders-horizontal.svg"
 import {ReactComponent as X} from "../../assets/svg/x.svg"
+import {ReactComponent as Minus} from "../../assets/svg/minus.svg"
 import styles from "../IconButton/IconButton.module.css"
 import {ReactComponent as ArrowOpen} from "../../assets/svg/caret-down.svg"
 import {ReactComponent as ArrowClose} from "../../assets/svg/caret-up.svg"

@@ -4,7 +4,7 @@ import IconButton from "../../components/IconButton/IconButton.jsx";
 import {useContext, useEffect, useState} from "react";
 import {AuthContext} from "../../context/AuthContext.jsx";
 import EditMyProfile from "../../components/EditMyProfile/EditMyProfile.jsx";
-import {useNavigate} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 
 function Profile () {
     const [activeSection, setActiveSection] = useState("profile");
@@ -123,10 +123,26 @@ return (
         <h1 className={styles.profileHeader}> Hello {user.username}   </h1>
         <div className={styles["profile-nav-container"]}>
             <ul className={styles["profile-nav-list"]}>
-                <a href="#" onClick={() => setActiveSection('profile')} className={styles["profile-link"]}>MY PROFILE</a>
-                <a href="#" onClick={() => setActiveSection('purchases')} className={styles["profile-link"]}>MY PURCHASES</a>
-                <a href="#" onClick={() => setActiveSection('favorites')} className={styles["profile-link"]}>MY FAVORITES</a>
-                <a href="#" onClick={() => setActiveSection('quiz')} className={styles["profile-link"]}>MY QUIZ RESULTS</a>
+                <li>
+                    <Link to="#" onClick={() => setActiveSection('profile')} className={styles["profile-link"]}>
+                        MY PROFILE
+                    </Link>
+                </li>
+                <li>
+                    <Link to="#purchases" onClick={() => setActiveSection('purchases')} className={styles["profile-link"]}>
+                        MY PURCHASES
+                    </Link>
+                </li>
+                <li>
+                    <Link to="#favorites" onClick={() => setActiveSection('favorites')} className={styles["profile-link"]}>
+                        MY FAVORITES
+                    </Link>
+                </li>
+                <li>
+                    <Link to="#quiz" onClick={() => setActiveSection('quiz')} className={styles["profile-link"]}>
+                        MY QUIZ RESULTS
+                    </Link>
+                </li>
             </ul>
             <div className={styles["profile-logout"]}>
                 <IconButton icon="logout" ariaLabel="Log out" onClick={logout}/>

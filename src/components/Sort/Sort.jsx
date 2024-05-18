@@ -15,7 +15,7 @@ function Sort({isVisible, sortOption, setSortOption, onClose}) {
     };
 
     return isVisible ? (
-        <aside className={styles.sortPanel}>
+        <aside className={`${styles.sortPanel} ${isVisible ? styles.visible : ""}`}>
             <div className={styles.flexIconButton}>
                 <IconButton
                     icon={"close"}
@@ -26,6 +26,7 @@ function Sort({isVisible, sortOption, setSortOption, onClose}) {
                 />
             </div>
             <h4 className={styles.sortTitle}>Sort</h4>
+            <div className={styles.sortContainer}>
             <fieldset className={styles.fieldSetStyle}>
                 <div className={styles.sortOptionsBox}>
                     <label className={styles.sortOptionsLabel}>
@@ -54,6 +55,7 @@ function Sort({isVisible, sortOption, setSortOption, onClose}) {
                     </label>
                 </div>
             </fieldset>
+            </div>
             <div className={styles.filterBtnContainer}>
                 <Button className={styles.resetButton} onClick={resetSort}>Reset Sort</Button>
             </div>
