@@ -1,8 +1,8 @@
-.filterPanel {
+.sortPanel {
     position: absolute;
-    left:1600px;
-    width: 100rem;
-    height: 100%;
+    right: -1530px;
+    width: 30%;
+    min-height: 100%;
     background-color: var(--section-color);
     box-shadow: 2px 0 5px rgba(0,0,0,0.5);
     transform: translateX(-100%);
@@ -12,50 +12,68 @@
     padding: 50px;
 }
 
-
-.filterPanel.visible {
-    transform: translateX(0);
+.sortTitle{
+    text-align: center;
+    padding: 100px;
+    font-size: 2em;
 }
 
-.filterTitle{
-    text-align: center;
-    font-size: 2em;
+.sortContainer{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    border: 5px solid transparent;
+    border-top-color: var(--detail-color);
     padding: 100px;
 }
 
-.filterContainer {
-    padding-top: 50px;
+.fieldSetStyle{
+    border: transparent;
+}
+
+.sortOptionsLabel{
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-    border: 5px solid transparent;
-    border-top-color: var(--detail-color);
-    font-size: 1.5em;
-    gap: 50px;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    width: 40%;
+    padding: 50px;
+    font-size: 3rem;
+}
+
+.sortOptionsBox{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+.sortCheckbox{
+    width: 40%;
+}
+
+.flexIconButton{
+    position: absolute;
+    top: 0;
+    left: 10px;
+    padding: 10px;
 }
 
 .changeFill{
     fill: var(--darkviolet-color) !important;
 }
 
-.flexIconButton{
-    position: absolute;
-    top: 0;
-    right: 0;
-    padding: 10px;
+.filterBtnContainer{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 50px;
+    height: 160px;
+    padding-top: 60px;
 }
 
 .btnSpecs{
     width: 100%;
     display: block;
-}
-
-.filterBtnContainer{
-    display: flex;
-    flex-direction: row;
-    gap: 50px;
-    height: 160px;
-    padding-top: 60px;
 }
 
 .resetButton{

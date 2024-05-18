@@ -123,7 +123,7 @@ button:disabled {
 }
 
 button :hover {
-  background-color: var(--darkviolet-color);
+  background-color: rgba(123, 123, 123, 0.9);
   border-radius: 5px;
 }
 
