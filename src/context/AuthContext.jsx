@@ -18,6 +18,7 @@ function AuthContextProvider({ children }) {
 
    useEffect(() => {
         const storedToken = localStorage.getItem ("token");
+
         if ( storedToken && checkTokenValidity(storedToken) ) {
             {
                 void login(storedToken)
@@ -27,6 +28,8 @@ function AuthContextProvider({ children }) {
             }
         }, [] );
 
+
+
     const login = async (jwt, redirectOnLogin= false) => {
         if (typeof jwt !== 'string' || jwt.trim() === '') {
             return;
@@ -35,6 +38,7 @@ function AuthContextProvider({ children }) {
         const decodedToken = jwtDecode(jwt);
         localStorage.setItem("token", jwt);
 
+
         try {
             const response = await axios.get(`https://api.datavortex.nl/occo/users/${decodedToken.sub}`, {
                 headers: {
@@ -42,7 +46,6 @@ function AuthContextProvider({ children }) {
                     "Authorization": `Bearer ${jwt}`
                 }
             });
-            console.log("API response for user info:", response);
             setAuthState({
                 ...authState,
                 isAuth: true,
@@ -58,6 +61,8 @@ function AuthContextProvider({ children }) {
                 navigate("/profile", { replace: true });
             }
         } catch (e) {
+            console.error("Error fetching user info:", e.response ? e.response.data : e.message);
+            logout();
             setAuthState({
                 ...authState,
                 isAuth: false,

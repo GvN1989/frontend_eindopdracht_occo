@@ -1,27 +1,35 @@
 import styles from "./ProductOverview.module.css"
 import useFetchCocktails from "../../components/useFetchCocktails/useFetchCocktails.jsx";
-import {useCallback, useMemo, useState} from "react";
+import {useCallback, useEffect, useMemo, useState} from "react";
 import IconButton from "../../components/IconButton/IconButton.jsx";
 import Filter from "../../components/Filter/Filter.jsx";
 import ProductItem from "../../components/ProductItem/ProductItem.jsx";
 import Button from "../../components/Button/Button.jsx";
 import findDrinksByCategory from "../../helpers//findDrinksByCategory.js";
 import findDrinksByType from "../../helpers/findDrinkByType.js";
+import Sort from "../../components/Sort/Sort.jsx";
 
 
 function ProductOverview () {
     const{ cocktails,isLoading,error}=useFetchCocktails();
     const pageSize = 48;
+
     const [currentPage, setCurrentPage] = useState(1);
     const [filters, setFilters] = useState({
         types: [],
         categories: []
     });
     const [showFilter, setShowFilter] = useState(false);
+    const [sortOption, setSortOption] = useState('');
+    const [showSort, setShowSort] = useState(false);
+
+    useEffect(() => {
+        console.log("Current sort option:", sortOption);
+    }, [sortOption]);
 
     const filteredCocktails = useMemo(() => {
 
-        let result = cocktails;
+        let result = [...cocktails];
 
         if (filters.types.length > 0) {
             result = findDrinksByType(result, filters.types);
@@ -30,14 +38,25 @@ function ProductOverview () {
         if (filters.categories.length > 0) {
             result = findDrinksByCategory(result, filters.categories);
         }
+
+        if (sortOption === 'a-z') {
+            result.sort((a, b) => a.strDrink.localeCompare(b.strDrink));
+        } else if (sortOption === 'z-a') {
+            result.sort((a, b) => b.strDrink.localeCompare(a.strDrink));
+        }
+
+        console.log("Filtered and sorted cocktails:", result);
+
         return result;
-    }, [cocktails, filters.types, filters.categories]);
+    }, [cocktails, filters.types, filters.categories, sortOption]);
 
 
     const displayedCocktails = useMemo (() => {
         const startIndex = (currentPage - 1) * pageSize;
         return filteredCocktails.slice(startIndex, startIndex + pageSize);
     }, [filteredCocktails, currentPage, pageSize]);
+
+    console.log(displayedCocktails)
 
     const handleNextPage = useCallback(() => {
         const pageCount = Math.ceil(filteredCocktails.length / pageSize);
@@ -50,6 +69,10 @@ function ProductOverview () {
 
     const toggleFilterPanel = () => {
         setShowFilter(prev => !prev);
+    };
+
+    const toggleSortPanel = () => {
+        setShowSort(prev => !prev);
     };
 
 
@@ -77,6 +100,13 @@ function ProductOverview () {
                 onClose={toggleFilterPanel}
                 cocktails={cocktails}
                     />
+            <Sort
+                isVisible={showSort}
+                sortOption={sortOption}
+                setSortOption={setSortOption}
+                onClose={toggleSortPanel}
+
+            />
             <main>
                 <section className="outer-section-container">
                     <h1 className={styles["product-overview-title"]}> COCKTAILFINDER </h1>
@@ -91,7 +121,9 @@ function ProductOverview () {
                         <IconButton
                             icon={"sort"}
                             ariaLabel="Toggle sort panel"
+                            className={`${styles.btnSpecs} ${showSort ? styles.active : ""}`}
                             svgClassName={styles.changeFill}
+                            onClick={toggleSortPanel}
                         />
                     </div>
                     <div className={styles["productListContainer"]}>
