@@ -18,7 +18,7 @@ function EditMyProfile () {
             username: user.username,
             email: user.email,
             dob: user.dob,
-            password: user.password,
+            password: '',
         }
     });
 
@@ -39,6 +39,7 @@ function EditMyProfile () {
             password: ''
     });
 }, [user, reset]);
+
     const editProfile = async (data) => {
 
         if (!token) {
@@ -50,16 +51,13 @@ function EditMyProfile () {
         setFormError(null);
 
 
-        const updateData = {
-            name: data.username,
-            email: data.email,
-            info: data.dob ? dobToString(data.dob) : '',
-        };
+        const updateData = {};
+        if (data.username !== user.username) updateData.name = data.username;
+        if (data.email !== user.email) updateData.email = data.email;
+        if (data.dob !== user.dob) updateData.info = dobToString(data.dob);
+        if (data.password && data.password.trim() !== '') updateData.password = data.password;
 
-
-        if (data.password && data.password.trim() !== '') {
-            updateData.password = data.password;
-        }
+        console.log("Data sent to API:", updateData);
 
         try  {
             const response = await axios.put(`https://api.datavortex.nl/occo/users/Geesje`, updateData,{
@@ -69,9 +67,17 @@ function EditMyProfile () {
                 }
             });
 
+            console.log("API response:", response);
+
             if (response.status === 204) {
                 setSuccessMessage("Profile updated successfully!");
-                reset(updateData);
+                console.log(response)
+                reset({
+                    username: data.username,
+                    email: data.email,
+                    dob: data.dob || user.dob,
+                    password: ''
+                });
                 setFormError(null);
             }
         } catch (error) {
@@ -92,7 +98,7 @@ function EditMyProfile () {
                             type="text"
                             id="username-field"
                             {...register("username",{
-                                required: "Name is required",
+                                required: "Username is required",
                                 minLength:{
                                     value:2,
                                     message: "Name field must at least contain 2 characters"
@@ -125,9 +131,10 @@ function EditMyProfile () {
                             type="date"
                             id="dob-field"
                             {...register("dob", {
-                                validate: value => validateDOB(value) || "Invalid date of birth"
+                                validate: value => !value || validateDOB(value) || "Invalid date of birth"
                             })}
                         />
+                        {errors.dob && <p className={styles["form-field__error"]}>{errors.dob.message}</p>}
                     </label>
                 </div>
                 <div className={styles["form-field"]}>

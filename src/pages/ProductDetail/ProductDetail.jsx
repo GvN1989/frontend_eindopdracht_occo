@@ -67,6 +67,9 @@ function ProductDetail() {
                 <div className={styles["ingredients-box"]}>
                     <h3 className={styles["ingredients-title"]}> Ingredients</h3>
                     {Object.keys(ingredientChecks).map((key, i) => {
+                        const ingredient = cocktail[key];
+                        const measureKey = `strMeasure${i + 1}`;
+                        const measure = cocktail[measureKey];
                         return (
 
                                 <div key={i} className={styles.ingredientItem}>
@@ -77,7 +80,8 @@ function ProductDetail() {
                                             onChange={() => handleCheckboxChange(key)}
                                             className={styles.ingredientCheckbox}
                                         />
-                                        {cocktail[key]}
+                                        {measure && `${measure}`}
+                                        {ingredient}
                                     </label>
                                 </div>
                         );
@@ -94,7 +98,7 @@ function ProductDetail() {
                         />
                     </div>
                     <div className={styles.spacer}>
-                        <p className={styles.productDetailText}> € 4.95 </p>
+                        <p className={styles.productDetailText}> € 5.95 </p>
                     </div>
                 </div>
                 <Button className={styles.cartBtn}>Add to Cart</Button>

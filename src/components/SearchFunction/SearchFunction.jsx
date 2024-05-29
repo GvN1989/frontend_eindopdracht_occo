@@ -29,8 +29,17 @@ function SearchFunction() {
         }
     }, [query]);
 
+    const handleResultClick = (drinkId) => {
+        setQuery('');
+        navigate(`/productdetail/${drinkId}`);
+    };
+
+    const handleFormSubmit = (e) => {
+        e.preventDefault();
+    };
+
     return (
-        <form className={styles["search-container"]}>
+        <form className={styles["search-container"]} onSubmit={handleFormSubmit}>
             <input
                 type="text"
                 className={styles["searchInput"]}
@@ -46,7 +55,7 @@ function SearchFunction() {
                         <div
                             key={drink.idDrink}
                             className={`${styles["search-result-item"]} ${index === focusIndex ? styles["focused"] : ''}`}
-                            onClick={() => navigate(`/productdetail/${drink.idDrink}`)}
+                            onClick={() => handleResultClick(drink.idDrink)}
                             onMouseEnter={() => setFocusIndex(index)}
                         >
                             {drink.strDrink}

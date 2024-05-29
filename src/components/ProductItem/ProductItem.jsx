@@ -8,7 +8,7 @@ function ProductItem({id, title, image, alt, classname}) {
                 <img src={image} alt={alt} className={classname} />
                 <div className={styles.productDetails || "productDetails"}>
                     <h2 className={styles.productTitle}>{title}</h2>
-                    <p className={styles.productPrice}>€ 4.95</p>
+                    <p className={styles.productPrice}>€ 5.95</p>
                 </div>
             </Link>
         </li>
